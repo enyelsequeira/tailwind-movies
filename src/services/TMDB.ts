@@ -1,7 +1,6 @@
 import {
   Genres,
   ImagesResults,
-  Movie,
   MovieInformation,
   MoviesResults,
   ShowsResults,
