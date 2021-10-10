@@ -55,6 +55,19 @@ export interface Cast {
   profile_path: string;
 }
 
+export interface Actor extends Cast {
+  also_known_as?: string[];
+  biography: string;
+  birthday: string;
+  deathday: unknown;
+  gender: number;
+  homepage: unknown;
+  id: number;
+  imdb_id: string;
+  known_for_department: string;
+  place_of_birth: string;
+}
+
 export interface Crew extends Cast {
   department: string;
   job: string;
@@ -117,10 +130,17 @@ export interface Images {
   vote_average: number;
   vote_count: number;
   width: number;
+  placeholder?: string;
 }
 export interface ImagesResults {
   backdrops: Images[];
   id: number;
   logos: Images[];
   posters: Images[];
+  profiles?: Images[];
+}
+
+export interface ActorImages {
+  id: number;
+  profiles: Images[];
 }

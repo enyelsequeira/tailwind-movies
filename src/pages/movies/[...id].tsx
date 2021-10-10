@@ -6,11 +6,16 @@ import MovieInfo from "@/components/movie-information/movie-information"
 import Main from "@/components/main/main"
 import Typography from "@/components/ui/typography"
 import Layout from "@/layout"
+import { useRouter } from "next/router"
 
 
 
 
 const MovieInformation = ({ id }) => {
+  const router = useRouter()
+
+
+  // console.log(router.query.id, 'routes')
   const movieId = id.length > 1 ? id[1] : id[0]
 
   const { data, isLoading } = useGetMovieQuery({ id: movieId }, { refetchOnMountOrArgChange: true })
@@ -22,7 +27,6 @@ const MovieInformation = ({ id }) => {
   if (isLoading) <p>my data is loading</p>
   if (isImagesLoading) <p>Images are loading</p>
 
-  // console.log({ isLoading, isImagesLoading });
 
 
 
@@ -53,12 +57,13 @@ const MovieInformation = ({ id }) => {
 
 export default MovieInformation
 
-
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   return {
     props: {
-      id: ctx.params.movie
+      id: ctx.params.id
     }
   }
 }
+
+
 

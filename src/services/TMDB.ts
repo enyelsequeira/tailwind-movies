@@ -1,4 +1,5 @@
 import {
+  Actor,
   Genres,
   ImagesResults,
   MovieInformation,
@@ -75,16 +76,28 @@ export const tmdbApi = createApi({
       query: ({ listName, accountId, sessionId, page }) =>
         `/account/${accountId}/${listName}?api_key=${APIKEY}&session_id=${sessionId}&page=${page}`,
     }),
-    getRecommendations: builder.query({
+    getRecommendations: builder.query<
+      MoviesResults,
+      { movie_id: string | number; list: string }
+    >({
       query: ({ movie_id, list }) =>
         `/movie/${movie_id}/${list}?api_key=${APIKEY}`,
     }),
-    getActorsDetails: builder.query({
+    // Getting information about the actors details/movies and image
+    getActorsDetails: builder.query<Actor, number | string>({
       query: (id) => `person/${id}?api_key=${APIKEY}`,
     }),
-    getMoviesByActorId: builder.query({
+    getMoviesByActorId: builder.query<
+      MoviesResults,
+      { id: number | string; page: number }
+    >({
       query: ({ id, page }) =>
         `/discover/movie?with_cast=${id}&page=${page}&api_key=${APIKEY}`,
+    }),
+    getActorImages: builder.query<ImagesResults, { id: number | string }>({
+      query: ({ id }) => {
+        return `person/${id}/images?api_key=${APIKEY}`;
+      },
     }),
   }),
 });
@@ -97,6 +110,7 @@ export const {
   useGetRecommendationsQuery,
   useGetActorsDetailsQuery,
   useGetMoviesByActorIdQuery,
+  useGetActorImagesQuery,
   useGetMovieImagesQuery,
   useGetTopRatedShowsQuery,
 } = tmdbApi;
