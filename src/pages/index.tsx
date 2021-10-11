@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const { genreIdOrCategoryName, searchQuery } = useSelector((state: RootState) => state.currentGenreOrCategory);
   const { data, error, isLoading } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
 
+
   const movie = Math.floor(Math.random() * data?.results.length)
   return (
     <Layout>
