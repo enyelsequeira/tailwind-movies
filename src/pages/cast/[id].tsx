@@ -6,6 +6,8 @@ import Main from "@/components/main/main"
 import Typography from "@/components/ui/typography"
 import Layout from "@/layout"
 import { useRouter } from 'next/router'
+import { useState } from "react"
+import Button from "@/components/ui/button"
 
 
 
@@ -16,13 +18,12 @@ const People = ({ id }) => {
   const { data: movieByActor } = useGetMoviesByActorIdQuery({ id: id, page: 1 })
   const { data: actorImages } = useGetActorImagesQuery({ id })
   const router = useRouter()
-  // console.log({ data, movieByActor, actorImages });
-
+  const [more, setMore] = useState(false)
   if (isLoading) <p>Still loading page</p>
 
   return (
     <Layout>
-      <Main>
+      <Main movie>
         <MovieImagesCarrousel imagesData={actorImages} />
         {data && <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
           <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
@@ -30,12 +31,13 @@ const People = ({ id }) => {
             <Typography as="h4" className="tracking-wide my-2"> {data.birthday} </Typography>
             <Typography as="h4" className="tracking-wide my-2">Born: {data.place_of_birth} </Typography>
           </div>
-          <div>
-            <Typography as="p">{data.biography}</Typography>
+          <div className="space-y-3">
+            <Typography as="p" className={more ? "line-clamp-none" : "line-clamp-6"}>{data.biography}</Typography>
+            <Button variant="secondary" resetStyles onClick={() => setMore(!more)} className="p-2 rounded-xl">{more ? "Less" : "More"} &rarr; </Button>
           </div>
-          <div className="flex justify-between">
-            <a target="_blank" href={`https://www.imdb.com/name/${data.imdb_id}`} rel="noreferrer">&rarr; More</a>
-            <button className="bg-blue-600 text-white px-6 my-2 md:my-0 md:px-4 h-[fit-content] py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg hover:bg-blue-500 transition-all ease-in duration-300" onClick={() => router.back()}>&larr; Back </button>
+          <div className="flex justify-between mt-4">
+            <a className="bg-white text-blue-500 px-2 md:px-4  h-[fit-content]  py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg cursor-pointer hover:bg-light-extra-two transition-all ease-in duration-200 hover:text-light dark:hover:bg-dark-background-primary" target="_blank" href={`https://www.imdb.com/name/${data.imdb_id}`} rel="noreferrer" >&rarr; IMDB</a>
+            <Button variant="secondary" onClick={() => router.back()}>&larr; Back </Button>
           </div>
         </div>
         }

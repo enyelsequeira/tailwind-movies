@@ -5,8 +5,18 @@ import Link from "next/link"
 import Image from "next/image"
 import Circle from 'react-circle';
 import { Cast } from "@/types/types"
+import Button from "../ui/button"
+import { useState } from "react"
+import Modal from "../modal"
+import { useRouter } from "next/router"
+import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
+import { useDispatch } from "react-redux"
 
 const MovieInfo = ({ data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const router = useRouter()
+  const dispatch = useDispatch()
+
 
   return (
     <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
@@ -33,6 +43,7 @@ const MovieInfo = ({ data }) => {
         <Typography as="h3">Overview </Typography>
         <Typography as="p" resetStyles className="text-left md:text-justify text-xl font-body line-clamp-4 hover:line-clamp-none"> {data?.overview}</Typography>
       </div>
+      {/* rating and buttons */}
       <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
           <Typography as="h3" className="my-2">Rating</Typography>
@@ -46,14 +57,14 @@ const MovieInfo = ({ data }) => {
           />
         </div>
         <div className="flex flex-col justify-end space-y-8">
-          <button className="bg-white text-blue-500 px-4 py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
+          <Button variant="primary">
             <Typography>Favorite</Typography>
             <MdFavoriteBorder />
-          </button>
-          <button className="bg-white text-blue-500 px-4 py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
+          </Button>
+          <Button variant="primary">
             <Typography>WatchList</Typography>
             <MdWatchLater />
-          </button>
+          </Button>
         </div>
 
       </div>
@@ -62,7 +73,12 @@ const MovieInfo = ({ data }) => {
         <div className="flex space-x-4">
           {data?.genres.map((genre) => {
             return (
-              <Typography key={genre.id}> {genre.name} </Typography>
+              <Link href="/" passHref key={genre.id} >
+                <a onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
+                  <Typography > {genre.name} </Typography>
+                </a>
+
+              </Link>
             )
           })}
         </div>
@@ -93,32 +109,36 @@ const MovieInfo = ({ data }) => {
 
       </div>
 
-      {/* <div className="flex rounded-lg text-lg gap-1 justify-around md:justify-between lg:justify-around py-2" role="group">
-       
-      </div> */}
+
 
       <div className="flex flex-row gap-1 flex-wrap lg:flex-row justify-between items-baseline  my-2" >
         <div className="flex rounded-lg flex-row justify-between text-lg gap-1" role="group">
-          <button className="bg-white text-blue-500 px-2 md:px-4 h-[fit-content] py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
-            <Typography>IMDB</Typography>
-            <FaImdb />
-          </button>
-          <button className="bg-white text-blue-500 px-2 md:px-4  h-[fit-content]  py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
-            <Typography>Website</Typography>
-            < FaExternalLinkAlt />
-          </button>
-          <button className="bg-white text-blue-500 px-2 md:px-4 h-[fit-content]  py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
+          <a target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`}>
+            <Button variant="primary">
+              <Typography>IMDB</Typography>
+              <FaImdb />
+            </Button>
+          </a>
+          <a target="_blank" rel="noopener noreferrer" href={`${data?.homepage}`}>
+            <Button variant="primary">
+              <Typography>Website</Typography>
+              < FaExternalLinkAlt />
+            </Button>
+          </a>
+          <Button variant="primary" onClick={() => setIsModalOpen(true)}>
             <Typography>Trailer</Typography>
             < FaPlay />
-          </button>
+          </Button>
         </div>
 
         {/* back btn */}
-        <button className="bg-blue-600 text-white px-6 my-2 md:my-0 md:px-4 h-[fit-content] py-2 rounded-lg border flex justify-center items-center space-x-3 text-lg">
+        <Button variant="secondary" onClick={() => router.push("/")}>
           &larr; Back
-        </button>
+        </Button>
 
       </div>
+
+      {data && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 
 
