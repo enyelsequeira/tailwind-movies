@@ -31,6 +31,8 @@ export const tmdbApi = createApi({
       query: ({ genreIdOrCategoryName, page, searchQuery }) => {
         //* Get Movies by Search
         if (searchQuery) {
+          console.log(searchQuery, "from resource");
+          console.log("search query");
           return `/search/movie?query=${searchQuery}&page=${page}&api_key=${APIKEY}`;
         }
 

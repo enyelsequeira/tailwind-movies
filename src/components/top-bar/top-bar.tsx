@@ -1,20 +1,23 @@
+import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
+import { FormEventHandler, KeyboardEvent } from "react";
+import { useState, useEffect } from "react";
 import { FC } from "react";
+import { RootState } from "@/app/rootReducer";
+
+import { useDispatch, useSelector } from "react-redux";
 import DarkModeBtn from "../dark-mode-btn";
+import { useRouter } from "next/router";
+import Search from "../search";
+
 
 const TopBar: FC = (): JSX.Element => {
+
+
   return (
     <div className="col-span-10 flex  px-3 flex-col md:flex-row py-2 justify-between items-center">
-      <div className="flex border border-dark-background-secondary dark:border-light-background-primary rounded-md w-full md:w-2/4">
-        <input type="text" className="px-4 py-2 w-full  rounded-md" placeholder="Search Movies" />
-        <button className="flex items-center justify-center px-4 border-l">
-          <svg className="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24">
-            <path
-              d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-          </svg>
-        </button>
-      </div>
-      {/* <input className="w-full md:w-2/4 h-[fit-content] mx-0 md:mx-auto bg-gray-200 appearance-none border-2 border-gray-200 rounded  py-2 px-8 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" placeholder="search movies" /> */}
+
+      <Search />
+
       <div className="flex justify-around md:justify-end w-full py-4  md:w-1/5" >
         <button className="block focus:outline-none focus:bg-gray-700 md:px-5">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

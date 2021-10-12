@@ -1,3 +1,5 @@
+import useOnClickOutside from "@/hooks/useOnClickOutside";
+import { useRef } from "react";
 import { MdClose } from "react-icons/md"
 import Button from "../ui/button";
 import Typography from "../ui/typography";
@@ -10,7 +12,8 @@ interface Props {
 }
 
 const Modal = ({ open, title, video, setOpen }) => {
-  console.log(title, "title");
+  const ref = useRef()
+  useOnClickOutside(ref, () => setOpen(false))
 
   const toggle = () => {
     setOpen(!open)
@@ -18,13 +21,15 @@ const Modal = ({ open, title, video, setOpen }) => {
   return (
     <>
       <div
+
         className={open ? "flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 bg-black/50 outline-none focus:outline-none justify-center items-center border-4 border-red-800" : `hidden`}>
         <div className="relative  my-6 mx-auto max-w-4xl w-full ">
           {/* <!--content--> */}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none ">
             {/* <!--header--> */}
-            <div className="flex items-start  justify-between p-5 border-b border-solid border-gray-200 rounded-t">
+            <div ref={ref} className="flex items-start  justify-between p-5 border-b border-solid border-gray-200 rounded-t">
               <Typography as="h2">
+                {/* TODO look at dark mode */}
                 {title}
               </Typography>
               <Button variant="primary"

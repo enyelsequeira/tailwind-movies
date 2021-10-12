@@ -5,12 +5,15 @@ import Typography from "../ui/typography";
 import { useGetGenresQuery } from "@/services/TMDB";
 import FullNavigation from "../full-navigation";
 import MobileNav from "../mobile-navigation";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const AppBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // TODO figure out what needs to be passed here
   const { data, isLoading } = useGetGenresQuery(null);
+
 
 
   const { width } = useWindowSize()
