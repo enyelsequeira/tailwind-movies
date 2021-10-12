@@ -1,8 +1,7 @@
-import React from 'react'
-import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
-import { FormEventHandler, KeyboardEvent } from "react";
-import { useState, useEffect } from "react";
 import { FC } from "react";
+import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
+import { KeyboardEvent } from "react";
+import { useState, useEffect } from "react";
 import { RootState } from "@/app/rootReducer";
 
 import { useDispatch, useSelector } from "react-redux";

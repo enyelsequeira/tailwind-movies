@@ -1,16 +1,20 @@
-import Typography from "@/components/ui/typography"
-import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
-import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
-import Link from "next/link"
-import Image from "next/image"
-import Circle from 'react-circle';
-import { Cast } from "@/types/types"
-import Button from "../ui/button"
 import { useState } from "react"
-import Modal from "../modal"
-import { useRouter } from "next/router"
+
+import { Cast } from "@/types/types"
 import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
 import { useDispatch } from "react-redux"
+
+import { Button, Typography } from "../ui"
+import { Modal } from ".."
+
+import Link from "next/link"
+import { useRouter } from "next/router"
+import Image from "next/image"
+import Circle from 'react-circle';
+
+// icons
+import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
+import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
 
 const MovieInfo = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)

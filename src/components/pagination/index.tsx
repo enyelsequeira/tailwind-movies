@@ -1,5 +1,4 @@
 import { FC } from "react"
-import Typography from "../ui/typography"
 
 
 interface Props {

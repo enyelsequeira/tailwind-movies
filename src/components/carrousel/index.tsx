@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Image from "next/image"
-import { FC } from "hoist-non-react-statics/node_modules/@types/react"
-import { ActorImages, Images, ImagesResults, MovieInformation } from "@/types/types"
+import { FC } from "react"
+import { ImagesResults, MovieInformation } from "@/types/types"
 import { resolver } from "@/helpers"
 
 
@@ -10,7 +10,7 @@ interface Props {
   movieData?: MovieInformation
 }
 
-const MovieImagesCarrousel: FC<Props> = ({ imagesData, movieData }): JSX.Element => {
+const Carrousel: FC<Props> = ({ imagesData, movieData }): JSX.Element => {
   const [index, setIndex] = useState(0)
   const allImages = resolver(imagesData)
 
@@ -60,7 +60,7 @@ const MovieImagesCarrousel: FC<Props> = ({ imagesData, movieData }): JSX.Element
     </div>
   )
 }
-export default MovieImagesCarrousel
+export default Carrousel
 
 
 

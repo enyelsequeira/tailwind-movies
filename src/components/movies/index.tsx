@@ -1,15 +1,12 @@
-import { Movie, MoviesResults } from "@/types/types";
 import { FC, useState, useEffect } from "react";
-import Pagination from "../pagination";
+
+import { RootState } from "@/app/rootReducer";
 import { useSelector } from "react-redux";
 import { useGetMoviesQuery } from "@/services/TMDB";
-import SingleMovie from "../movie/movie";
-import { RootState } from "@/app/rootReducer";
-import Typography from "../ui/typography";
+import { Movie, Pagination } from "..";
+import { Typography } from "../ui";
 
-interface Props {
-  data: MoviesResults
-}
+import { SingleResults } from "@/types/types";
 
 const Movies: FC = () => {
   const [page, setPage] = useState(1);
@@ -27,9 +24,9 @@ const Movies: FC = () => {
     <div className="font-bold col-span-7 flex flex-col border-black">
       <Typography as="h1" className="pl-3 mb-6">Movies</Typography>
       <div className="flex flex-col items-center gap-2 md:grid md:grid-cols-2 lg:grid-cols-4  max-h-screen  md:max-h-[1200px] overflow-auto no-scrollbar  py-2">
-        {data ? data.results.map((data: Movie, i: number) => {
+        {data ? data.results.map((data: SingleResults, i: number) => {
           return (
-            <SingleMovie data={data} key={i} />
+            <Movie data={data} key={i} />
           )
         }) : null}
       </div>

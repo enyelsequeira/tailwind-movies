@@ -2,9 +2,10 @@ import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/Current
 import { Genres } from "@/types/types";
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sidebarMenu } from "../appbar";
+import { sidebarMenu } from "../menu-bar";
 import Typography from "../ui/typography";
 import Link from "next/link"
+import { RootState } from "@/app/rootReducer";
 
 
 interface Props {
@@ -12,7 +13,7 @@ interface Props {
 }
 const FullNavigation: FC<Props> = ({ data }) => {
   const dispatch = useDispatch()
-  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+  const { genreIdOrCategoryName } = useSelector((state: RootState) => state.currentGenreOrCategory);
 
 
   useEffect(() => {

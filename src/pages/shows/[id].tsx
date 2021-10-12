@@ -1,28 +1,27 @@
-import { useGetMoviesByActorIdQuery, useGetActorsDetailsQuery, useGetActorImagesQuery } from "@/services/TMDB"
-import { GetServerSideProps } from 'next'
-import Layout from "@/layout"
-import { useRouter } from 'next/router'
-import { useState } from "react"
-import { SingleResults } from "@/types/types"
 import { Carrousel, Main, Movie, Recommended } from "@/components"
-import { Button, Typography } from "@/components/ui"
+import Layout from "@/layout"
+import { useGetTvShowsAllInformationQuery } from "@/services/TMDB"
+import { SingleResults } from "@/types/types"
+import { GetServerSideProps } from "next"
+
+const Shows = ({ id }: { id: string }) => {
+  console.log(typeof id)
+  // const { data, isLoading } = useGetTVShowsInfoQuery(id)
+  // const { data: tvShowsImages } = useGetTVShowsImagesQuery(id)
+
+  const { data: tvShowsImages } = useGetTvShowsAllInformationQuery({ id: id, keyword: "images" })
+  const { data, isLoading } = useGetTvShowsAllInformationQuery({ id: id })
+  const { data: tvShowsRecommendations } = useGetTvShowsAllInformationQuery({ id: id, keyword: "recommendations" })
 
 
+  if (isLoading) return <p>Loading wait</p>
 
-
-const People = ({ id }) => {
-  // console.log(id);
-  const { data, isLoading } = useGetActorsDetailsQuery(id)
-  const { data: movieByActor } = useGetMoviesByActorIdQuery({ id: id, page: 1 })
-  const { data: actorImages } = useGetActorImagesQuery({ id })
-  const router = useRouter()
-  const [more, setMore] = useState(false)
-  if (isLoading) <p>Still loading page</p>
-
+  console.log({ data: data.first_air_date, tvShowsImages, tvShowsRecommendations });
   return (
     <Layout>
       <Main movie>
-        <Carrousel imagesData={actorImages} />
+        <Carrousel imagesData={tvShowsImages} />
+        {/* 
         {data && <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
           <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
             <Typography as="h3" className="md:tracking-wider text-center" >{data.name}</Typography>
@@ -38,12 +37,12 @@ const People = ({ id }) => {
             <Button variant="secondary" onClick={() => router.back()}>&larr; Back </Button>
           </div>
         </div>
-        }
+        } */}
 
 
         {/* movies by Actors*/}
-        <Recommended title={`Movies with ${data?.name} `}>
-          {movieByActor && movieByActor.results.length > 0 ? movieByActor.results.slice(0, 12).map((movie: SingleResults, i) => {
+        <Recommended title="Recommended Tv Shows">
+          {tvShowsRecommendations && tvShowsRecommendations.results.length > 0 ? tvShowsRecommendations.results.slice(0, 12).map((movie: SingleResults, i) => {
             return (
               <Movie data={movie} key={i} />
             )
@@ -57,23 +56,12 @@ const People = ({ id }) => {
   )
 }
 
-
-
-export default People
-
+export default Shows
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-
   return {
     props: {
       id: ctx.params.id
     }
   }
 }
-
-
-
-
-
-
-

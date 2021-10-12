@@ -1,0 +1,16 @@
+export { default as MenuBar } from "./menu-bar";
+export { default as DarkModeBtn } from "./dark-mode-btn";
+export { default as FullNavigation } from "./full-navigation";
+export { default as MobileNavigation } from "./mobile-navigation";
+export { default as Hero } from "./hero";
+export { default as Main } from "./main";
+export { default as Modal } from "./modal";
+export { default as Movie } from "./movie";
+export { default as Carrousel } from "./carrousel";
+export { default as MovieInfo } from "./movie-info";
+export { default as Movies } from "./movies";
+export { default as Pagination } from "./pagination";
+export { default as Recommended } from "./recommended";
+export { default as Search } from "./search";
+export { default as ShowsBox } from "./shows-box";
+export { default as TopBar } from "./top-bar";

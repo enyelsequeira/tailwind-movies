@@ -1,18 +1,20 @@
-import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
-import { Genres } from "@/types/types"
 import { FC, useEffect } from "react"
+import { Genres } from "@/types/types"
+
 import { useDispatch, useSelector } from "react-redux"
-import { sidebarMenu } from "../appbar"
+import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
+import { RootState } from "@/app/rootReducer"
+
+import { Typography } from "../ui"
+import { sidebarMenu } from "../menu-bar"
+
 import Link from "next/link"
-
-import Typography from "../ui/typography"
-
 interface Props {
   data?: Genres
 }
-const MobileNav: FC<Props> = ({ data }) => {
+const MobileNavigation: FC<Props> = ({ data }) => {
   const dispatch = useDispatch()
-  const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+  const { genreIdOrCategoryName } = useSelector((state: RootState) => state.currentGenreOrCategory);
 
 
   useEffect(() => {
@@ -71,4 +73,4 @@ const MobileNav: FC<Props> = ({ data }) => {
     </>
   )
 }
-export default MobileNav
+export default MobileNavigation

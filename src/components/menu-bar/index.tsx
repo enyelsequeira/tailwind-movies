@@ -1,14 +1,13 @@
-import useWindowSize from "@/hooks/useWindowsSize";
 import { useState } from "react";
-
-import Typography from "../ui/typography";
+import { Typography } from "../ui";
+import { FullNavigation, MobileNavigation } from "..";
+// Hooks
+import useWindowSize from "@/hooks/useWindowsSize";
 import { useGetGenresQuery } from "@/services/TMDB";
-import FullNavigation from "../full-navigation";
-import MobileNav from "../mobile-navigation";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
-const AppBar = () => {
+
+
+const MenuBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // TODO figure out what needs to be passed here
@@ -37,7 +36,7 @@ const AppBar = () => {
       <div className={`sidebar z-50 bg-light-background-primary dark:bg-dark-background-secondary text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform  md:relative md:translate-x-0 transition duration-200 ease-in-out overflow-auto ${isMenuOpen ? "" : "-translate-x-full "}`}>
         {
           width < 768 ?
-            <MobileNav data={data} /> : <FullNavigation data={data} />
+            <MobileNavigation data={data} /> : <FullNavigation data={data} />
         }
 
 
@@ -48,7 +47,7 @@ const AppBar = () => {
   )
 }
 
-export default AppBar
+export default MenuBar
 
 export const sidebarMenu = [
   { label: 'Popular', value: 'popular' },

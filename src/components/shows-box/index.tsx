@@ -1,15 +1,16 @@
-import { Shows, ShowsResults } from "@/types/types"
 import { FC, useState } from "react"
-import Typography from "../ui/typography"
-import Image from "next/image"
-import Pagination from "../pagination"
+import { Shows } from "@/types/types"
 import { useGetTopRatedShowsQuery } from "@/services/TMDB"
+import Link from "next/link"
+import Image from "next/image"
+import { Typography } from "../ui"
+import { Pagination } from ".."
 
 
 interface Props {
   title: string
 }
-const Sidebar: FC<Props> = ({ title }) => {
+const ShowsBox: FC<Props> = ({ title }) => {
   const [page, setPage] = useState(1)
 
   const { data, isLoading } = useGetTopRatedShowsQuery({ name: "top_rated", page })
@@ -25,9 +26,11 @@ const Sidebar: FC<Props> = ({ title }) => {
           return (
             <div className="flex flex-col justify-between" key={d.id}>
               <Image className="rounded-xl" width="100" height="100" src={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}`} alt={d.original_name} objectFit="cover" />
-              <Typography as="h6" className="truncate font-thin px-1" key={d.id}>
-                {d?.name}
-              </Typography>
+              <Link href={`/shows/${d.id}`} passHref>
+                <Typography as="h6" className="truncate font-thin px-1 cursor-pointer" key={d.id}>
+                  {d?.name}
+                </Typography>
+              </Link>
             </div>
           )
         })}
@@ -37,4 +40,4 @@ const Sidebar: FC<Props> = ({ title }) => {
     </div >
   )
 }
-export default Sidebar
+export default ShowsBox

@@ -1,8 +1,7 @@
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import { useRef } from "react";
 import { MdClose } from "react-icons/md"
-import Button from "../ui/button";
-import Typography from "../ui/typography";
+import { Button, Typography } from "../ui";
 
 interface Props {
   open?: () => null;

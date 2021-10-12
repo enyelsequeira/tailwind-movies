@@ -1,8 +1,7 @@
 import { Movie } from "@/types/types"
 import { FC } from "react";
 import Image from "next/image"
-import { useGetMovieQuery } from "@/services/TMDB";
-import Typography from "../ui/typography";
+import { Typography } from "../ui";
 
 interface Props {
   data?: Movie

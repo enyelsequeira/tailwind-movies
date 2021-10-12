@@ -5,6 +5,7 @@ import {
   MovieInformation,
   MoviesResults,
   ShowsResults,
+  TvShowsInformation,
 } from "./../types/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const APIKEY = process.env.NEXT_PUBLIC_API_KEY;
@@ -31,8 +32,6 @@ export const tmdbApi = createApi({
       query: ({ genreIdOrCategoryName, page, searchQuery }) => {
         //* Get Movies by Search
         if (searchQuery) {
-          console.log(searchQuery, "from resource");
-          console.log("search query");
           return `/search/movie?query=${searchQuery}&page=${page}&api_key=${APIKEY}`;
         }
 
@@ -73,6 +72,29 @@ export const tmdbApi = createApi({
         `/tv/${name}?api_key=${APIKEY}&language=en-US&page=${page}`,
     }),
 
+    //* Get Tv Shows Information by ID INFORMATION SHOWS Combine these Into one
+    // getTVShowsInfo: builder.query({
+    //   query: (id) => `/tv/${id}?api_key=${APIKEY}&language=en`,
+    // }),
+    // getTVShowsImages: builder.query({
+    //   query: (id) => `/tv/${id}/images?api_key=${APIKEY}&language=en`,
+    // }),
+    // getTVShowsRecommendations: builder.query({
+    //   query: (id) => `/tv/${id}/recommendations?api_key=${APIKEY}&language=en`,
+    // }),
+
+    getTvShowsAllInformation: builder.query<
+      ShowsResults & ImagesResults & TvShowsInformation,
+      { id: string | number; keyword?: string }
+    >({
+      query: ({ id, keyword }) => {
+        if (!keyword) {
+          return `/tv/${id}?api_key=${APIKEY}&language=en`;
+        }
+
+        return `/tv/${id}/${keyword}?api_key=${APIKEY}&language=en`;
+      },
+    }),
     //*  Get User Specific Lists
     getList: builder.query({
       query: ({ listName, accountId, sessionId, page }) =>
@@ -106,6 +128,7 @@ export const tmdbApi = createApi({
 
 export const {
   useGetGenresQuery,
+  useGetTvShowsAllInformationQuery,
   useGetMoviesQuery,
   useGetMovieQuery,
   useGetListQuery,

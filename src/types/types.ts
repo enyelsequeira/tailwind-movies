@@ -26,10 +26,13 @@ export interface Movie {
 export interface Shows extends Movie {
   first_air_date: string;
   name: string;
+  media_type: string;
   origin_country: string;
   original_name: string;
   poster_path: string;
 }
+
+export type SingleResults = Movie & Shows;
 
 export interface MoviesResults {
   page: number;
@@ -110,6 +113,52 @@ export interface MovieInformation extends Movie {
       size: number;
     }[];
   };
+}
+// TV shows
+export interface Networks {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+export interface Creators {
+  id: number;
+  credit_id: string;
+  name: string;
+  gender: number;
+  profile_path: string | null;
+}
+export interface TvShowsInformation extends MovieInformation {
+  created_by: Creators[];
+  episode_run_time: number[];
+  first_air_date: string;
+  in_production: boolean;
+  languages: string[];
+  last_air_date: string;
+  last_episode_to_air?: {
+    air_date: string;
+    episode_number: number;
+    id: number;
+    name: string;
+    overview: string;
+    production_code: string;
+    season_number: number;
+    still_path: string;
+    vote_average: number;
+    vote_count: number;
+  };
+  name: string;
+  networks: Networks[];
+  next_episode_to_air?: null;
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: string[];
+  original_name: string;
+  status: string;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  seasons?: [];
+  type: string;
 }
 export interface ProductionCompany {
   id: number;

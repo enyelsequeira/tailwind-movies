@@ -1,13 +1,8 @@
-import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
-import { FormEventHandler, KeyboardEvent } from "react";
-import { useState, useEffect } from "react";
-import { FC } from "react";
-import { RootState } from "@/app/rootReducer";
 
-import { useDispatch, useSelector } from "react-redux";
-import DarkModeBtn from "../dark-mode-btn";
-import { useRouter } from "next/router";
-import Search from "../search";
+import { FC } from "react";
+import { DarkModeBtn, Search } from "..";
+
+
 
 
 const TopBar: FC = (): JSX.Element => {
