@@ -1,6 +1,6 @@
 import { useState, FC } from "react"
 
-import { Cast, MovieInformation, TVshowsAndMovieInformation, TvShowsInformation } from "@/types/types"
+import { Cast, MovieInformation, TvShowsInformation } from "@/types/types"
 import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
 import { useDispatch } from "react-redux"
 
@@ -57,7 +57,7 @@ const MovieInfo: FC<Props> = ({ data, shows }) => {
       <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
           <Typography as="h3" className="my-2">Rating</Typography>
-          <Circle animate={true} animationDuration="2s" responsive={false} size="100" lineWidth="40" progress={data?.vote_average * 10 || shows?.vote_average * 10} progressColor="rgba(36, 101, 187, 0.747)" bgColor="#ecedf0" textColor="#6b778c" textStyle={{
+          <Circle animate={true} animationDuration="2s" responsive={false} size="100" lineWidth="40" progress={isMovie ? data?.vote_average * 10 : shows?.vote_average * 10} progressColor="rgba(36, 101, 187, 0.747)" bgColor="#ecedf0" textColor="#6b778c" textStyle={{
             font: 'bold 4rem Source Sans Pro, Arial, sans-serif' // CSSProperties: Custom styling for percentage.
           }}
             percentSpacing={20} // Number: Adjust spacing of "%" symbol and number.
@@ -156,7 +156,7 @@ const MovieInfo: FC<Props> = ({ data, shows }) => {
             </Button>
           </a>}
 
-          <a target="_blank" rel="noopener noreferrer" href={`${data?.homepage || shows.homepage}`}>
+          <a target="_blank" rel="noopener noreferrer" href={`${isMovie ? data?.homepage : shows.homepage}`}>
             <Button variant="primary">
               <Typography>Website</Typography>
               < FaExternalLinkAlt />
@@ -175,7 +175,7 @@ const MovieInfo: FC<Props> = ({ data, shows }) => {
 
       </div>
 
-      {data && isModalOpen && <Modal open={isModalOpen} title={isMovie ? data.title : shows.name} video={data.videos.results[0].key || shows.videos.results[0].key} setOpen={setIsModalOpen} />}
+      {data && isModalOpen && <Modal open={isModalOpen} title={isMovie ? data.title : shows.name} video={isMovie ? data.videos.results[0].key : shows.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 
 

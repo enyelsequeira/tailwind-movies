@@ -1,4 +1,3 @@
-import { TVshowsAndMovieInformation } from "./types";
 export interface GenresData {
   id: number;
   name: string;
