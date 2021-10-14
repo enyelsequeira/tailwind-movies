@@ -19,7 +19,7 @@ const Shows = ({ id }: { id: string }) => {
         <Carrousel imagesData={tvShowsImages} />
 
 
-        <MovieInfo data={data} />
+        <MovieInfo shows={data} />
 
         {/* movies by Actors*/}
         <Recommended title="Recommended Tv Shows">
