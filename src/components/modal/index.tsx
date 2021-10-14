@@ -27,7 +27,7 @@ const Modal = ({ open, title, video, setOpen }) => {
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none ">
             {/* <!--header--> */}
             <div ref={ref} className="flex items-start  justify-between p-5 border-b border-solid border-gray-200 rounded-t">
-              <Typography as="h2">
+              <Typography as="h2" className="text-light-background-primary">
                 {/* TODO look at dark mode */}
                 {title}
               </Typography>

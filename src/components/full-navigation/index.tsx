@@ -18,7 +18,7 @@ const FullNavigation: FC<Props> = ({ data }) => {
 
   useEffect(() => {
   }, [genreIdOrCategoryName])
-  console.log(genreIdOrCategoryName);
+  // console.log(genreIdOrCategoryName);
   return (
     <>
       <div className="py-2 my-4">

@@ -89,7 +89,7 @@ export const tmdbApi = createApi({
     >({
       query: ({ id, keyword }) => {
         if (!keyword) {
-          return `/tv/${id}?api_key=${APIKEY}&language=en`;
+          return `/tv/${id}?append_to_response=videos,credits&api_key=${APIKEY}&language=en`;
         }
 
         return `/tv/${id}/${keyword}?api_key=${APIKEY}&language=en`;

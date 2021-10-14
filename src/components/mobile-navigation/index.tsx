@@ -19,7 +19,6 @@ const MobileNavigation: FC<Props> = ({ data }) => {
 
   useEffect(() => {
   }, [genreIdOrCategoryName])
-  console.log(genreIdOrCategoryName);
 
 
   return (

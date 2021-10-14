@@ -1,3 +1,4 @@
+import { TVshowsAndMovieInformation } from "./types";
 export interface GenresData {
   id: number;
   name: string;
@@ -160,6 +161,7 @@ export interface TvShowsInformation extends MovieInformation {
   seasons?: [];
   type: string;
 }
+export type TVshowsAndMovieInformation = TvShowsInformation & MovieInformation;
 export interface ProductionCompany {
   id: number;
   logo_path: string;
@@ -193,3 +195,13 @@ export interface ActorImages {
   id: number;
   profiles: Images[];
 }
+
+// ! something to test out later for refactoring
+// function isTvShows(data:any) data is TVshowsAndMovieInformation {
+//   return !! data[name, episode_run_time]
+
+// }  {isTvShow(data) {
+//           return <Info title={name} {...data}/>} else {
+//             return <Info title={title} {...data} />
+//           }
+//         }

@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, FC } from "react"
 
-import { Cast } from "@/types/types"
+import { Cast, TVshowsAndMovieInformation } from "@/types/types"
 import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
 import { useDispatch } from "react-redux"
 
@@ -16,28 +16,33 @@ import Circle from 'react-circle';
 import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
 import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
 
-const MovieInfo = ({ data }) => {
+interface Props {
+  data: TVshowsAndMovieInformation
+}
+const MovieInfo: FC<Props> = ({ data }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
+  // Can this be type guard?
+  const isMovie = data.title
 
   return (
     <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
       <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
-        <Typography as="h3" className="md:tracking-wider text-center" >{data?.title}</Typography>
-        <Typography as="h4" className="tracking-wide my-5"> {data?.tagline}</Typography>
-        <div className="flex md:space-x-2 my-2 md:border-2 md:border-black">
+        <Typography as="h3" className="md:tracking-wider text-center" >{isMovie ? data.title : data.name}</Typography>
+        <Typography as="h4" className="tracking-wide my-5"> {data?.tagline !== "" ? data.tagline : "No Tagline"}</Typography>
+        <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
           <div className="relative px-2">
-            <Typography className="relative">{data?.runtime} Mins</Typography>
+            <Typography className="relative">{isMovie ? data.runtime : data.episode_run_time[0]} Mins</Typography>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
           </div>
           <div className="relative px-2 ">
-            <Typography className="relative">{data?.release_date}</Typography>
+            <Typography className="relative">{isMovie ? data.release_date : data.first_air_date}</Typography>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
           </div>
           <div className="relative px-2">
-            <Typography className="relative">{data?.spoken_languages[0].english_name}</Typography>
+            <Typography className="relative">{data.spoken_languages[0].english_name}</Typography>
           </div>
 
         </div>
@@ -97,7 +102,7 @@ const MovieInfo = ({ data }) => {
             return (
               <div key={actor.id} className="flex flex-col">
                 <div className="relative h-28 md:h-32">
-                  <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor?.name} objectFit="cover" layout="fill" />
+                  <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" />
                 </div>
                 <Link href={`/cast/${actor.id}`}>
                   <a>
@@ -117,12 +122,13 @@ const MovieInfo = ({ data }) => {
 
       <div className="flex flex-row gap-1 flex-wrap lg:flex-row justify-between items-baseline  my-2" >
         <div className="flex rounded-lg flex-row justify-between text-lg gap-1" role="group">
-          <a target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data?.imdb_id}`}>
+          {data.imdb_id && <a target="_blank" rel="noopener noreferrer" href={`https://www.imdb.com/title/${data.imdb_id}`}>
             <Button variant="primary">
               <Typography>IMDB</Typography>
               <FaImdb />
             </Button>
-          </a>
+          </a>}
+
           <a target="_blank" rel="noopener noreferrer" href={`${data?.homepage}`}>
             <Button variant="primary">
               <Typography>Website</Typography>
@@ -142,7 +148,7 @@ const MovieInfo = ({ data }) => {
 
       </div>
 
-      {data && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
+      {data && isModalOpen && <Modal open={isModalOpen} title={isMovie ? data.title : data.name} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 
 

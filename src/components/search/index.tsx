@@ -16,17 +16,17 @@ const Search = () => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      console.log(query);
+      // console.log(query);
       dispatch(searchMovie(query));
       setQuery("empty")
-      console.log(setQuery(""))
-      console.log("after search", query);
+      // console.log(setQuery(""))
+      // console.log("after search", query);
     }
   };
-  console.log(searchQuery);
+  // console.log(searchQuery);
 
   useEffect(() => {
-    console.log(query)
+    // console.log(query)
     setQuery(searchQuery)
   }, [searchQuery])
 
