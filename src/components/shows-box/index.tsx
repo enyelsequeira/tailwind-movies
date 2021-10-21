@@ -4,7 +4,7 @@ import { useGetTopRatedShowsQuery } from "@/services/TMDB"
 import Link from "next/link"
 import Image from "next/image"
 import { Typography } from "../ui"
-import { Pagination } from ".."
+import { Loader, Pagination } from ".."
 
 
 interface Props {
@@ -15,19 +15,21 @@ const ShowsBox: FC<Props> = ({ title }) => {
 
   const { data, isLoading } = useGetTopRatedShowsQuery({ name: "top_rated", page })
 
-  if (isLoading) <p>wait....</p>
+  if (isLoading) {
+    return <Loader />
+  }
 
   return (
     <div className="md:col-span-2 p-4 md:p-1 text-2xl font-bold flex flex-col">
       <Typography as="h4" className="md:col-span-3 font-semibold mb-4 md:my-4">{title}</Typography>
 
       <div className="grid grid-cols-2 gap-2 md:gap-1 md:grid-cols-3">
-        {data?.results.slice(0, 6).map((d: Shows) => {
+        {data && data.results.slice(0, 6).map((d: Shows) => {
           return (
             <div className="flex flex-col justify-between" key={d.id}>
               <Image className="rounded-xl" width="100" height="100" src={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}`} alt={d.original_name} objectFit="cover" />
               <Link href={`/shows/${d.id}`} passHref>
-                <Typography as="h6" className="truncate font-thin px-1 cursor-pointer" key={d.id}>
+                <Typography as="h6" className="truncate font-thin px-1 cursor-pointer hover:text-red-400 dark:hover:text-red-200" key={d.id}>
                   {d?.name}
                 </Typography>
               </Link>

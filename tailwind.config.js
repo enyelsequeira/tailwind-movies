@@ -13,6 +13,10 @@ module.exports = {
       body: ["Source Sans Pro", "serif"],
     },
     extend: {
+      animation: {
+        bounce200: "bounce 1s infinite 200ms",
+        bounce400: "bounce 1s infinite 400ms",
+      },
       gridTemplateRows: {
         layout: "100px, repeat(9, minmax(200px, 1fr))",
         test: "450px 1fr",

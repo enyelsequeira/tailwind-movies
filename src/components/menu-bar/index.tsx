@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Typography } from "../ui";
-import { FullNavigation, MobileNavigation } from "..";
+import { FullNavigation, Loader, MobileNavigation } from "..";
 // Hooks
 import useWindowSize from "@/hooks/useWindowsSize";
 import { useGetGenresQuery } from "@/services/TMDB";
@@ -11,7 +11,7 @@ const MenuBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // TODO figure out what needs to be passed here
-  const { data, isLoading } = useGetGenresQuery(null);
+  const { data, isLoading, error } = useGetGenresQuery(null);
 
 
 
@@ -20,7 +20,9 @@ const MenuBar = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  if (isLoading) <Typography>Loading data....</Typography>
+  if (isLoading) return <Loader />
+  if (error) return <Typography as="h3">sorry could not load genres</Typography>
+
 
   return (
     <>

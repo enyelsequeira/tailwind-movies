@@ -4,13 +4,16 @@ import { ThemeProvider } from "next-themes";
 import { Provider } from 'react-redux';
 import { store } from '@/app/store';
 
+import { AnimatePresence } from "framer-motion";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider attribute="class">
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <AnimatePresence exitBeforeEnter initial={false}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </AnimatePresence>
     </ThemeProvider>
   )
 }

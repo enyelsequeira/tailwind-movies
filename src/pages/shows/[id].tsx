@@ -1,36 +1,39 @@
-import { Carrousel, Main, Movie, MovieInfo, Recommended } from "@/components"
+import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended } from "@/components"
+import { Typography } from "@/components/ui"
 import Layout from "@/layout"
 import { useGetTvShowsAllInformationQuery } from "@/services/TMDB"
 import { SingleResults } from "@/types/types"
 import { GetServerSideProps } from "next"
 
 const Shows = ({ id }: { id: string }) => {
-  const { data: tvShowsImages } = useGetTvShowsAllInformationQuery({ id: id, keyword: "images" })
-  const { data, isLoading } = useGetTvShowsAllInformationQuery({ id: id })
+  const { data: tvShowsImages, isLoading: imagesLoading } = useGetTvShowsAllInformationQuery({ id: id, keyword: "images" })
+  const { data, isLoading, error } = useGetTvShowsAllInformationQuery({ id: id })
   const { data: tvShowsRecommendations } = useGetTvShowsAllInformationQuery({ id: id, keyword: "recommendations" })
 
 
-  if (isLoading) return <p>Loading wait</p>
+  // if (isLoading) return <p>Loading wait</p>
 
-  console.log({ data });
+  // console.log({ data });
   return (
     <Layout>
       <Main movie>
-        <Carrousel imagesData={tvShowsImages} />
+        {isLoading ? <Loader isInfo /> : (
+          <>
+            {imagesLoading ? <Loader /> : <Carrousel imagesData={tvShowsImages} />}
 
+            <MovieInfo shows={data} />
 
-        <MovieInfo shows={data} />
-
-        {/* movies by Actors*/}
-        <Recommended title="Recommended Tv Shows">
-          {tvShowsRecommendations && tvShowsRecommendations.results.length > 0 ? tvShowsRecommendations.results.slice(0, 12).map((movie: SingleResults, i) => {
-            return (
-              <Movie data={movie} key={i} />
-            )
-          }) : <div>Sorry No recommendation were found</div>}
-        </Recommended>
-
-
+            {/* movies by Actors*/}
+            <Recommended title="Recommended Tv Shows">
+              {tvShowsRecommendations && tvShowsRecommendations.results.length > 0 ? tvShowsRecommendations.results.slice(0, 12).map((movie: SingleResults, i: number) => {
+                return (
+                  <Movie data={movie} key={i} value={i} />
+                )
+              }) : <div>Sorry No recommendation were found</div>}
+            </Recommended>
+          </>
+        )}
+        {error && <Typography> Sorry there was an error fetching data.. </Typography>}
 
       </Main>
     </Layout>

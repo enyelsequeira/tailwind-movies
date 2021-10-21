@@ -7,21 +7,34 @@ import { Typography } from "../ui";
 import Image from "next/image"
 import Link from "next/link"
 
+import { motion } from "framer-motion"
 
 interface Props {
   data?: SingleResults
-  key?: number
+  value?: number
 }
 
 
-const Movie: FC<Props> = ({ data }) => {
+const Movie: FC<Props> = ({ data, value }) => {
+  const variants = {
+    visible: (i: number) => ({
+      opacity: 1,
+      transition: {
+        delay: i * 0.3,
+        ease: "easeIn",
+        duration: 2,
+      },
+    }),
+    hidden: { opacity: 0 },
+  }
+
 
   return (
-    <div className="flex flex-col h-80 w-2/3 md:min-w-full px-1">
+    <motion.div variants={variants} initial="hidden" animate="visible" custom={value} className="flex flex-col h-96 w-2/3 md:min-w-full px-1">
       <Link href={`/movies/${data.id}`} passHref>
-        <>
-          <Image className="rounded shadow-2xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} width="300" height="300" objectFit="cover" alt={data.title} blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} />
-        </>
+        <a>
+          <Image className="rounded shadow-2xl cursor-pointer" src={data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : "/images/placeholder.jpeg"} width="300" height="300" objectFit="cover" alt={data.title} blurDataURL={data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : "/images/placeholder.jpeg"} />
+        </a>
       </Link>
       <Link href={data.media_type === "tv" ? `/shows/${data.id}` : `/movies/${data.id}`}>
         <a className="cursor-pointer ">
@@ -40,7 +53,7 @@ const Movie: FC<Props> = ({ data }) => {
           })
         }
       </div>
-    </div>
+    </motion.div>
 
 
 

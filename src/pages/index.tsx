@@ -15,7 +15,8 @@ const Home: NextPage = () => {
   return (
     <Layout>
       <Main>
-        <Hero data={data?.results[movie]} />
+        {isLoading ? <div> I am loading wait</div> : <Hero data={data.results[movie]} />}
+        {error && <div>There was an error fetching data</div>}
         <ShowsBox title="Most Rated Shows" />
         <Movies />
       </Main>

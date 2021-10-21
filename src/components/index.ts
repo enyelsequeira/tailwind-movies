@@ -14,3 +14,4 @@ export { default as Recommended } from "./recommended";
 export { default as Search } from "./search";
 export { default as ShowsBox } from "./shows-box";
 export { default as TopBar } from "./top-bar";
+export { default as Loader } from "./loader";

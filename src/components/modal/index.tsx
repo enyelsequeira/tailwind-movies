@@ -21,13 +21,13 @@ const Modal = ({ open, title, video, setOpen }) => {
     <>
       <div
 
-        className={open ? "flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 bg-black/50 outline-none focus:outline-none justify-center items-center border-4 border-red-800" : `hidden`}>
+        className={open ? "flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 bg-black/50 outline-none focus:outline-none justify-center items-center " : `hidden`}>
         <div className="relative  my-6 mx-auto max-w-4xl w-full ">
           {/* <!--content--> */}
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none ">
             {/* <!--header--> */}
             <div ref={ref} className="flex items-start  justify-between p-5 border-b border-solid border-gray-200 rounded-t">
-              <Typography as="h2" className="text-light-background-primary">
+              <Typography as="h2" className="text-gray-900">
                 {/* TODO look at dark mode */}
                 {title}
               </Typography>

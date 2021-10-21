@@ -1,3 +1,8 @@
+import {
+  TvShowsInformation,
+  MovieInformation,
+  TVshowsAndMovieInformation,
+} from "./../types/types";
 import { Images, ImagesResults } from "@/types/types";
 
 const fillExtraImages = Array(5).fill({
@@ -26,3 +31,11 @@ export const resolver = (
     };
   }
 };
+
+export function isTvShows(data: any): data is TVshowsAndMovieInformation {
+  return !!data.name;
+}
+
+export function isTvTest(data: any): data is MovieInformation {
+  return (data as TvShowsInformation).title !== undefined;
+}
