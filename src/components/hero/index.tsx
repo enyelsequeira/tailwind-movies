@@ -15,7 +15,10 @@ const Hero: FC<Props> = ({ data }) => {
       {data &&
         <>
           <Link href={`/movies/${data.id}`} passHref>
-            <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} />
+            <a>
+
+              <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} />
+            </a>
           </Link>
           <div className="absolute bg-black/40 text-white space-y-1 w-[300px] md:w-auto  rounded-b-2xl bottom-0 p-2 ">
             <Link href={`/movies/${data.id}`} passHref>

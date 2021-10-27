@@ -30,6 +30,7 @@ export const tmdbApi = createApi({
       }
     >({
       query: ({ genreIdOrCategoryName, page, searchQuery }) => {
+        // console.log(page, "page from tmdb");
         //* Get Movies by Search
         if (searchQuery) {
           return `/search/movie?query=${searchQuery}&page=${page}&api_key=${APIKEY}`;
@@ -45,6 +46,7 @@ export const tmdbApi = createApi({
 
         //* Get Movies by Genre
         if (typeof genreIdOrCategoryName === "number") {
+          console.log(page);
           return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${APIKEY}`;
         }
 
@@ -100,6 +102,8 @@ export const tmdbApi = createApi({
       query: ({ listName, accountId, sessionId, page }) =>
         `/account/${accountId}/${listName}?api_key=${APIKEY}&session_id=${sessionId}&page=${page}`,
     }),
+
+    //* Get recommendations of movies
     getRecommendations: builder.query<
       MoviesResults,
       { movie_id: string | number; list: string }
@@ -107,6 +111,7 @@ export const tmdbApi = createApi({
       query: ({ movie_id, list }) =>
         `/movie/${movie_id}/${list}?api_key=${APIKEY}`,
     }),
+
     // Getting information about the actors details/movies and image
     getActorsDetails: builder.query<Actor, number | string>({
       query: (id) => `person/${id}?api_key=${APIKEY}`,

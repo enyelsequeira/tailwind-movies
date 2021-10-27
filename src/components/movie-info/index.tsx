@@ -30,7 +30,7 @@ const MovieInfo: FC<Props> = (props: MovieProps) => {
   const dispatch = useDispatch()
 
   // Can this be type guard?
-  console.log(data);
+  // console.log(data);
 
   if (data || shows) {
     const isMovie = data?.title
@@ -64,5 +64,6 @@ const MovieInfo: FC<Props> = (props: MovieProps) => {
 }
 
 export default MovieInfo
+
 
 

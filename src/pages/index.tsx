@@ -10,6 +10,7 @@ const Home: NextPage = () => {
   const page = 1
   const { genreIdOrCategoryName, searchQuery } = useSelector((state: RootState) => state.currentGenreOrCategory);
   const { data, error, isLoading } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
+  // console.log(data);
 
   const movie = Math.floor(Math.random() * data?.results.length)
   return (

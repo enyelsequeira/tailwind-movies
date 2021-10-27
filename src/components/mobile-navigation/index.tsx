@@ -9,6 +9,7 @@ import { Typography } from "../ui"
 import { sidebarMenu } from "../menu-bar"
 
 import Link from "next/link"
+import { RiMovie2Line } from "react-icons/ri"
 interface Props {
   data?: Genres
 }
@@ -24,9 +25,9 @@ const MobileNavigation: FC<Props> = ({ data }) => {
   return (
     <>
       <div className="py-2">
-        <Typography as="h4" className="mb-4 tracking-widest text-gray-500 uppercase dark:text-white font-title">
-          Menu
-        </Typography>
+        <Link href="/" passHref>
+          <RiMovie2Line className="w-14 h-14 mb-3 mx-auto fill-current text-red-400 dark:text-yellow-600 cursor-pointer hover:text-red-800 dark:hover:text-red-200 transition-all ease-in duration-300" />
+        </Link>
         {sidebarMenu.map((label, i) => {
           return (
             <Link href="/" key={i} passHref>

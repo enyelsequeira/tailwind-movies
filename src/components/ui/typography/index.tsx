@@ -29,7 +29,7 @@ const Typography = forwardRef<HTMLDivElement, ITypography>(
       'text-2xl font-bold font-title': Element === 'h3' && !resetStyles,
       'text-xl font-medium font-title': Element === 'h4' && !resetStyles,
       'text-lg font-medium font-title': Element === 'h5' && !resetStyles,
-      'text-lg font-base font-title': Element === 'h6' && !resetStyles,
+      'text-lg font-base font-title dark:text-white text-black': Element === 'h6' && !resetStyles,
       'text-base font-body': Element === 'p' && !resetStyles,
     },
       className

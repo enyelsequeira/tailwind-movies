@@ -7,6 +7,9 @@ import Typography from "../ui/typography";
 import Link from "next/link"
 import { RootState } from "@/app/rootReducer";
 
+import { RiMovie2Line } from "react-icons/ri"
+import { Login } from "..";
+
 
 interface Props {
   data?: Genres
@@ -18,13 +21,15 @@ const FullNavigation: FC<Props> = ({ data }) => {
 
   useEffect(() => {
   }, [genreIdOrCategoryName])
-  // console.log(genreIdOrCategoryName);
   return (
     <>
       <div className="py-2 my-4">
-        <Typography as="h4" className="mb-4 tracking-widest text-gray-500 uppercase dark:text-white font-title">
-          Menu
-        </Typography>
+        <Link href="/" passHref>
+          <a>
+            <RiMovie2Line className="w-14 h-14 mb-3 mx-auto fill-current text-red-400 dark:text-yellow-600 cursor-pointer hover:text-red-800 dark:hover:text-red-200 transition-all ease-in duration-300" />
+          </a>
+        </Link>
+
         {sidebarMenu.map((name, i) => {
           return (
             <Link href="/" key={i} passHref>
@@ -62,6 +67,7 @@ const FullNavigation: FC<Props> = ({ data }) => {
           })}
         </ul>
       </div>
+      <Login />
 
     </>
   )

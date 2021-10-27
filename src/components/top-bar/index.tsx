@@ -2,23 +2,36 @@
 import { FC } from "react";
 import { DarkModeBtn, Search } from "..";
 
+import { useSelector } from "react-redux";
+import { userSelector } from "@/features/auth";
 
+import Image from "next/image";
+import { FiLogIn } from "react-icons/fi";
+import { fetchToken } from "@/helpers";
 
 
 const TopBar: FC = (): JSX.Element => {
+  const { isAuthenticated, user } = useSelector(userSelector);
 
 
   return (
-    <div className="col-span-10 flex  px-3 flex-col md:flex-row py-2 justify-between items-center">
+    <div className="col-span-10 flex  px-3 flex-col md:flex-row py-2 justify-between items-center border-2 border-red-500">
 
       <Search />
 
-      <div className="flex justify-around md:justify-end w-full py-4  md:w-1/5" >
-        <button className="block focus:outline-none focus:bg-gray-700 md:px-5">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-          </svg>
-        </button>
+      <div className="flex justify-around md:justify-end w-full py-4  md:w-1/5 space-x-6">
+        {isAuthenticated ? (
+          <div className="relative object-cover w-6 h-auto">
+            <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">
+            <FiLogIn onClick={fetchToken} className="cursor-pointer fill-current hover:text-red-900 dark:hover:text-red-200 transition-all duration-300 ease-linear w-5 h-auto" />
+          </div>
+        )}
+
+
+
         <DarkModeBtn />
 
       </div>

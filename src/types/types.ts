@@ -204,3 +204,33 @@ export interface ActorImages {
 //             return <Info title={title} {...data} />
 //           }
 //         }
+
+// user
+
+export interface User {
+  avatar: {
+    gravatar: {
+      hash: string;
+    };
+    tmdb: {
+      avatar_path: string;
+    };
+  };
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  include_adult: boolean;
+  username: string;
+}
+
+export interface UserToken {
+  expires_at: string;
+  request_token: string;
+  success: boolean;
+}
+
+export interface UserSessionId {
+  session_id: string;
+  success: boolean;
+}

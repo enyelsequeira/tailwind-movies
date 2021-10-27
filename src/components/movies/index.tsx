@@ -15,6 +15,7 @@ const Movies: FC = () => {
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: 'smooth' });
+    // console.log({ data, page, genreIdOrCategoryName });
   }, [page, genreIdOrCategoryName])
 
   if (isLoading) return <Loader />
@@ -25,7 +26,7 @@ const Movies: FC = () => {
       <Typography as="h1" className="pl-3 mb-6">Movies</Typography>
       <div className="flex flex-col items-center gap-2 md:grid md:grid-cols-2 lg:grid-cols-4  max-h-screen  md:max-h-[1200px] overflow-auto no-scrollbar  py-2">
         {data ? data.results.map((data: SingleResults, i: number) => {
-          console.log(i);
+          // console.log(i);
           return (
             <Movie data={data} key={i} value={i} />
           )
