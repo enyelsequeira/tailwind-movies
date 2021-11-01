@@ -72,14 +72,14 @@ export const getSessionId = async () => {
   const token = localStorage.getItem("request_token");
 
   if (token) {
-    console.log("my token is here now", token);
+    // console.log("my token is here now", token);
     try {
       const {
         data: { session_id },
       } = await moviesApi.post<UserSessionId>("authentication/session/new", {
         request_token: token,
       });
-      console.log(session_id, "my session id");
+      // console.log(session_id, "my session id");
 
       localStorage.setItem("session_id", session_id);
 

@@ -21,7 +21,7 @@ interface Props {
 }
 
 const ShowInfo: FC<Props> = ({ data }) => {
-  console.log({ data: data.type });
+  // console.log({ data: data.type });
   const [isModalOpen, setIsModalOpen] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
