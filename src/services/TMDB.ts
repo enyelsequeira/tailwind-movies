@@ -98,7 +98,15 @@ export const tmdbApi = createApi({
       },
     }),
     //*  Get User Specific Lists
-    getList: builder.query({
+    getList: builder.query<
+      MoviesResults,
+      {
+        listName: string;
+        accountId: string | number;
+        sessionId: string | number;
+        page: number;
+      }
+    >({
       query: ({ listName, accountId, sessionId, page }) =>
         `/account/${accountId}/${listName}?api_key=${APIKEY}&session_id=${sessionId}&page=${page}`,
     }),

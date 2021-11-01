@@ -17,37 +17,34 @@ import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
 import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
 
 interface Props {
-  data?: MovieInformation,
+  data: TvShowsInformation
 }
 
-
-const MovieInfo: FC<Props> = ({ data }) => {
-
+const ShowInfo: FC<Props> = ({ data }) => {
+  console.log({ data: data.type });
   const [isModalOpen, setIsModalOpen] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
-  // Can this be type guard?
-  // console.log(data);
 
   if (data) {
     const isMovie = data?.title
     return (
       <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
         <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
-          <Typography as="h3" className="md:tracking-wider text-center" >{data.title}</Typography>
+          <Typography as="h3" className="md:tracking-wider text-center" >{data.name}</Typography>
           <Typography as="h4" className="tracking-wide my-5"> {data.tagline !== "" ? data.tagline : "No Tagline"}</Typography>
           <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
             <div className="relative px-2">
-              <Typography className="relative">{data.runtime} Mins</Typography>
+              <Typography className="relative">{data.episode_run_time[0]} Mins</Typography>
               <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
             </div>
             <div className="relative px-2 ">
-              <Typography className="relative">{data.release_date}</Typography>
+              <Typography className="relative">{data.first_air_date}</Typography>
               <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
             </div>
             <div className="relative px-2">
-              <Typography className="relative">{data?.spoken_languages[0]?.english_name}</Typography>
+              <Typography className="relative">{data.spoken_languages.length < 1 ? "Unknown" : data.spoken_languages[0].english_name}</Typography>
             </div>
 
           </div>
@@ -69,22 +66,13 @@ const MovieInfo: FC<Props> = ({ data }) => {
               showPercentageSymbol={true} // Boolean: Show/hide only the "%" symbol.
             />
           </div>
-          <div className="flex flex-col justify-end space-y-8">
-            <Button variant="primary">
-              <Typography>Favorite</Typography>
-              <MdFavoriteBorder />
-            </Button>
-            <Button variant="primary">
-              <Typography>WatchList</Typography>
-              <MdWatchLater />
-            </Button>
-          </div>
+
 
         </div>
         <div>
           <Typography as="h3" className="my-2">Genres</Typography>
           <div className="flex space-x-4">
-            {data && data.genres.map((genre) => {
+            {data.genres.map((genre) => {
               return (
                 <Link href="/" passHref key={genre.id} >
                   <a onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
@@ -103,11 +91,11 @@ const MovieInfo: FC<Props> = ({ data }) => {
         <div>
           <Typography as="h3" className="my-2">Cast</Typography>
           <div className="grid grid-cols-3  gap-3 md:grid md:grid-cols-5  py-1">
-            {data && data.credits.cast.slice(0, 5).map((actor: Cast) => {
+            {data.credits.cast.slice(0, 5).map((actor: Cast) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
-                    <Image className="rounded-md h-36" src={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} alt={actor.name} objectFit="cover" layout="fill" />
+                    <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
                     <a>
@@ -151,7 +139,7 @@ const MovieInfo: FC<Props> = ({ data }) => {
 
         </div>
 
-        {data && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
+        {data && isModalOpen && <Modal open={isModalOpen} title={data.name} video={isMovie ? data.videos.results[0].key : data.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 
 
@@ -161,7 +149,8 @@ const MovieInfo: FC<Props> = ({ data }) => {
   }
 }
 
-export default MovieInfo
+
+export default ShowInfo
 
 
 

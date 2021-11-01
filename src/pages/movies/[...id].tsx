@@ -1,7 +1,6 @@
 import { useGetMovieImagesQuery, useGetMovieQuery, useGetRecommendationsQuery } from "@/services/TMDB"
 import { GetServerSideProps } from 'next'
 import Layout from "@/layout"
-import { useRouter } from "next/router"
 import { SingleResults } from "@/types/types"
 import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended } from "@/components"
 import { Typography } from "@/components/ui"
@@ -11,15 +10,14 @@ import { useEffect } from "react"
 
 
 const MovieInformation = ({ id }) => {
-  const router = useRouter()
 
 
   // console.log(router.query.id, 'routes')
   const movieId = id.length > 1 ? id[1] : id[0]
 
   const { data, isLoading, error } = useGetMovieQuery({ id: movieId }, { refetchOnMountOrArgChange: true })
-  const { data: imagesData, isLoading: isImagesLoading } = useGetMovieImagesQuery({ id: movieId })
-  const { data: recommendations, isLoading: isRecommendationsLoading } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: data?.id });
+  const { data: imagesData, } = useGetMovieImagesQuery({ id: movieId })
+  const { data: recommendations, } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: data?.id });
   useEffect(() => {
     window.scroll({ top: 0, behavior: 'smooth' });
   }, [movieId])

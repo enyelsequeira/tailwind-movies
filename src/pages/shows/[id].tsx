@@ -1,4 +1,5 @@
 import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended } from "@/components"
+import ShowInfo from "@/components/show-info"
 import { Typography } from "@/components/ui"
 import Layout from "@/layout"
 import { useGetTvShowsAllInformationQuery } from "@/services/TMDB"
@@ -21,7 +22,7 @@ const Shows = ({ id }: { id: string }) => {
           <>
             {imagesLoading ? <Loader /> : <Carrousel imagesData={tvShowsImages} />}
 
-            <MovieInfo shows={data} />
+            <ShowInfo data={data} />
 
             {/* movies by Actors*/}
             <Recommended title="Recommended Tv Shows">

@@ -1,5 +1,6 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from 'react';
+
 const DarkModeBtn = (): JSX.Element => {
   const [mounted, setMounted] = useState(false);
 
