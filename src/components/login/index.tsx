@@ -1,9 +1,6 @@
-import { RootState } from '@/app/rootReducer';
-import { setUser, userSelector } from '@/features/auth';
-import { fetchToken, getSessionId, moviesApi } from '@/helpers';
+import { fetchToken, } from '@/helpers';
 import useAuth from '@/hooks/useAuth';
-import { useEffect } from 'react';
-import { AiOutlineLogin, AiOutlineLogout } from "react-icons/ai"
+import { AiOutlineLogin } from "react-icons/ai"
 import { BiLogOutCircle } from "react-icons/bi"
 
 import Image from "next/image"
@@ -28,7 +25,7 @@ const Login = () => {
         </div>
       )}
 
-      {!isAuthenticated ? <button className="bg-gray-300 hover:bg-gray-400  font-bold py-2 pxde-4 rounded inline-flex items-center text-black " onClick={fetchToken}>
+      {!isAuthenticated ? <button className="bg-gray-300 hover:bg-gray-400  font-bold py-2 px-4 rounded inline-flex items-center text-black " onClick={fetchToken}>
         <AiOutlineLogin className="fill-current w-8 h-8 mr-2" />
         <span>Login</span>
       </button> : <button className="bg-gray-300 hover:bg-gray-400  font-bold py-2 px-4 rounded inline-flex items-center text-black " onClick={logOut}>

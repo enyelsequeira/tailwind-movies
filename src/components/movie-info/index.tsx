@@ -14,24 +14,32 @@ import Circle from 'react-circle';
 
 // icons
 import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
-import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
+import { MdWatchLater, MdFavoriteBorder, MdFavorite } from "react-icons/md"
+import { useEffect } from "react"
+import useAdd from "@/hooks/useAdd"
+import useAuth from "@/hooks/useAuth"
 
 interface Props {
   data?: MovieInformation,
+
 }
 
+const MovieInfo: FC<Props> = ({ data, }) => {
+  const { user } = useAuth();
+  const sessionId = typeof window !== "undefined" ? localStorage.getItem("session_id") : null
 
-const MovieInfo: FC<Props> = ({ data }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
-  // Can this be type guard?
-  // console.log(data);
+  const { addToFavorites, isAddToFavorite } = useAdd({ userId: user?.id, sessionId, movieId: data.id, data, })
+  const { addToWatchlist, isMovieWatchlisted } = useAdd({ userId: user?.id, sessionId, movieId: data.id, data, })
+
+
+
 
   if (data) {
-    const isMovie = data?.title
     return (
       <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
         <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
@@ -71,11 +79,11 @@ const MovieInfo: FC<Props> = ({ data }) => {
           </div>
           <div className="flex flex-col justify-end space-y-8">
             <Button variant="primary">
-              <Typography>Favorite</Typography>
-              <MdFavoriteBorder />
+              <Typography onClick={() => addToFavorites()}>{isAddToFavorite ? "Unfavorite" : "Favorite"}</Typography>
+              {isAddToFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
             </Button>
             <Button variant="primary">
-              <Typography>WatchList</Typography>
+              <Typography onClick={() => addToWatchlist()}>{isMovieWatchlisted ? "Remove WatchList" : "WatchList"}</Typography>
               <MdWatchLater />
             </Button>
           </div>

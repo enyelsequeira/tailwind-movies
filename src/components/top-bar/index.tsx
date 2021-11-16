@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { userSelector } from "@/features/auth";
 
 import Image from "next/image";
+import Link from "next/link"
 import { FiLogIn } from "react-icons/fi";
 import { fetchToken } from "@/helpers";
 
@@ -22,7 +23,11 @@ const TopBar: FC = (): JSX.Element => {
       <div className="flex justify-around md:justify-end w-full py-4  md:w-1/5 space-x-6">
         {isAuthenticated ? (
           <div className="relative object-cover w-6 h-auto">
-            <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
+            <Link href={`/profile/${user.id}`} passHref>
+              <a>
+                <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
+              </a>
+            </Link>
           </div>
         ) : (
           <div className="flex justify-center items-center">

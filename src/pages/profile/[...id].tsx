@@ -4,6 +4,7 @@ import useAuth from "@/hooks/useAuth";
 import Layout from "@/layout";
 import { useGetListQuery } from "@/services/TMDB";
 import { SingleResults } from "@/types/types";
+import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import Link from "next/link"
 
@@ -11,10 +12,13 @@ const Profile = ({ id }) => {
   const { isAuthenticated, user } = useAuth()
   const sessionId = typeof window !== "undefined" ? localStorage.getItem("session_id") : null
 
-  const { data, isLoading, error } = useGetListQuery({ listName: "watchlist/movies", accountId: id, sessionId, page: 1 })
-  const { data: favoriteMovies } = useGetListQuery({ listName: "favorite/movies", accountId: id, sessionId, page: 1 })
+  const { data, isLoading, error, refetch: refecthWatchList } = useGetListQuery({ listName: "watchlist/movies", accountId: id, sessionId, page: 1 })
+  const { data: favoriteMovies, refetch: refetchFavoriteList } = useGetListQuery({ listName: "favorite/movies", accountId: id, sessionId, page: 1 })
 
-
+  useEffect(() => {
+    refecthWatchList()
+    refetchFavoriteList()
+  }, [])
 
   if (isLoading) return <Loader isInfo />
   if (error) return <Typography as="h3">Sorry there was an error fetching data  </Typography>

@@ -195,18 +195,6 @@ export interface ActorImages {
   profiles: Images[];
 }
 
-// ! something to test out later for refactoring
-// function isTvShows(data:any) data is TVshowsAndMovieInformation {
-//   return !! data[name, episode_run_time]
-
-// }  {isTvShow(data) {
-//           return <Info title={name} {...data}/>} else {
-//             return <Info title={title} {...data} />
-//           }
-//         }
-
-// user
-
 export interface User {
   avatar: {
     gravatar: {

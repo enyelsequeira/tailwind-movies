@@ -74,17 +74,6 @@ export const tmdbApi = createApi({
         `/tv/${name}?api_key=${APIKEY}&language=en-US&page=${page}`,
     }),
 
-    //* Get Tv Shows Information by ID INFORMATION SHOWS Combine these Into one
-    // getTVShowsInfo: builder.query({
-    //   query: (id) => `/tv/${id}?api_key=${APIKEY}&language=en`,
-    // }),
-    // getTVShowsImages: builder.query({
-    //   query: (id) => `/tv/${id}/images?api_key=${APIKEY}&language=en`,
-    // }),
-    // getTVShowsRecommendations: builder.query({
-    //   query: (id) => `/tv/${id}/recommendations?api_key=${APIKEY}&language=en`,
-    // }),
-
     getTvShowsAllInformation: builder.query<
       ShowsResults & ImagesResults & TvShowsInformation,
       { id: string | number; keyword?: string }
