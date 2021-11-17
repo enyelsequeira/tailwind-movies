@@ -15,7 +15,6 @@ import Circle from 'react-circle';
 // icons
 import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
 import { MdWatchLater, MdFavoriteBorder, MdFavorite } from "react-icons/md"
-import { useEffect } from "react"
 import useAdd from "@/hooks/useAdd"
 import useAuth from "@/hooks/useAuth"
 
@@ -29,12 +28,20 @@ const MovieInfo: FC<Props> = ({ data, }) => {
   const sessionId = typeof window !== "undefined" ? localStorage.getItem("session_id") : null
 
 
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const router = useRouter()
   const dispatch = useDispatch()
 
   const { addToFavorites, isAddToFavorite } = useAdd({ userId: user?.id, sessionId, movieId: data.id, data, })
   const { addToWatchlist, isMovieWatchlisted } = useAdd({ userId: user?.id, sessionId, movieId: data.id, data, })
+
+  const handleClick = () => {
+    if (data.videos.results.length === 0) {
+      alert("No Trailer Available")
+    }
+    setIsModalOpen(true)
+  }
 
 
 
@@ -146,7 +153,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
                 < FaExternalLinkAlt />
               </Button>
             </a>
-            <Button variant="primary" onClick={() => setIsModalOpen(true)}>
+            <Button variant="primary" onClick={handleClick}>
               <Typography>Trailer</Typography>
               < FaPlay />
             </Button>
@@ -159,7 +166,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
 
         </div>
 
-        {data && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
+        {data.videos.results.length !== 0 && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 
 

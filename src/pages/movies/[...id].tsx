@@ -2,23 +2,23 @@ import { useGetListQuery, useGetMovieImagesQuery, useGetMovieQuery, useGetRecomm
 import { GetServerSideProps } from 'next'
 import Layout from "@/layout"
 import { SingleResults } from "@/types/types"
-import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended } from "@/components"
+import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended, SEOComponent } from "@/components"
 import { Typography } from "@/components/ui"
 import { useEffect } from "react"
-import useAdd from "@/hooks/useAdd"
-import useAuth from "@/hooks/useAuth"
-import { useState } from "react"
-import { moviesApi } from "@/helpers"
+
 
 
 
 
 const MovieInformation = ({ id }) => {
+
+
+
+
   const movieId = id.length > 1 ? id[1] : id[0]
   const { data, isLoading, error } = useGetMovieQuery({ id: movieId })
   const { data: imagesData, } = useGetMovieImagesQuery({ id: movieId })
   const { data: recommendations, } = useGetRecommendationsQuery({ list: '/recommendations', movie_id: data?.id });
-
 
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const MovieInformation = ({ id }) => {
 
   return (
     <Layout>
+      <SEOComponent title={data ? data.title : "Next Movies"} description={data ? data.overview : "Movie Overview"} />
       <Main movie>
         {isLoading ? <Loader isInfo /> : (
           <>

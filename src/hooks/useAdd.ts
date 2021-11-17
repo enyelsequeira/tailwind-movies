@@ -1,7 +1,6 @@
 import { moviesApi } from "@/helpers";
 import { useGetListQuery } from "@/services/TMDB";
-import { MovieInformation, MoviesResults } from "@/types/types";
-import axios from "axios";
+import { MovieInformation } from "@/types/types";
 import { useEffect, useState } from "react";
 
 /**

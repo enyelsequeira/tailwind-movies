@@ -2374,6 +2374,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.npm.taobao.org/natural-compare/download/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+next-seo@^4.28.1:
+  version "4.28.1"
+  resolved "https://registry.npmmirror.com/next-seo/download/next-seo-4.28.1.tgz#c98ee559c8ab7196c62d0f6903afd7a8cde47a03"
+  integrity sha1-yY7lWcircZbGLQ9pA6/XqM3kegM=
+
 next-themes@^0.0.15:
   version "0.0.15"
   resolved "https://registry.npmmirror.com/next-themes/download/next-themes-0.0.15.tgz#ab0cee69cd763b77d41211f631e108beab39bf7d"

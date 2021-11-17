@@ -4,7 +4,7 @@ import Layout from "@/layout"
 import { useRouter } from 'next/router'
 import { useState } from "react"
 import { SingleResults } from "@/types/types"
-import { Carrousel, Loader, Main, Movie, Recommended } from "@/components"
+import { Carrousel, Loader, Main, Movie, Recommended, SEOComponent } from "@/components"
 import { Button, Typography } from "@/components/ui"
 
 
@@ -17,10 +17,14 @@ const People = ({ id }) => {
   const { data: actorImages } = useGetActorImagesQuery({ id })
   const router = useRouter()
   const [more, setMore] = useState(false)
+
+
+
   if (isLoading) <p>Still loading page</p>
 
   return (
     <Layout>
+      <SEOComponent title={data ? `${data.name} Page` : "Actors page"} description={data ? `${data.biography} ` : "Actors information"} />
       <Main movie>
         {isLoading ? <Loader isInfo /> : (
           <>

@@ -1,4 +1,4 @@
-import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended } from "@/components"
+import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended, SEOComponent } from "@/components"
 import ShowInfo from "@/components/show-info"
 import { Typography } from "@/components/ui"
 import Layout from "@/layout"
@@ -6,17 +6,18 @@ import { useGetTvShowsAllInformationQuery } from "@/services/TMDB"
 import { SingleResults } from "@/types/types"
 import { GetServerSideProps } from "next"
 
+
 const Shows = ({ id }: { id: string }) => {
   const { data: tvShowsImages, isLoading: imagesLoading } = useGetTvShowsAllInformationQuery({ id: id, keyword: "images" })
   const { data, isLoading, error } = useGetTvShowsAllInformationQuery({ id: id })
   const { data: tvShowsRecommendations } = useGetTvShowsAllInformationQuery({ id: id, keyword: "recommendations" })
 
 
-  // if (isLoading) return <p>Loading wait</p>
 
-  // console.log({ data });
+
   return (
     <Layout>
+      <SEOComponent title={data ? `${data?.name} page` : "shows tv page"} description={data ? `${data?.overview}` : "Information about tv shows"} />
       <Main movie>
         {isLoading ? <Loader isInfo /> : (
           <>

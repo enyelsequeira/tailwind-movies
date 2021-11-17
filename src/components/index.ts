@@ -16,3 +16,4 @@ export { default as ShowsBox } from "./shows-box";
 export { default as TopBar } from "./top-bar";
 export { default as Loader } from "./loader";
 export { default as Login } from "./login";
+export { default as SEOComponent } from "./SEO";
