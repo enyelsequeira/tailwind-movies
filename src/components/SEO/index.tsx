@@ -1,6 +1,7 @@
 import { DefaultSeo } from "next-seo"
 
 
+// Could be typed
 const SEOComponent = ({ title, description }) => {
 
   const SEO = {
