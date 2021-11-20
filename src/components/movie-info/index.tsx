@@ -43,9 +43,9 @@ const MovieInfo: FC<Props> = ({ data, }) => {
     setIsModalOpen(true)
   }
 
-  const alertNotLoggedIn = (fn: () => void) => {
+  const alertNotLoggedIn = (fn: () => void, keyword: string) => {
     if (!user) {
-      alert("You need to be logged in to add to favorites")
+      alert(`You need to logged in to add to ${keyword}`)
     } else {
       fn()
     }
@@ -92,11 +92,11 @@ const MovieInfo: FC<Props> = ({ data, }) => {
           </div>
           <div className="flex flex-col justify-end space-y-8">
             <Button variant="primary">
-              <Typography onClick={() => alertNotLoggedIn(addToFavorites)}>{isAddToFavorite ? "Unfavorite" : "Favorite"}</Typography>
+              <Typography onClick={() => alertNotLoggedIn(addToFavorites, "Favorite")}>{isAddToFavorite ? "Unfavorite" : "Favorite"}</Typography>
               {isAddToFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
             </Button>
             <Button variant="primary">
-              <Typography onClick={() => alertNotLoggedIn(addToWatchlist)}>{isMovieWatchlisted ? "Remove WatchList" : "WatchList"}</Typography>
+              <Typography onClick={() => alertNotLoggedIn(addToWatchlist, "WatchList")}>{isMovieWatchlisted ? "Remove WatchList" : "WatchList"}</Typography>
               <MdWatchLater />
             </Button>
           </div>
