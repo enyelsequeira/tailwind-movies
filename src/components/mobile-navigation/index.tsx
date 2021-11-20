@@ -1,3 +1,5 @@
+// TODO This need to be deleted after refactoring looking for bugs...
+
 import { FC, useEffect } from "react"
 import { Genres } from "@/types/types"
 

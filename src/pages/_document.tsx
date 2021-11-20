@@ -17,7 +17,7 @@ class MyDocument extends Document {
 
           <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet" />
         </Head>
-        <body className="max-w-screen-2xl border-4 border-red-200 mx-auto bg-light-background-primary dark:bg-dark-background-primary">
+        <body className="max-w-screen-2xl  mx-auto bg-light-background-primary dark:bg-dark-background-primary">
           <Main />
           <NextScript />
         </body>
