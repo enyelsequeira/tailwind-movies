@@ -43,12 +43,18 @@ const MovieInfo: FC<Props> = ({ data, }) => {
     setIsModalOpen(true)
   }
 
-
+  const alertNotLoggedIn = (fn: () => void) => {
+    if (!user) {
+      alert("You need to be logged in to add to favorites")
+    } else {
+      fn()
+    }
+  }
 
 
   if (data) {
     return (
-      <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
+      <aside className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
         <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
           <Typography as="h3" className="md:tracking-wider text-center" >{data.title}</Typography>
           <Typography as="h4" className="tracking-wide my-5"> {data.tagline !== "" ? data.tagline : "No Tagline"}</Typography>
@@ -75,7 +81,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
         <div className="flex flex-between space-x-16  md:space-x-48 ">
           <div>
             <Typography as="h3" className="my-2">Rating</Typography>
-            <Circle animate={true} animationDuration="2s" responsive={false} size="100" lineWidth="40" progress={data.vote_average * 10} progressColor="rgba(36, 101, 187, 0.747)" bgColor="#ecedf0" textColor="#6b778c" textStyle={{
+            <Circle animate={true} animationDuration="4s" responsive={false} size="100" lineWidth="40" progress={data.vote_average * 10} progressColor="rgba(36, 101, 187, 0.747)" bgColor="#ecedf0" textColor="#6b778c" textStyle={{
               font: 'bold 4rem Source Sans Pro, Arial, sans-serif' // CSSProperties: Custom styling for percentage.
             }}
               percentSpacing={20} // Number: Adjust spacing of "%" symbol and number.
@@ -86,11 +92,11 @@ const MovieInfo: FC<Props> = ({ data, }) => {
           </div>
           <div className="flex flex-col justify-end space-y-8">
             <Button variant="primary">
-              <Typography onClick={() => addToFavorites()}>{isAddToFavorite ? "Unfavorite" : "Favorite"}</Typography>
+              <Typography onClick={() => alertNotLoggedIn(addToFavorites)}>{isAddToFavorite ? "Unfavorite" : "Favorite"}</Typography>
               {isAddToFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
             </Button>
             <Button variant="primary">
-              <Typography onClick={() => addToWatchlist()}>{isMovieWatchlisted ? "Remove WatchList" : "WatchList"}</Typography>
+              <Typography onClick={() => alertNotLoggedIn(addToWatchlist)}>{isMovieWatchlisted ? "Remove WatchList" : "WatchList"}</Typography>
               <MdWatchLater />
             </Button>
           </div>
@@ -170,7 +176,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
 
 
 
-      </div>
+      </aside>
 
     )
   }
