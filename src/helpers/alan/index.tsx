@@ -20,7 +20,7 @@ const useAlanAi = () => {
   const dispatch = useDispatch()
   const router = useRouter()
   const { theme, setTheme } = useTheme()
-  const { user, logOut } = useAuth()
+  const { isAuthenticated, user, logOut } = useAuth()
 
 
   useEffect(() => {
@@ -51,6 +51,15 @@ const useAlanAi = () => {
           }
         } else if (command === "change Mode") {
           setTheme(theme === 'dark' ? 'light' : 'dark')
+        } else if (command === "please take me to my profile") {
+          if (!isAuthenticated) {
+            alanBtn.p
+            alert("you need to be logged in to do that")
+          } else {
+            console.log(user);
+            router.push(`/profile/${user.id}`)
+          }
+
         } else if (command === "please log me out") {
           logOut()
         }
