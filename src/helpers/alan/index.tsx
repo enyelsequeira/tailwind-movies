@@ -6,6 +6,13 @@ import { useDispatch } from 'react-redux';
 import { fetchToken } from '..';
 
 
+
+interface AlanProps {
+  text: string;
+  genre: string;
+  command: string;
+  genres: any;
+}
 const useAlanAi = () => {
   const dispatch = useDispatch()
   const router = useRouter()
@@ -17,7 +24,8 @@ const useAlanAi = () => {
     alanBtn({
       key: '2b4d51c596098c03255747fce375bd5a2e956eca572e1d8b807a3e2338fdd0dc/stage',
 
-      onCommand: ({ command, genre, genres, mode, query }) => {
+      onCommand: ({ text, genre, command, genres }: AlanProps) => {
+        console.log({ text, genre, command, genres });
         if (command === 'chooseGenre') {
           const foundGenre = genres.find((gen) => gen.name.toLowerCase() === genre.toLowerCase());
 
