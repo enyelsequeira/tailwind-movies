@@ -23,36 +23,6 @@ const Home: NextPage = () => {
   useAlanAi();
 
 
-  // const dispatch = useDispatch()
-  // const router = useRouter()
-
-
-  // useEffect(() => {
-  //   alanBtn({
-  //     key: '2b4d51c596098c03255747fce375bd5a2e956eca572e1d8b807a3e2338fdd0dc/stage',
-
-  //     onCommand: ({ command, genre, genres, mode, query }) => {
-  //       if (command === 'chooseGenre') {
-  //         console.log("am i here", command, genre, genres, mode, query);
-  //         const foundGenre = genres.find((gen) => gen.name.toLowerCase() === genre.toLowerCase());
-
-  //         if (foundGenre) {
-  //           router.push("/")
-  //           dispatch(selectGenreOrCategory(foundGenre.id));
-  //         } else if (genre) {
-  //           const parsedGenre = genre.startsWith('top') ? 'top_rated' : genre;
-
-  //           dispatch(selectGenreOrCategory(parsedGenre));
-  //         }
-  //       } else if (command === 'login') {
-  //         fetchToken();
-  //       }
-  //     },
-
-  //   })
-
-  // }, []);
-
 
   return (
     <Layout>

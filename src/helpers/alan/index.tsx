@@ -1,8 +1,11 @@
 import { selectGenreOrCategory } from '@/features/currentGenreOrCategory/CurrentGenreOrCategory';
+import useAuth from '@/hooks/useAuth';
+import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchToken } from '..';
+
 
 
 
@@ -15,7 +18,9 @@ interface AlanProps {
 const useAlanAi = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  //check if window if undefined
+  const { theme, setTheme } = useTheme()
+  const { isAuthenticated, user, logOut } = useAuth()
+
 
   useEffect(() => {
     const alanBtn = require('@alan-ai/alan-sdk-web');
@@ -36,8 +41,14 @@ const useAlanAi = () => {
 
             dispatch(selectGenreOrCategory(parsedGenre));
           }
-        } else if (command === 'login') {
-          fetchToken();
+        } else if (command === 'please log me in') {
+          if (!user) {
+            fetchToken();
+          } else {
+            alert("you are already logged in")
+          }
+        } else if (command === "change Mode") {
+          setTheme(theme === 'dark' ? 'light' : 'dark')
         }
       },
 
