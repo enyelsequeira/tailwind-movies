@@ -1,5 +1,4 @@
 import { selectGenreOrCategory } from '@/features/currentGenreOrCategory/CurrentGenreOrCategory';
-import alanBtn from '@alan-ai/alan-sdk-web';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -19,7 +18,7 @@ const useAlanAi = () => {
   //check if window if undefined
 
   useEffect(() => {
-    if (typeof window === 'undefined') return null
+    const alanBtn = require('@alan-ai/alan-sdk-web');
 
     alanBtn({
       key: '2b4d51c596098c03255747fce375bd5a2e956eca572e1d8b807a3e2338fdd0dc/stage',
