@@ -1,6 +1,7 @@
 import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended, SEOComponent } from "@/components"
 import ShowInfo from "@/components/show-info"
 import { Typography } from "@/components/ui"
+import useAlanAi from "@/helpers/alan"
 import Layout from "@/layout"
 import { useGetTvShowsAllInformationQuery } from "@/services/TMDB"
 import { SingleResults } from "@/types/types"

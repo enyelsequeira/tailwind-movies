@@ -7,17 +7,22 @@ import { DefaultSeo } from 'next-seo';
 
 import { AnimatePresence } from "framer-motion";
 import SEO from "@@/next-seo.config"
+import useAlanAi from '@/helpers/alan';
+import useIsSsr from '@/hooks/useIsSsr';
 
 function MyApp({ Component, pageProps }: AppProps) {
+
+
+
   return (
-    <ThemeProvider attribute="class">
-      <DefaultSeo  {...SEO} />
-      <AnimatePresence exitBeforeEnter initial={false}>
-        <Provider store={store}>
+    <Provider store={store}>
+      <ThemeProvider attribute="class">
+        <DefaultSeo  {...SEO} />
+        <AnimatePresence exitBeforeEnter initial={false}>
           <Component {...pageProps} />
-        </Provider>
-      </AnimatePresence>
-    </ThemeProvider>
+        </AnimatePresence>
+      </ThemeProvider>
+    </Provider>
   )
 }
 export default MyApp

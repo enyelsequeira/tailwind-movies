@@ -172,6 +172,9 @@ const MovieInfo: FC<Props> = ({ data, }) => {
 
         </div>
 
+        {/* this is slow could be improved? maybe */}
+        {/* {console.log(data.videos.results)} */}
+
         {data.videos.results.length !== 0 && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
 
 

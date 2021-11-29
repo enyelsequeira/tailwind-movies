@@ -8,10 +8,12 @@ import { useEffect } from "react";
 import { GetServerSideProps } from "next";
 import Link from "next/link"
 import { useRouter } from "next/router";
+import useAlanAi from "@/helpers/alan";
 
 
 const Profile = ({ id }) => {
   const { isAuthenticated, user } = useAuth()
+
   const router = useRouter()
   const sessionId = typeof window !== "undefined" ? localStorage.getItem("session_id") : null
 
