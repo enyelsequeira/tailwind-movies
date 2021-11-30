@@ -53,7 +53,7 @@ const useAlanAi = () => {
           setTheme(theme === 'dark' ? 'light' : 'dark')
         } else if (command === "please take me to my profile") {
           if (!isAuthenticated) {
-            alanBtn.p
+            // TODO needs fixing
             alert("you need to be logged in to do that")
           } else {
             console.log(user);
