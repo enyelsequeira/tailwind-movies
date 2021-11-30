@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@alan-ai/alan-sdk-web@^1.8.28":
+  version "1.8.28"
+  resolved "https://registry.npmmirror.com/@alan-ai/alan-sdk-web/download/@alan-ai/alan-sdk-web-1.8.28.tgz#05ffe278db71a43af925f5ea6f51844a117890e6"
+  integrity sha1-Bf/ieNtxpDr5JfXqb1GEShF4kOY=
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.npmmirror.com/@babel/code-frame/download/@babel/code-frame-7.12.11.tgz?cache=0&sync_timestamp=1633554008946&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40babel%2Fcode-frame%2Fdownload%2F%40babel%2Fcode-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"

@@ -6,6 +6,7 @@ import { useState } from "react"
 import { SingleResults } from "@/types/types"
 import { Carrousel, Loader, Main, Movie, Recommended, SEOComponent } from "@/components"
 import { Button, Typography } from "@/components/ui"
+import useAlanAi from "@/helpers/alan"
 
 
 

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.28",
     "@reduxjs/toolkit": "^1.6.1",
     "@tailwindcss/line-clamp": "^0.2.1",
     "axios": "^0.23.0",

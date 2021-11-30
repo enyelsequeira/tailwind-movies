@@ -14,7 +14,6 @@ const MovieInformation = ({ id }) => {
 
 
 
-
   const movieId = id.length > 1 ? id[1] : id[0]
   const { data, isLoading, error } = useGetMovieQuery({ id: movieId })
   const { data: imagesData, } = useGetMovieImagesQuery({ id: movieId })

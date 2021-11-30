@@ -1,9 +1,16 @@
 import Layout from '@/layout'
 import type { NextPage } from 'next'
 import { useGetMoviesQuery } from '@/services/TMDB'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/app/rootReducer'
 import { Hero, Main, Movies, ShowsBox } from '@/components'
+import useAlanAi from '@/helpers/alan'
+import { useEffect } from 'react'
+import { selectGenreOrCategory } from '@/features/currentGenreOrCategory/CurrentGenreOrCategory'
+import { fetchToken } from '@/helpers'
+import alanBtn from '@alan-ai/alan-sdk-web'
+import { useRouter } from 'next/router'
+import { useRef } from 'react'
 
 
 const Home: NextPage = () => {
@@ -13,6 +20,10 @@ const Home: NextPage = () => {
   // console.log(data);
 
   const movie = Math.floor(Math.random() * data?.results.length)
+  useAlanAi();
+
+
+
   return (
     <Layout>
       <Main>
@@ -21,6 +32,7 @@ const Home: NextPage = () => {
         <ShowsBox title="Most Rated Shows" />
         <Movies />
       </Main>
+
     </Layout>
   )
 }
