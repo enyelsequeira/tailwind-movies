@@ -130,7 +130,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
-                    <Image className="rounded-md h-36" src={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} alt={actor.name} objectFit="cover" layout="fill" />
+                    <Image className="rounded-md h-36" src={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} alt={actor.name} objectFit="cover" layout="fill" blurDataURL={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
                     <a>

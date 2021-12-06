@@ -99,7 +99,7 @@ const ShowInfo: FC<Props> = ({ data }) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
-                    <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" />
+                    <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" blurDataURL={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
                     <a>

@@ -5,11 +5,11 @@ export const genreOrCategory = createSlice({
   initialState: { genreIdOrCategoryName: "", page: 1, searchQuery: "" },
   reducers: {
     selectGenreOrCategory: (state, action) => {
-      // console.log(state.genreIdOrCategoryName);
+      console.log(state.page);
       state.genreIdOrCategoryName = action.payload;
+      state.page = action.payload;
     },
     searchMovie: (state, action) => {
-      // console.log(action);
       state.searchQuery = action.payload;
     },
   },

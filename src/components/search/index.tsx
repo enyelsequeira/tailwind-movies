@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
 import { KeyboardEvent } from "react";
 import { useState, useEffect } from "react";
@@ -16,11 +15,7 @@ const Search = () => {
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      // console.log(query);
       dispatch(searchMovie(query));
-      setQuery("empty")
-      // console.log(setQuery(""))
-      // console.log("after search", query);
     }
   };
   // console.log(searchQuery);

@@ -15,7 +15,6 @@ const ShowsBox: FC<Props> = ({ title }) => {
 
   const { data, error } = useGetTopRatedShowsQuery({ name: "top_rated", page })
 
-  console.log(error);
 
   return (
     <div className="md:col-span-2 p-4 md:p-1 text-2xl font-bold flex flex-col">
@@ -26,7 +25,7 @@ const ShowsBox: FC<Props> = ({ title }) => {
         {data && data.results.slice(0, 6).map((d: Shows) => {
           return (
             <div className="flex flex-col justify-between" key={d.id}>
-              <Image className="rounded-xl" width="100" height="100" src={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}`} alt={d.original_name} objectFit="cover" />
+              <Image className="rounded-xl" width="100" height="100" src={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}`} alt={d.original_name} objectFit="cover" blurDataURL={`https://image.tmdb.org/t/p/original/${d.backdrop_path || d.poster_path}`} />
               <Link href={`/shows/${d.id}`} passHref>
                 <Typography as="h6" className="truncate font-thin px-1 cursor-pointer hover:text-red-400 dark:hover:text-red-200" key={d.id}>
                   {d?.name}

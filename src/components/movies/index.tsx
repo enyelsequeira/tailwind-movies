@@ -11,7 +11,7 @@ import { SingleResults } from "@/types/types";
 const Movies: FC = () => {
   const [page, setPage] = useState(1);
   const { genreIdOrCategoryName, searchQuery } = useSelector((state: RootState) => state.currentGenreOrCategory);
-  const { data, error, isLoading } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery });
+  const { data, error, isLoading } = useGetMoviesQuery({ genreIdOrCategoryName, page, searchQuery })
 
   useEffect(() => {
     window.scroll({ top: 0, behavior: 'smooth' });
