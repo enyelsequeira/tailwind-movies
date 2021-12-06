@@ -46,7 +46,6 @@ export const tmdbApi = createApi({
 
         //* Get Movies by Genre
         if (typeof genreIdOrCategoryName === "number") {
-          console.log(page);
           return `discover/movie?with_genres=${genreIdOrCategoryName}&page=${page}&api_key=${APIKEY}`;
         }
 

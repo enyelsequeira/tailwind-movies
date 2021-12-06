@@ -1,11 +1,13 @@
-import { useState, FC } from "react"
+import { useState, FC, Suspense } from "react"
 
-import { Cast, MovieInformation, TvShowsInformation } from "@/types/types"
+import { Cast, MovieInformation, } from "@/types/types"
 import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
 import { useDispatch } from "react-redux"
+import dynamic from 'next/dynamic'
 
 import { Button, Typography } from "../ui"
-import { Modal } from ".."
+import { Loader, } from ".."
+const Modal = dynamic(() => import('../modal'))
 
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -128,7 +130,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
-                    <Image className="rounded-md h-36" src={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} alt={actor.name} objectFit="cover" layout="fill" />
+                    <Image className="rounded-md h-36" src={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} alt={actor.name} objectFit="cover" layout="fill" blurDataURL={actor.profile_path ? `https://image.tmdb.org/t/p/original/${actor?.profile_path}` : "/images/placeholder.jpeg"} />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
                     <a>
@@ -175,7 +177,12 @@ const MovieInfo: FC<Props> = ({ data, }) => {
         {/* this is slow could be improved? maybe */}
         {/* {console.log(data.videos.results)} */}
 
-        {data.videos.results.length !== 0 && isModalOpen && <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />}
+        {data.videos.results.length !== 0 && isModalOpen &&
+          <Suspense fallback={<Loader />}>
+
+            <Modal open={isModalOpen} title={data.title} video={data.videos.results[0].key} setOpen={setIsModalOpen} />
+          </Suspense>
+        }
 
 
 

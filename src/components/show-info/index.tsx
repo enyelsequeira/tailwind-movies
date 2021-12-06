@@ -1,20 +1,24 @@
-import { useState, FC } from "react"
+import { useState, FC, Suspense } from "react"
+import dynamic from 'next/dynamic'
+import Link from "next/link"
+import Image from "next/image"
 
-import { Cast, MovieInformation, TvShowsInformation } from "@/types/types"
-import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
+import { useRouter } from "next/router"
 import { useDispatch } from "react-redux"
 
-import { Button, Typography } from "../ui"
-import { Modal } from ".."
-
-import Link from "next/link"
-import { useRouter } from "next/router"
-import Image from "next/image"
 import Circle from 'react-circle';
+
+
+import { Cast, TvShowsInformation } from "@/types/types"
+import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
+
+
+import { Button, Typography } from "../ui"
+const Modal = dynamic(() => import('../modal'))
 
 // icons
 import { FaExternalLinkAlt, FaImdb, FaPlay } from "react-icons/fa"
-import { MdWatchLater, MdFavoriteBorder } from "react-icons/md"
+import { Loader } from ".."
 
 interface Props {
   data: TvShowsInformation
@@ -95,7 +99,7 @@ const ShowInfo: FC<Props> = ({ data }) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
-                    <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" />
+                    <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" blurDataURL={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
                     <a>
@@ -139,7 +143,11 @@ const ShowInfo: FC<Props> = ({ data }) => {
 
         </div>
 
-        {data && isModalOpen && <Modal open={isModalOpen} title={data.name} video={isMovie ? data.videos.results[0].key : data.videos.results[0].key} setOpen={setIsModalOpen} />}
+        {data && isModalOpen &&
+          <Suspense fallback={<Loader />}>
+            <Modal open={isModalOpen} title={data.name} video={isMovie ? data.videos.results[0].key : data.videos.results[0].key} setOpen={setIsModalOpen} />
+          </Suspense>
+        }
 
 
 

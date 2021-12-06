@@ -7,8 +7,7 @@ import { DefaultSeo } from 'next-seo';
 
 import { AnimatePresence } from "framer-motion";
 import SEO from "@@/next-seo.config"
-import useAlanAi from '@/helpers/alan';
-import useIsSsr from '@/hooks/useIsSsr';
+
 
 function MyApp({ Component, pageProps }: AppProps) {
 

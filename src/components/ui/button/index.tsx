@@ -1,7 +1,6 @@
 import cn from "classnames"
-import { LinkProps } from "next/link";
-import { ComponentPropsWithRef, forwardRef } from "react";
-import { ComponentProps, JSXElementConstructor, AnchorHTMLAttributes } from 'react';
+import { forwardRef } from "react";
+import { ComponentProps, JSXElementConstructor, } from 'react';
 
 
 enum Variant {
@@ -12,7 +11,6 @@ enum Variant {
   extra
 }
 
-// variant test = Pick<AnchorHTMLAttributes<"a">, "href" | "target">
 export interface IButton extends ComponentProps<"button"> {
   as?: JSXElementConstructor<any>
   component?: string | JSXElementConstructor<any>

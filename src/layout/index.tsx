@@ -1,6 +1,6 @@
 import { MenuBar, TopBar } from "@/components";
 import { FC, ReactNode, } from "react";
-import { AnimateSharedLayout, motion } from "framer-motion"
+import { motion } from "framer-motion"
 
 
 interface Props {

@@ -17,7 +17,7 @@ const Hero: FC<Props> = ({ data }) => {
           <Link href={`/movies/${data.id}`} passHref>
             <a>
 
-              <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} />
+              <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} />
             </a>
           </Link>
           <div className="absolute bg-black/40 text-white space-y-1 w-[300px] md:w-auto  rounded-b-2xl bottom-0 p-2 ">

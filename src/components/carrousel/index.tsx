@@ -31,7 +31,7 @@ const Carrousel: FC<Props> = ({ imagesData, movieData }): JSX.Element => {
     <div className="md:col-span-6 lg:col-span-3 px-3 pt-6 md:flex md:flex-col md:justify-center  ">
       {allImages?.allImgs?.length > 0 && (
         <div className="relative flex flex-col items-center  py-4 ">
-          <Image className="rounded-md shadow-2xl" src={allImages?.allImgs[index].file_path ? `https://image.tmdb.org/t/p/original/${allImages?.allImgs[index].file_path}` : allImages.allImgs[index].placeholder} width="700" height="700" objectFit="cover" alt={movieData?.title} />
+          <Image className="rounded-md shadow-2xl" src={allImages?.allImgs[index].file_path ? `https://image.tmdb.org/t/p/original/${allImages?.allImgs[index].file_path}` : allImages.allImgs[index].placeholder} width="700" height="700" objectFit="cover" alt={movieData?.title} blurDataURL={allImages?.allImgs[index].file_path ? `https://image.tmdb.org/t/p/original/${allImages?.allImgs[index].file_path}` : allImages.allImgs[index].placeholder} />
 
           <button onClick={slideLeft} className="absolute -left-1 top-[50%] bg-black/40 dark:bg-red-400 dark:text-black text-white p-1 rounded-2xl hover:bg-red-300  transition-all ease-in duration-300 dark:hover:bg-red-50">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -51,7 +51,7 @@ const Carrousel: FC<Props> = ({ imagesData, movieData }): JSX.Element => {
           return (
             <div className={`relative w-[200px] ${allImages.classes}`} key={i}>
               <Image className={`${index === i ? "" : "opacity-50"} rounded-l`}
-                src={image?.file_path ? `https://image.tmdb.org/t/p/original/${image.file_path}` : image.placeholder} layout="fill" alt={`CoolImage${i}`} key={i} />
+                src={image?.file_path ? `https://image.tmdb.org/t/p/original/${image.file_path}` : image.placeholder} layout="fill" alt={`CoolImage${i}`} key={i} blurDataURL={image?.file_path ? `https://image.tmdb.org/t/p/original/${image.file_path}` : image.placeholder} />
             </div>
 
           )
