@@ -6,7 +6,6 @@ import { sidebarMenu } from "../menu-bar";
 import Typography from "../ui/typography";
 import Link from "next/link"
 import { RootState } from "@/app/rootReducer";
-
 import { RiMovie2Line } from "react-icons/ri"
 import { Login } from "..";
 import useWindowSize from "@/hooks/useWindowsSize";

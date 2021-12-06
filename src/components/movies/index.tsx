@@ -18,12 +18,13 @@ const Movies: FC = () => {
     // console.log({ data, page, genreIdOrCategoryName });
   }, [page, genreIdOrCategoryName])
 
-  if (isLoading) return <Loader />
-  if (error) return <Typography as="h1">Sorry there was an error fetching movies</Typography>
 
   return (
     <div className="font-bold col-span-7 flex flex-col border-black">
       <Typography as="h1" className="pl-3 mb-6">Movies</Typography>
+      {isLoading && <Loader />}
+      {error && <Typography as="h1">Sorry there was an error fetching movies</Typography>}
+
       <div className="flex flex-col items-center gap-2 md:grid md:grid-cols-2 lg:grid-cols-4  max-h-screen  md:max-h-[1200px] overflow-auto no-scrollbar  py-2">
         {data ? data.results.map((data: SingleResults, i: number) => {
           // console.log(i);

@@ -1,16 +1,12 @@
 import Layout from '@/layout'
 import type { NextPage } from 'next'
 import { useGetMoviesQuery } from '@/services/TMDB'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '@/app/rootReducer'
-import { Hero, Main, Movies, ShowsBox } from '@/components'
+import { Hero, Movies, ShowsBox } from '@/components'
+import PageLayout from '@/layout/pages-layout'
 import useAlanAi from '@/helpers/alan'
-import { useEffect } from 'react'
-import { selectGenreOrCategory } from '@/features/currentGenreOrCategory/CurrentGenreOrCategory'
-import { fetchToken } from '@/helpers'
-import alanBtn from '@alan-ai/alan-sdk-web'
-import { useRouter } from 'next/router'
-import { useRef } from 'react'
+
 
 
 const Home: NextPage = () => {
@@ -22,18 +18,13 @@ const Home: NextPage = () => {
   const movie = Math.floor(Math.random() * data?.results.length)
   useAlanAi();
 
-
-
   return (
-    <Layout>
-      <Main>
-        {isLoading ? <div> I am loading wait</div> : <Hero data={data.results[movie]} />}
-        {error && <div>There was an error fetching data</div>}
-        <ShowsBox title="Most Rated Shows" />
-        <Movies />
-      </Main>
-
-    </Layout>
+    <PageLayout seoProps={{ title: "My home page is here", description: "the home page of tailwind/next movies" }}>
+      {isLoading ? <div> I am loading wait</div> : <Hero data={data.results[movie]} />}
+      {error && <div>There was an error fetching data</div>}
+      <ShowsBox title="Most Rated Shows" />
+      <Movies />
+    </PageLayout>
   )
 }
 

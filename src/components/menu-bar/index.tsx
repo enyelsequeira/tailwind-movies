@@ -11,7 +11,6 @@ import Link from "next/link";
 const MenuBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // TODO figure out what needs to be passed here
   const { data, isLoading, error } = useGetGenresQuery(null);
 
   const [scrollPosition, setScrollPosition] = useState(0);
