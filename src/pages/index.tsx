@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   useAlanAi();
 
   return (
-    <PageLayout seoProps={{ title: "My home page is here", description: "the home page of tailwind/next movies" }}>
+    <PageLayout seoProps={{ title: "Home page of the movie app", description: "Home page where you can choose what to watch and search, don't know what your're looking for? try and just click a category" }}>
       {isLoading ? <div> I am loading wait</div> : <Hero data={data?.results[movie]} />}
       {error && <div>There was an error fetching data</div>}
       <ShowsBox title="Most Rated Shows" />

@@ -1,8 +1,7 @@
-import { useGetListQuery, useGetMovieImagesQuery, useGetMovieQuery, useGetRecommendationsQuery } from "@/services/TMDB"
+import { useGetMovieImagesQuery, useGetMovieQuery, useGetRecommendationsQuery } from "@/services/TMDB"
 import { GetServerSideProps } from 'next'
-import Layout from "@/layout"
 import { SingleResults } from "@/types/types"
-import { Carrousel, Loader, Main, Movie, MovieInfo, Recommended, SEOComponent } from "@/components"
+import { Carrousel, Loader, Movie, MovieInfo, Recommended, } from "@/components"
 import { Typography } from "@/components/ui"
 import { useEffect } from "react"
 import PageLayout from "@/layout/pages-layout"

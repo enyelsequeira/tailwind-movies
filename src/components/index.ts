@@ -1,7 +1,6 @@
 export { default as MenuBar } from "./menu-bar";
 export { default as DarkModeBtn } from "./dark-mode-btn";
 export { default as FullNavigation } from "./full-navigation";
-export { default as MobileNavigation } from "./mobile-navigation";
 export { default as Hero } from "./hero";
 export { default as Main } from "./main";
 export { default as Modal } from "./modal";

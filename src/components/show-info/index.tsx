@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux"
 import Circle from 'react-circle';
 
 
-import { Cast, MovieInformation, TvShowsInformation } from "@/types/types"
+import { Cast, TvShowsInformation } from "@/types/types"
 import { selectGenreOrCategory } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory"
 
 

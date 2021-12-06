@@ -1,4 +1,4 @@
-import { Loader, Main, Movie, Recommended, SEOComponent } from "@/components";
+import { Loader, Movie, Recommended, } from "@/components";
 import { Typography } from "@/components/ui";
 import useAuth from "@/hooks/useAuth";
 import { useGetListQuery } from "@/services/TMDB";

@@ -3,7 +3,7 @@ import useAuth from '@/hooks/useAuth';
 import { GenresData } from '@/types/types';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchToken } from '..';
 
