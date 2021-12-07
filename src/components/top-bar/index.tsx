@@ -16,7 +16,7 @@ const TopBar: FC = (): JSX.Element => {
 
 
   return (
-    <div className="col-span-10 flex  px-3 flex-col md:flex-row py-2 justify-between items-center border-2 border-red-300">
+    <div className="col-span-10 flex  px-3 flex-col md:flex-row py-2 justify-between items-center ">
 
       <Search />
 
