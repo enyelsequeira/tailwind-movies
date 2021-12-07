@@ -18,7 +18,7 @@ const ShowsBox: FC<Props> = ({ title }) => {
 
   return (
     <div className="md:col-span-2 p-4 md:p-1 text-2xl font-bold flex flex-col">
-      <Typography as="h4" className="md:col-span-3 font-semibold mb-4 md:my-4">{title}</Typography>
+      <Typography as="h4" className="md:col-span-3 font-semibold mb-4 md:my-4 dark:text-yellow-100">{title}</Typography>
 
       <div className="grid grid-cols-2 gap-2 md:gap-1 md:grid-cols-3">
         {error && <Typography as="h2" className="col-span-3">Error could not load tv shows</Typography>}

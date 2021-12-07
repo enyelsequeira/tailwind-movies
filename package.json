@@ -14,6 +14,7 @@
     "@tailwindcss/line-clamp": "^0.2.1",
     "axios": "^0.23.0",
     "classnames": "^2.3.1",
+    "daisyui": "^1.16.2",
     "framer-motion": "^4.1.17",
     "next": "12",
     "next-seo": "^4.28.1",

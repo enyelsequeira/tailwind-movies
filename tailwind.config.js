@@ -53,5 +53,5 @@ module.exports = {
       lineClamp: ["hover"],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [require("@tailwindcss/line-clamp"), require("daisyui")],
 };

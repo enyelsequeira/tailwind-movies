@@ -27,7 +27,7 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
   useEffect(() => {
   }, [genreIdOrCategoryName])
   return (
-    <div className={`sidebar z-50 bg-light-background-primary dark:bg-dark-background-secondary text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform  md:relative md:translate-x-0 transition duration-200 ease-in-out overflow-auto  ${isMenuOpen || width > 768 ? "block " : "hidden"}`}>
+    <aside className={`sidebar border-4 border-red-500 z-50 bg-light-background-primary dark:bg-dark-background-secondary text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform  md:relative md:translate-x-0 transition duration-200 ease-in-out overflow-auto  ${isMenuOpen || width >= 768 ? "block " : "hidden"}`}>
       <div className="py-2 my-4">
         <Link href="/" passHref>
           <a onClick={() => dispatch(searchMovie(""))}>
@@ -82,7 +82,7 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
       </div>
       <Login />
 
-    </div>
+    </aside>
   )
 
 }

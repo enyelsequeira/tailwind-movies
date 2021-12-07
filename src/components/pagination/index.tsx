@@ -12,7 +12,7 @@ interface Props {
 const Pagination: FC<Props> = ({ currentPage, setPage, totalPages, full }): JSX.Element => {
 
   return (
-    <nav aria-label="Page navigation" className={`col-span-2 mx-auto my-1 ${full ? "md:col-span-4" : " md:col-span-3 "}`}>
+    <nav aria-label="Page navigation" className={`col-span-2 mx-auto my-1 ${full ? "md:col-span-4 py-3" : " md:col-span-3 "}`}>
       <ul className="inline-flex space-x-2">
         <li>
           <button onClick={(currentPage !== 1) ? () => setPage(((prevCurrentPage) => prevCurrentPage - 1)) : null} className="flex items-center justify-center w-10 h-10 text-indigo-600 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-indigo-100 dark:text-light-accent">

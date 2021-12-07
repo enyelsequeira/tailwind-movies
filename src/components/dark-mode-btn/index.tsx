@@ -1,7 +1,7 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from 'react';
 
-const DarkModeBtn = (): JSX.Element => {
+const DarkModeBtn = ({ mobile }: { mobile?: boolean }): JSX.Element => {
   const [mounted, setMounted] = useState(false);
 
   const { theme, setTheme } = useTheme()
@@ -12,7 +12,7 @@ const DarkModeBtn = (): JSX.Element => {
     <button
       aria-label="Toggle Dark Mode"
       type="button"
-      className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-800  dark:hover:bg-gray-700 transition-all rounded flex items-center justify-center h-7 max-w-min p-1"
+      className={`bg-gray-200 hover:bg-gray-300 dark:bg-gray-800  dark:hover:bg-gray-700 transition-all rounded flex items-center justify-self-end justify-center h-7 max-w-min p-1`}
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       {mounted && (

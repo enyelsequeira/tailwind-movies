@@ -38,7 +38,7 @@ const Movie: FC<Props> = ({ data, value }) => {
       </Link>
       <Link href={data.media_type === "tv" ? `/shows/${data.id}` : `/movies/${data.id}`}>
         <a className="cursor-pointer ">
-          <Typography className="truncate text-center md:text-justify py-1 hover:text-red-400 dark:hover:text-red-200 transition-all ease-in duration-200	" as="h3">{data.title ? data.title : data.name}</Typography>
+          <Typography className="truncate text-center md:text-justify py-1 hover:text-red-400 dark:hover:text-red-200 transition-all ease-in duration-200	 dark:text-white" as="h3">{data.title ? data.title : data.name}</Typography>
         </a>
       </Link>
       <div className="flex my-4 md:my-4 justify-center">

@@ -56,7 +56,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
 
   if (data) {
     return (
-      <aside className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
+      <div className="px-1 md:px-[10px] py-2  md:col-span-6 lg:col-span-3 h-full md:max-h-full">
         <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
           <Typography as="h3" className="md:tracking-wider text-center" >{data.title}</Typography>
           <Typography as="h4" className="tracking-wide my-5"> {data.tagline !== "" ? data.tagline : "No Tagline"}</Typography>
@@ -186,7 +186,7 @@ const MovieInfo: FC<Props> = ({ data, }) => {
 
 
 
-      </aside>
+      </div>
 
     )
   }

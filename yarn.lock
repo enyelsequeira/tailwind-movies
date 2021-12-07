@@ -1028,6 +1028,11 @@ csstype@^3.0.2:
   resolved "https://registry.npmmirror.com/csstype/download/csstype-3.0.10.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcsstype%2Fdownload%2Fcsstype-3.0.10.tgz#2ad3a7bed70f35b965707c092e5f30b327c290e5"
   integrity sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==
 
+daisyui@^1.16.2:
+  version "1.16.2"
+  resolved "https://registry.npmmirror.com/daisyui/download/daisyui-1.16.2.tgz?cache=0&sync_timestamp=1636301292072&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fdaisyui%2Fdownload%2Fdaisyui-1.16.2.tgz#3b3d62f393c293601efb744ce40d5916ec5b8d93"
+  integrity sha512-kHoTvq3/eU8tPbu3U3Nwq7yy0I5zauqAYRSvw1x+t8g9FBjFm3jNtUQO/vBjUZsU7ABIf5aaT58iBF2NeusCUA==
+
 damerau-levenshtein@^1.0.7:
   version "1.0.7"
   resolved "https://registry.nlark.com/damerau-levenshtein/download/damerau-levenshtein-1.0.7.tgz#64368003512a1a6992593741a09a9d31a836f55d"
