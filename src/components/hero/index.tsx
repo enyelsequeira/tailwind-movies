@@ -11,7 +11,7 @@ interface Props {
 const Hero: FC<Props> = ({ data }) => {
 
   return (
-    <div className="relative h-80 md:col-span-4 bg-transparent w-full min-w-max   my-4 md:mx-2 ">
+    <div className="hidden md:block relative h-80 md:col-span-4 bg-transparent w-full min-w-max   my-4 md:mx-2 ">
       {data &&
         <>
           <Link href={`/movies/${data.id}`} passHref>
