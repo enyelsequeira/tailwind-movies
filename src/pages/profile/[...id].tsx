@@ -43,8 +43,8 @@ const Profile = ({ id }) => {
           <Typography as="h2">
             Sorry you need to be authenticated to see this page.
 
-            <Link href="/">
-              <a className="text-red-500">Go back</a>
+            <Link href="/" className="text-red-500">
+              Go back
             </Link>
           </Typography>
 

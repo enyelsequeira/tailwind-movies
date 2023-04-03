@@ -78,13 +78,16 @@ const ShowInfo: FC<Props> = ({ data }) => {
           <div className="flex space-x-4">
             {data.genres.map((genre) => {
               return (
-                <Link href="/" passHref key={genre.id} >
-                  <a onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
-                    <Typography as="p" className="hover:text-red-400 dark:hover:text-red-200" > {genre.name} </Typography>
-                  </a>
+                (<Link
+                  href="/"
+                  passHref
+                  key={genre.id}
+                  onClick={() => dispatch(selectGenreOrCategory(genre.id))}>
 
-                </Link>
-              )
+                  <Typography as="p" className="hover:text-red-400 dark:hover:text-red-200" > {genre.name} </Typography>
+
+                </Link>)
+              );
 
             })}
           </div>
@@ -102,14 +105,14 @@ const ShowInfo: FC<Props> = ({ data }) => {
                     <Image className="rounded-md h-36" src={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} alt={actor.name} objectFit="cover" layout="fill" blurDataURL={`https://image.tmdb.org/t/p/original/${actor?.profile_path}`} />
                   </div>
                   <Link href={`/cast/${actor.id}`}>
-                    <a>
-                      <Typography as="p" resetStyles className="truncate text-center hover:text-red-400 dark:hover:text-red-200"> {actor.name} </Typography>
-                    </a>
+
+                    <Typography as="p" resetStyles className="truncate text-center hover:text-red-400 dark:hover:text-red-200"> {actor.name} </Typography>
+
                   </Link>
 
 
                 </div>
-              )
+              );
             })}
           </div>
 
@@ -152,8 +155,7 @@ const ShowInfo: FC<Props> = ({ data }) => {
 
 
       </div>
-
-    )
+    );
   }
 }
 

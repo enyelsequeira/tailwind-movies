@@ -24,9 +24,9 @@ const TopBar: FC = (): JSX.Element => {
         {isAuthenticated ? (
           <div className="relative object-cover w-6 h-auto">
             <Link href={`/profile/${user.id}`} passHref>
-              <a>
-                <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
-              </a>
+
+              <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
+
             </Link>
           </div>
         ) : (
@@ -42,7 +42,7 @@ const TopBar: FC = (): JSX.Element => {
       </div>
 
     </div>
-  )
+  );
 }
 
 export default TopBar

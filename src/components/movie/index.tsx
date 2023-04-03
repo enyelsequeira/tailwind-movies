@@ -1,19 +1,18 @@
 import { FC } from "react";
-import { SingleResults } from "@/types/types";
+import { SingleResults, Movie } from "@/types/types";
 
-import { AiFillStar } from "react-icons/ai"
+import { AiFillStar } from "react-icons/ai";
 import { Typography } from "../ui";
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 interface Props {
-  data?: SingleResults
-  value?: number
+  data?: Movie;
+  value?: number;
 }
-
 
 const Movie: FC<Props> = ({ data, value }) => {
   const variants = {
@@ -26,39 +25,56 @@ const Movie: FC<Props> = ({ data, value }) => {
       },
     }),
     hidden: { opacity: 0 },
-  }
-
+  };
 
   return (
-    <motion.div variants={variants} initial="hidden" animate="visible" custom={value} className="flex flex-col h-96 w-2/3 md:min-w-full px-1">
-      <Link href={`/movies/${data.id}`} passHref>
-        <a>
-          <Image className="rounded shadow-2xl cursor-pointer" src={data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : "/images/placeholder.jpeg"} width="300" height="300" objectFit="cover" alt={data.title} blurDataURL={data.backdrop_path ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}` : "/images/placeholder.jpeg"} />
-        </a>
-      </Link>
-      <Link href={data.media_type === "tv" ? `/shows/${data.id}` : `/movies/${data.id}`}>
-        <a className="cursor-pointer ">
-          <Typography className="truncate text-center md:text-justify py-1 hover:text-red-400 dark:hover:text-red-200 transition-all ease-in duration-200	" as="h3">{data.title ? data.title : data.name}</Typography>
-        </a>
-      </Link>
-      <div className="flex my-4 md:my-4 justify-center">
-        {
-          [...Array(5)].map((s, i) => {
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      custom={value}
+      key={data.id}
+      className="group relative flex flex-col overflow-hidden rounded-lg  bg-white"
+    >
+      <div className="aspect-h-4 aspect-w-3 bg-gray-200 sm:aspect-none group-hover:opacity-75 sm:h-96">
+        <Image
+          width={500}
+          height={500}
+          src={
+            data.backdrop_path
+              ? `https://image.tmdb.org/t/p/original/${data.backdrop_path}`
+              : "/images/placeholder.jpeg"
+          }
+          alt={data.title}
+          blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+          className="h-full w-full object-cover object-center sm:h-full sm:w-full"
+        />
+      </div>
+      <div className="flex flex-1 flex-col space-y-2 p-4">
+        <h3 className="text-sm font-medium text-gray-900 mx-auto max-w-xs break-words truncate">
+          <Link href={`/movies/${data.id}`}>
+            <span aria-hidden="true" className="absolute inset-0" />
+            {data.title}
+          </Link>
+        </h3>
+        <div className="flex flex-1 mx-auto  ">
+          {[...Array(5)].map((s, i) => {
             const ratingValue = i + 1;
             return (
-              <AiFillStar className={`w-5 h-5 fill-current ${ratingValue > data.vote_average / 2 ? "dark:text-gray-200 text-gray-600" : "text-blue-600"}`
-              } key={i} />
-            )
-
-          })
-        }
+              <AiFillStar
+                className={`w-5 h-5 fill-current ${
+                  ratingValue > data.vote_average / 2
+                    ? "dark:text-gray-200 text-gray-600"
+                    : "text-blue-600"
+                }`}
+                key={i}
+              />
+            );
+          })}
+        </div>
       </div>
     </motion.div>
+  );
+};
 
-
-
-  )
-}
-
-export default Movie
-
+export default Movie;

@@ -16,9 +16,9 @@ const Login = () => {
           <Typography as="h6">{user.name}</Typography>
           <div className="relative object-cover w-20 h-20 mt-2 mx-auto">
             <Link href={`/profile/${user.id}`}>
-              <a href="">
-                <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
-              </a>
+
+              <Image className="rounded-full" objectFit="cover" layout="fill" alt="profile picture" blurDataURL={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} src={`https://www.themoviedb.org/t/p/w64_and_h64_face${user.avatar.tmdb.avatar_path}`} />
+
             </Link>
 
           </div>
@@ -34,7 +34,7 @@ const Login = () => {
       </button>}
 
     </div>
-  )
+  );
 }
 
 export default Login

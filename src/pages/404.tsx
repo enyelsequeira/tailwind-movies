@@ -16,12 +16,10 @@ export default function Page404() {
             The page you’re looking for doesn’t exist.
           </Typography>
 
-          <Link href="/">
-            <a
-              href="#"
-              className="bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md transition-all duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110"
-            >Go home</a
-            >
+          <Link
+            href="/"
+            className="bg-gradient-to-r from-purple-400 to-blue-500 hover:from-pink-500 hover:to-orange-500 text-white font-semibold px-6 py-3 rounded-md transition-all duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+            Go home
           </Link>
 
         </div>

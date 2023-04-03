@@ -15,18 +15,16 @@ const Hero: FC<Props> = ({ data }) => {
       {data &&
         <>
           <Link href={`/movies/${data.id}`} passHref>
-            <a>
 
-              <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} />
-            </a>
+            <Image className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} objectFit="cover" layout="fill" alt={data?.title} blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} />
+
           </Link>
           <div className="absolute bg-black/40 text-white space-y-1 w-[300px] md:w-auto  rounded-b-2xl bottom-0 p-2 ">
             <Link href={`/movies/${data.id}`} passHref>
-              <a>
-                <Typography as="h2" className="text-white text-center truncate text-sm md:text-2xl font-extrabold hover:text-red-300">
-                  {data.title}
-                </Typography>
-              </a>
+
+              <Typography as="h2" className="text-white text-center truncate text-sm md:text-2xl font-extrabold hover:text-red-300">
+                {data.title}
+              </Typography>
 
             </Link>
             <Typography as="p" className="font-body line-clamp-3 my-1  text-xs md:text-xl">
@@ -40,7 +38,7 @@ const Hero: FC<Props> = ({ data }) => {
         </>
       }
     </div>
-  )
+  );
 }
 export default Hero
 

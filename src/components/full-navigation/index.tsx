@@ -29,15 +29,15 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
   return (
     <div className={`sidebar z-50 bg-light-background-primary dark:bg-dark-background-secondary text-blue-100 w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform  md:relative md:translate-x-0 transition duration-200 ease-in-out overflow-auto  ${isMenuOpen || width > 768 ? "block " : "hidden"}`}>
       <div className="py-2 my-4">
-        <Link href="/" passHref>
-          <a onClick={() => dispatch(searchMovie(""))}>
-            <RiMovie2Line className="w-14 h-14 mb-3 mx-auto fill-current text-red-400 dark:text-yellow-600 cursor-pointer hover:text-red-800 dark:hover:text-red-200 transition-all ease-in duration-300" />
-          </a>
+        <Link href="/" passHref onClick={() => dispatch(searchMovie(""))}>
+
+          <RiMovie2Line className="w-14 h-14 mb-3 mx-auto fill-current text-red-400 dark:text-yellow-600 cursor-pointer hover:text-red-800 dark:hover:text-red-200 transition-all ease-in duration-300" />
+
         </Link>
 
         {sidebarMenu.map((name, i) => {
           return (
-            <Link href="/" key={i} passHref>
+            <Link href="/" key={i} passHref legacyBehavior>
               <Typography as="h6" className="transition duration-500 ease-in-out cursor-pointer dark:text-white text-sm text-light-2 py-2 group-hover:text-light-3 group-hover:font-semibold hover:text-light-3 dark:hover:text-light-3" onClick={() => {
                 dispatch(selectGenreOrCategory(name.value))
                 dispatch(searchMovie(""))
@@ -47,7 +47,7 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
               </Typography>
 
             </Link>
-          )
+          );
         })}
       </div>
       <div className="border-t-4 border-dark-background-primary dark:border-light-background-secondary">
@@ -55,7 +55,7 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
         <ul className="flex flex-col pt-5 space-y-8 ">
           {data?.genres.map(({ name, id }) => {
             return (
-              <Link href="/" passHref key={id}>
+              <Link href="/" passHref key={id} legacyBehavior>
                 <li onClick={() => {
                   dispatch(selectGenreOrCategory(id))
                   dispatch(searchMovie(""))
@@ -76,14 +76,14 @@ const FullNavigation: FC<Props> = ({ data, isMenuOpen, setIsMenuOpen }) => {
                   </Typography>
                 </li>
               </Link>
-            )
+            );
           })}
         </ul>
       </div>
       <Login />
 
     </div>
-  )
+  );
 
 }
 
