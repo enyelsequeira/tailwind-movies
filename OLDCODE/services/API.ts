@@ -7,7 +7,6 @@ export const APIKEY = process.env.NEXT_PUBLIC_API_KEY;
 export const EndPoints = {
   getGenres: `genre/movie/list?api_key=${APIKEY}`,
   getMoviesByCategory: "discover/movie",
-  getMovieInfo: "movie",
 } as const;
 
 // create a types out of the object
@@ -35,4 +34,3 @@ export const getMovieAPI = (): AxiosInstance => {
   }
   return MoviesAPI;
 };
-// movie/980078?append_to_response=videos,credits

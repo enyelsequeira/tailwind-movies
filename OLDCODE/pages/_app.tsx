@@ -2,7 +2,7 @@ import type { AppProps } from "next/app";
 import "@/styles/main.css";
 import { ThemeProvider } from "next-themes";
 import { Provider } from "react-redux";
-import { store } from "@/app/store";
+import { store } from "@/app-reducers/store";
 import { DefaultSeo } from "next-seo";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {

@@ -1,20 +1,22 @@
 import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
 import { KeyboardEvent } from "react";
 import { useState, useEffect } from "react";
-import { RootState } from "@/app/rootReducer";
+import { RootState } from "@/app-reducers/rootReducer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 const Search = () => {
-  const [query, setQuery] = useState("")
-  const { searchQuery } = useSelector((state: RootState) => state.currentGenreOrCategory);
-  const location = useRouter()
+  const [query, setQuery] = useState("");
+  const { searchQuery } = useSelector(
+    (state: RootState) => state.currentGenreOrCategory
+  );
+  const location = useRouter();
 
   const dispatch = useDispatch();
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       dispatch(searchMovie(query));
     }
   };
@@ -23,13 +25,22 @@ const Search = () => {
 
   useEffect(() => {
     // console.log(query)
-    setQuery(searchQuery)
-  }, [searchQuery])
-
+    setQuery(searchQuery);
+  }, [searchQuery]);
 
   return (
     <div className="flex  border-dark-background-secondary dark:border-light-background-primary rounded-md w-full md:w-2/4 mt-14 md:mt-0">
-      <input type="text" className="px-4 py-2 w-full  rounded-md" placeholder={location.pathname !== "/" ? "Can't search " : "Search Movie"} onKeyDown={handleKeyDown} disabled={location.pathname !== "/"} value={query} onChange={(e) => setQuery(e.target.value)} />
+      <input
+        type="text"
+        className="px-4 py-2 w-full  rounded-md"
+        placeholder={
+          location.pathname !== "/" ? "Can't search " : "Search Movie"
+        }
+        onKeyDown={handleKeyDown}
+        disabled={location.pathname !== "/"}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
       {/* <button className="flex items-center justify-center px-4 border-l" onClick={(e) => handleKeyDown(e)}>
         <svg className="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24">
@@ -38,7 +49,7 @@ const Search = () => {
         </svg>
       </button> */}
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

@@ -1,10 +1,9 @@
-"use client";
-
+import { useGenres } from "@/hooks/queries/useGenres";
 import clsx from "clsx";
 import { IconCalendar, IconChevronRight, IconMovie } from "@tabler/icons-react";
+import { sidebarMenu } from "../menu-bar";
+import { Typography } from "../ui";
 import Link from "next/link";
-import { sidebarMenu } from "@/constants";
-import { useGenres } from "@/hooks/useGenres";
 
 export const MobileNavigation = () => {
   const { genres } = useGenres();
@@ -32,9 +31,9 @@ export const MobileNavigation = () => {
           </li>
           <li>
             <div>
-              <p className="text-xl font-medium  tracking-widest my-6 text-gray-500 uppercase dark:text-white font-title">
+              <Typography className="text-xl font-medium  tracking-widest my-6 text-gray-500 uppercase dark:text-white font-title">
                 Genres
-              </p>
+              </Typography>
             </div>
             <ul role="list" className="-mx-2 mt-2 space-y-1">
               {genres?.map((genre) => (

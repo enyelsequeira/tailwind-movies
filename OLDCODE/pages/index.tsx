@@ -5,7 +5,7 @@ import type {
 } from "next";
 import { useGetMoviesQuery } from "@/services/TMDB";
 import { useSelector } from "react-redux";
-import { RootState } from "@/app/rootReducer";
+import { RootState } from "@/app-reducers/rootReducer";
 import { Hero, Movies, ShowsBox } from "@/components";
 import useAlanAi from "@/helpers/alan";
 import Layout from "@/layout";

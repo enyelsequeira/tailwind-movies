@@ -1,9 +1,8 @@
-"use client";
-
 import { FC } from "react";
 import { SingleResults, Movie } from "@/types/types";
 
 import { AiFillStar } from "react-icons/ai";
+import { Typography } from "../ui";
 
 import Image from "next/image";
 import Link from "next/link";

@@ -1,4 +1,4 @@
-import { RootState } from "@/app/rootReducer";
+import { RootState } from "@/app-reducers/rootReducer";
 import { User } from "@/types/types";
 import { createSlice } from "@reduxjs/toolkit";
 
