@@ -10,8 +10,8 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import Image from "next/image";
-import { IconPlayerPlay } from "@tabler/icons-react";
 import GoBack from "../back-button";
+import ModalComponentClient from "../modal/modal-component-client";
 
 type Props = {
   movieInfo: MovieInfoResponse;
@@ -50,7 +50,6 @@ const MovieInfo = ({ movieInfo }: Props) => {
           as="p"
           className="text-left md:text-justify text-xl font-body line-clamp-4 hover:line-clamp-none transition-all duration-200 ease-in cursor-pointer"
         >
-          {" "}
           {movieInfo?.overview}
         </Text>
       </div>
@@ -163,10 +162,13 @@ const MovieInfo = ({ movieInfo }: Props) => {
               <IconLink />
             </Button>
           </a>
-          <Button variant="primary">
-            <Text>Trailer</Text>
-            <IconPlayerPlay />
-          </Button>
+          <ModalComponentClient
+            movie={{
+              id: movieInfo.id,
+              title: movieInfo.title,
+              video: movieInfo.videos.results[0].key,
+            }}
+          />
         </div>
 
         {/* back btn */}
