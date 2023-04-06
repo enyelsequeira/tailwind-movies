@@ -1,4 +1,3 @@
-"use client";
 import Carrousel from "@/components/carrousel";
 import { useGetMovieInfo } from "@/hooks/useMovieInfo";
 

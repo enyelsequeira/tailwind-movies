@@ -1,7 +1,7 @@
 "use client";
 
 import { FC } from "react";
-import { SingleResults, Movie } from "@/types/types";
+import { Movie } from "@/types/types";
 
 import { AiFillStar } from "react-icons/ai";
 
@@ -29,7 +29,7 @@ const Movie: FC<Props> = ({ data, value }) => {
   };
 
   return (
-    <motion.div
+    <motion.article
       variants={variants}
       initial="hidden"
       animate="visible"
@@ -74,7 +74,7 @@ const Movie: FC<Props> = ({ data, value }) => {
           })}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 

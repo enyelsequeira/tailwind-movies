@@ -5,8 +5,16 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useGenres } from "@/hooks/useGenres";
 import { sidebarMenu } from "@/constants";
+import { Categories } from "@/hooks/useGetHomePage";
+import useCategoriesStore, {
+  usePaginationStore,
+} from "@/store/useCategoriesStore";
+import { useRouter } from "next/navigation";
 
 const Navigation = () => {
+  const setCategory = useCategoriesStore((state) => state.setCategory);
+  const setPage = usePaginationStore((state) => state.setPage);
+  const router = useRouter();
   const { genres } = useGenres();
   return (
     <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col ">
@@ -21,6 +29,11 @@ const Navigation = () => {
               <ul role="list" className="space-y-1">
                 {sidebarMenu.map((item) => (
                   <li
+                    onClick={async () => {
+                      router.push("/");
+                      setCategory(item.value as Categories);
+                      setPage(() => 1);
+                    }}
                     key={item.label}
                     className={clsx(
                       "text-sm font-base font-title dark:text-white text-black transition duration-500 ease-in-out cursor-pointer   text-light-2 py-2 hover:font-semibold hover:text-dark-2 dark:hover:text-light-3"

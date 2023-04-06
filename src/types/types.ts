@@ -10,7 +10,7 @@ export interface Genres {
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
-  genres_ids: number[];
+  genres_ids?: number[];
   id: number;
   original_language: string;
   overview: string;

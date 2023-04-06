@@ -100,7 +100,7 @@ const MovieInfo = ({ movieInfo }: Props) => {
         </Text>
         <div className="grid grid-cols-3  gap-3 md:grid md:grid-cols-5  py-1">
           {movieInfo &&
-            movieInfo.credits.cast.slice(0, 5).map((actor) => {
+            movieInfo?.credits?.cast?.slice(0, 5).map((actor) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
@@ -143,7 +143,7 @@ const MovieInfo = ({ movieInfo }: Props) => {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://www.imdb.com/title/${movieInfo.imdb_id}`}
+              href={`https://www.imdb.com/title/${movieInfo?.imdb_id}`}
             >
               <Button variant="primary">
                 <Text>IMDB</Text>
@@ -164,9 +164,9 @@ const MovieInfo = ({ movieInfo }: Props) => {
           </a>
           <ModalComponentClient
             movie={{
-              id: movieInfo.id,
-              title: movieInfo.title,
-              video: movieInfo.videos.results[0].key,
+              id: movieInfo?.id,
+              title: movieInfo?.title,
+              video: movieInfo?.videos?.results[0]?.key,
             }}
           />
         </div>
