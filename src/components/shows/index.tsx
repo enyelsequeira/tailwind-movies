@@ -8,55 +8,62 @@ import Image from "next/image";
 const Shows = () => {
   const [page, setPage] = useState(1);
   const { shows, isLoading, error } = useGetShows(page);
-  console.log({ shows });
   return (
-    <section className="col-span-full lg:col-span-2 border border-blue-500 px-2 w-full">
-      <Text size="h4" className="md:col-span-2 font-semibold mb-4 md:my-4">
+    <section className=" lg:col-span-2 flex flex-col">
+      <Text size="h4" className="font-semibold mb-4 md:my-4">
         Top Rated Shows
       </Text>
-      <div className="lg:h-72 border border-orange-800 grid grid-cols-3 gap-x-2">
-        {error && (
-          <Text size="h2" className="col-span-3">
-            Error could not load tv shows
-          </Text>
-        )}
-        {shows &&
-          shows.results.slice(0, 6).map((d) => {
-            return (
-              <div
-                className="flex flex-col justify-between max-h-[124px]"
-                key={d.id}
-              >
-                <Image
-                  className="rounded-xl object-cover"
-                  width="200"
-                  height="200"
-                  src={`https://image.tmdb.org/t/p/original/${
-                    d.backdrop_path || d.poster_path
-                  }`}
-                  alt={d.original_name}
-                  blurDataURL={`https://image.tmdb.org/t/p/original/${
-                    d.backdrop_path || d.poster_path
-                  }`}
-                />
-                <Link href={`/shows/${d.id}`} passHref legacyBehavior>
-                  <Text
-                    size="h5"
-                    className="truncate font-thin px-1 cursor-pointer hover:text-red-400 dark:hover:text-red-200"
-                    key={d.id}
+      <div className="h-full">
+        <div className="grid grid-cols-3 gap-4">
+          {error && (
+            <Text size="h2" className="col-span-3">
+              Error could not load tv shows
+            </Text>
+          )}
+          {shows &&
+            shows?.results.slice(0, 6).map((d) => {
+              return (
+                <article
+                  className="flex  h-[100px]  group relative rounded-md"
+                  key={d.id}
+                >
+                  <Image
+                    className="object-cover group-hover:opacity-70 transition-all duration-300 ease-in-out  rounded-md"
+                    width={300}
+                    height={200}
+                    src={`https://image.tmdb.org/t/p/original/${
+                      d.backdrop_path || d.poster_path
+                    }`}
+                    alt={d.original_name}
+                    blurDataURL={`https://image.tmdb.org/t/p/original/${
+                      d.backdrop_path || d.poster_path
+                    }`}
+                  />
+                  <Link
+                    href={`/shows/${d.id}`}
+                    className="absolute inset-0 hidden group-hover:flex items-center justify-center mx-auto bg-black/75 text-white transition-all duration-300 ease-in-out  rounded-md "
                   >
-                    {d?.name}
-                  </Text>
-                </Link>
-              </div>
-            );
-          })}
+                    <Text
+                      size="h5"
+                      className="truncate  px-1 cursor-pointer"
+                      key={d.id}
+                    >
+                      {d?.name}
+                    </Text>
+                  </Link>
+                </article>
+              );
+            })}
+        </div>
         {!isLoading && (
-          <Pagination
-            currentPage={page}
-            setPage={setPage}
-            totalPages={shows?.total_pages}
-          />
+          <div className="mt-4  mx-auto flex">
+            <Pagination
+              full
+              currentPage={page}
+              setPage={setPage}
+              totalPages={shows?.total_pages}
+            />
+          </div>
         )}
       </div>
     </section>
