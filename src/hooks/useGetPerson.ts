@@ -64,10 +64,10 @@ export interface Profile {
 // https://api.themoviedb.org/3/person/65510?api_key=4e0d07555e20e0345f6bd12869b2604e
 
 export interface MovieWithCast {
-  results: Result[];
+  results: MovieWithCastResult[];
 }
 
-export interface Result {
+export interface MovieWithCastResult {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
