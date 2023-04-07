@@ -24,4 +24,3 @@ const IndexPage = async () => {
 };
 
 export default IndexPage;
-// https://api.themoviedb.org/3/movie/popular?page=1&api_key=4e0d07555e20e0345f6bd12869b2604e

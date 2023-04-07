@@ -26,7 +26,7 @@ const Carrousel = ({ images }: Props): JSX.Element => {
                       width={500}
                       height={500}
                       src={`https://image.tmdb.org/t/p/original/${image.file_path}`}
-                      alt=""
+                      alt={image.file_path}
                       className="h-full w-full object-cover object-center"
                     />
                   </span>

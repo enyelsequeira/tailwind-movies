@@ -27,7 +27,7 @@ export default async function Page({
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
       <Suspense fallback={<Loader />}>
         <Carrousel images={images} />
-        <MovieInfo movieInfo={movieInfo} />
+        <MovieInfo {...movieInfo} />
       </Suspense>
       <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
         <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">
@@ -37,7 +37,7 @@ export default async function Page({
           {movieRecommendations.length ? (
             <>
               {movieRecommendations.map((movie) => (
-                <Movie key={movie.id} data={movie} />
+                <Movie key={movie.id} tvShows={false} {...movie} />
               ))}
             </>
           ) : (

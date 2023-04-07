@@ -1,4 +1,4 @@
-import { MovieInfoResponse } from "@/types/newTypes";
+import { Credits, Genre, Videos } from "@/types/newTypes";
 import Text from "../ui/typography";
 import ClientCircle from "../circle";
 import Button from "../ui/button";
@@ -12,34 +12,64 @@ import Link from "next/link";
 import Image from "next/image";
 import GoBack from "../back-button";
 import ModalComponentClient from "../modal/modal-component-client";
+import { Languages } from "@/types/types";
 
 type Props = {
-  movieInfo: MovieInfoResponse;
+  tagline: string;
+  runtime: number;
+  genres?: Genre[];
+  homepage: string;
+  imdb_id: string;
+  vote_average: number;
+  vote_count: number;
+  release_date: string;
+  overview: string;
+  backdrop_path: string;
+  poster_path: string;
+  title: string;
+  spoken_languages: Languages[];
+  id: number;
+  videos: Videos;
+  credits: Credits;
 };
 
-const MovieInfo = ({ movieInfo }: Props) => {
+const MovieInfo = ({
+  title,
+  tagline,
+  runtime,
+  release_date,
+  spoken_languages,
+  overview,
+  homepage,
+  videos,
+  id,
+  vote_average,
+  imdb_id,
+  credits,
+  genres,
+}: Props) => {
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
       <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
         <Text size="h3" className="md:tracking-wider text-center">
-          {movieInfo?.title}
+          {title}
         </Text>
         <Text size="h4" className="tracking-wide my-5">
           {" "}
-          {movieInfo?.tagline !== "" ? movieInfo?.tagline : "No Tagline"}
+          {tagline !== "" ? tagline : "No Tagline"}
         </Text>
         <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
           <div className="relative px-2">
-            <Text className="relative">{movieInfo?.runtime} Mins</Text>
+            <Text className="relative">{runtime} Mins</Text>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
           </div>
           <div className="relative px-2 ">
-            <Text className="relative">{movieInfo?.release_date}</Text>
+            <Text className="relative">{release_date}</Text>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
           </div>
           <div className="relative px-2">
             <Text className="relative">
-              {movieInfo?.spoken_languages[0]?.english_name}
+              {spoken_languages[0]?.english_name}
             </Text>
           </div>
         </div>
@@ -50,7 +80,7 @@ const MovieInfo = ({ movieInfo }: Props) => {
           as="p"
           className="text-left md:text-justify text-xl font-body line-clamp-4 hover:line-clamp-none transition-all duration-200 ease-in cursor-pointer"
         >
-          {movieInfo?.overview}
+          {overview}
         </Text>
       </div>
       {/* rating and buttons */}
@@ -59,7 +89,7 @@ const MovieInfo = ({ movieInfo }: Props) => {
           <Text size="h3" className="my-2">
             Rating
           </Text>
-          <ClientCircle average={movieInfo?.vote_average} />
+          <ClientCircle average={vote_average} />
         </div>
         <div className="flex flex-col justify-end space-y-8">
           <Button variant="primary">
@@ -72,13 +102,13 @@ const MovieInfo = ({ movieInfo }: Props) => {
           </Button>
         </div>
       </div>
-      <div>
-        <Text size="h3" className="my-2">
-          Genres
-        </Text>
-        <div className="flex space-x-4">
-          {movieInfo &&
-            movieInfo.genres.map((genre) => {
+      {genres ? (
+        <div>
+          <Text size="h3" className="my-2">
+            Genres
+          </Text>
+          <div className="flex space-x-4">
+            {genres.map((genre) => {
               return (
                 <Link href={`/genres/${genre.id}`} passHref key={genre.id}>
                   <Text
@@ -90,8 +120,9 @@ const MovieInfo = ({ movieInfo }: Props) => {
                 </Link>
               );
             })}
+          </div>
         </div>
-      </div>
+      ) : null}
 
       {/* cast */}
       <div>
@@ -99,8 +130,8 @@ const MovieInfo = ({ movieInfo }: Props) => {
           Cast
         </Text>
         <div className="grid grid-cols-3  gap-3 md:grid md:grid-cols-5  py-1">
-          {movieInfo &&
-            movieInfo?.credits?.cast?.slice(0, 5).map((actor) => {
+          {credits &&
+            credits?.cast?.slice(0, 5).map((actor) => {
               return (
                 <div key={actor.id} className="flex flex-col">
                   <div className="relative h-28 md:h-32">
@@ -139,11 +170,11 @@ const MovieInfo = ({ movieInfo }: Props) => {
           className="flex rounded-lg flex-row justify-between text-lg gap-1"
           role="group"
         >
-          {movieInfo && (
+          {imdb_id && (
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://www.imdb.com/title/${movieInfo?.imdb_id}`}
+              href={`https://www.imdb.com/title/${imdb_id}`}
             >
               <Button variant="primary">
                 <Text>IMDB</Text>
@@ -152,11 +183,7 @@ const MovieInfo = ({ movieInfo }: Props) => {
             </a>
           )}
 
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`${movieInfo?.homepage}`}
-          >
+          <a target="_blank" rel="noopener noreferrer" href={`${homepage}`}>
             <Button variant="primary">
               <Text>Website</Text>
               <IconLink />
@@ -164,9 +191,9 @@ const MovieInfo = ({ movieInfo }: Props) => {
           </a>
           <ModalComponentClient
             movie={{
-              id: movieInfo?.id,
-              title: movieInfo?.title,
-              video: movieInfo?.videos?.results[0]?.key,
+              id,
+              title: title,
+              video: videos?.results[0]?.key,
             }}
           />
         </div>

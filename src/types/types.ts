@@ -114,6 +114,7 @@ export interface MovieInformation extends Movie {
     }[];
   };
 }
+
 // TV shows
 export interface Networks {
   id: number;

@@ -1,6 +1,5 @@
 "use client";
 import Hero from "@/components/hero";
-import Loader from "@/components/loader";
 import Movie from "@/components/movie";
 import Pagination from "@/components/pagination";
 import Shows from "@/components/shows";
@@ -40,7 +39,7 @@ const InitialPage = () => {
       </Text>
       <div className="flex flex-col  md:grid md:grid-cols-2  xl:grid-cols-4 gap-4">
         {initialPage?.results.map((movie) => (
-          <Movie key={movie.id} data={movie} />
+          <Movie key={movie.id} tvShows={false} {...movie} />
         ))}
         {!isLoading && (
           <Pagination

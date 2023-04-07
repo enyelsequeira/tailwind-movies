@@ -25,7 +25,7 @@ export default function Page({ params }) {
             {" "}
             {movies &&
               movies.results.map((movie) => (
-                <Movie key={movie.id} data={movie} />
+                <Movie key={movie.id} tvShows={false} {...movie} />
               ))}
           </>
         )}
