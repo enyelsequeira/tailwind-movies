@@ -151,7 +151,16 @@ const MovieInfo = ({
                       }
                     />
                   </div>
-                  <Link href={`/cast/${actor.id}`}>
+                  <Link
+                    href={{
+                      pathname: "/cast",
+                      query: { id: actor.id },
+                    }}
+                    // href={{
+                    //   href: "/cas",
+                    //   query: { id: actor.id },
+                    // }}
+                  >
                     <Text
                       size="base"
                       className="truncate text-center hover:text-red-400 dark:hover:text-red-200"

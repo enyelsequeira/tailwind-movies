@@ -21,8 +21,6 @@ export default async function Page({
     Number(params.movie)
   );
 
-  console.log({ movieRecommendations });
-
   return (
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
       <Suspense fallback={<Loader />}>

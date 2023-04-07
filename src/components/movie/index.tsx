@@ -25,7 +25,6 @@ const Movie = ({
   vote_average,
   tvShows = false,
 }: Props) => {
-  console.log({ tvShows });
   const variants = {
     visible: (i: number) => ({
       opacity: 1,

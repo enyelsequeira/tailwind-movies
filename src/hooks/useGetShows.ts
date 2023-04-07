@@ -49,7 +49,6 @@ export const getShowInfo = async (showCode: number) => {
   const res = await getMovieAPI().get<ShowResponse>(API);
   return res.data;
 };
-// https://api.themoviedb.org/3/tv/1396?append_to_response=videos,credits&api_key=4e0d07555e20e0345f6bd12869b2604e&language=en
 
 export const getExternalids = async (showCode: number) => {
   const API = `tv/${showCode}/external_ids?api_key=${APIKEY}`;
@@ -75,5 +74,3 @@ export const getTvRecommendations = async (showCode: number) => {
   const results = res.data.results.slice(0, 12);
   return results;
 };
-
-// https://api.themoviedb.org/3/tv/37854/recommendations?api_key=4e0d07555e20e0345f6bd12869b2604e&language=en
