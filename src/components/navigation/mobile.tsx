@@ -5,7 +5,6 @@ import { IconCalendar, IconChevronRight, IconMovie } from "@tabler/icons-react";
 import Link from "next/link";
 import { sidebarMenu } from "@/constants";
 import { useGenres } from "@/hooks/useGenres";
-
 export const MobileNavigation = () => {
   const { genres } = useGenres();
 

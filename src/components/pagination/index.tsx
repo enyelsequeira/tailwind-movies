@@ -25,6 +25,7 @@ const Pagination: FC<Props> = ({
       <ul className="inline-flex space-x-2">
         <li>
           <button
+            // @ts-ignore
             onClick={
               currentPage !== 1
                 ? () => setPage((prevCurrentPage) => prevCurrentPage - 1)
@@ -50,6 +51,7 @@ const Pagination: FC<Props> = ({
         <li>
           <button
             className="flex items-center justify-center w-10 h-10 text-indigo-600 transition-colors duration-150 rounded-full focus:shadow-outline hover:bg-indigo-100 dark:text-light-accent"
+            // @ts-ignore
             onClick={
               currentPage !== totalPages
                 ? () => setPage((prevCurrentPage) => prevCurrentPage + 1)

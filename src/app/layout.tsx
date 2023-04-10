@@ -1,4 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+
 import "../styles/main.css";
 
 import { Alegreya, Source_Sans_Pro } from "next/font/google";
@@ -15,11 +18,13 @@ const sourceSans = Source_Sans_Pro({
   weight: ["200", "400", "600", "700", "300", "900"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html
       lang="en"
@@ -29,7 +34,7 @@ export default function RootLayout({
       <body className="h-full bg-light-background-primary dark:bg-dark-background-primary">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>
-            <Layout>{children}</Layout>
+            <Layout session={session}>{children}</Layout>
           </Providers>
         </ThemeProvider>
       </body>

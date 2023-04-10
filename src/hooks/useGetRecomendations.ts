@@ -9,7 +9,7 @@ export interface Root {
 
 export interface Result {
   adult: boolean;
-  backdrop_path: string | null;
+  backdrop_path: string;
   genre_ids: number[];
   id: number;
   original_language: string;

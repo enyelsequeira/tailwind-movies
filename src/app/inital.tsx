@@ -25,12 +25,13 @@ const InitialPage = () => {
     }
   };
 
-  const movie = Math.floor(Math.random() * initialPage?.results.length);
+  const movie =
+    initialPage && Math.floor(Math.random() * initialPage?.results?.length);
 
   return (
     <div>
       <div className="grid md:grid-cols-1 lg:grid-cols-5 lg:gap-x-4">
-        <Hero data={initialPage?.results[movie]} />
+        <Hero data={initialPage?.results[movie || 1]} />
         <Shows />
       </div>
       <Text size="h1" className="uppercase my-2 px-2">

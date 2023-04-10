@@ -3,6 +3,7 @@ import Carrousel from "@/components/carrousel";
 import Button from "@/components/ui/button";
 import Text from "@/components/ui/typography";
 import { usePersonInfo } from "@/hooks/useGetPerson";
+import { Poster } from "@/types/newTypes";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,17 +13,17 @@ const ClientCast = () => {
   const searchParams = useSearchParams();
   const [more, setMore] = useState(false);
 
-  const id = searchParams.get("id");
+  const id = searchParams?.get("id");
   const { person } = usePersonInfo(Number(id));
-  const images = person.images.profiles.slice(0, 8);
+  const images = person?.images.profiles.slice(0, 8);
 
-  if (!searchParams.get("id")) {
+  if (!searchParams?.get("id")) {
     router.back();
   }
 
   return (
     <>
-      <Carrousel images={images} />
+      <Carrousel images={images as Poster[]} />
       <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
         <Text size="h3" className="md:tracking-wider text-center">
           {person?.name}

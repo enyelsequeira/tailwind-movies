@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from "axios";
+import { env } from "../env/client.mjs";
 
 const MOVIEAPI = "https://api.themoviedb.org/3";
-export const APIKEY = process.env.NEXT_PUBLIC_API_KEY;
-
+export const APIKEY = env.NEXT_PUBLIC_API_KEY;
 // we could do something like this as well to have better typesafety
 export const EndPoints = {
   getGenres: `genre/movie/list?api_key=${APIKEY}`,

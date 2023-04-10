@@ -14,10 +14,10 @@ const Hero = ({ data }: Props) => {
         <>
           <Link href={`/movies/${data.id}`} passHref>
             <Image
-              className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer"
+              fill
+           
+              className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer object-cover object-center "
               src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
-              objectFit="cover"
-              layout="fill"
               alt={data?.title}
               blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
             />
