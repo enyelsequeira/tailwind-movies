@@ -45,21 +45,22 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  isAdmin       Boolean   @default(false)
-  firstName     String?
-  lastName      String?
-  username      String?   @unique
-  bio           String?
-  location      String?
-  portfolio     String?
-  profileUrl    String?
-  accounts      Account[]
-  Session       Session[]
+  id             String    @id @default(cuid())
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  isAdmin        Boolean   @default(false)
+  firstName      String?
+  lastName       String?
+  username       String?   @unique
+  bio            String?
+  location       String?
+  portfolio      String?
+  profileUrl     String?
+  accounts       Account[]
+  Session        Session[]
+  favoriteMovies Movie[] // Add this line for favorite movies relationship
 }
 
 model VerificationToken {
@@ -68,4 +69,24 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Movie {
+  id                    Int      @id @default(autoincrement())
+  userId                String
+  backdrop_path         String?
+  belongs_to_collection Json?
+  homepage              String?
+  movieId               Int      @unique
+  original_title        String?
+  popularity            Float?
+  poster_path           String?
+  tagline               String?
+  title                 String?
+  video                 Boolean?
+  vote_average          Float?
+  vote_count            Int?
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

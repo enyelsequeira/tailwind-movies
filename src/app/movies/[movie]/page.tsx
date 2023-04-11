@@ -7,6 +7,7 @@ import { getMovieRecomendations } from "@/hooks/useGetRecomendations";
 import Text from "@/components/ui/typography";
 import Movie from "@/components/movie";
 import { IconMoodSadFilled } from "@tabler/icons-react";
+import axios from "axios";
 
 export default async function Page({
   params,
@@ -20,6 +21,10 @@ export default async function Page({
   const movieRecommendations = await getMovieRecomendations(
     Number(params.movie)
   );
+
+  const test = await fetch("http://localhost:3000/api/movie");
+  const result = await test.json();
+  console.log({ result });
 
   return (
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
