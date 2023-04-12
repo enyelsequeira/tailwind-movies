@@ -3,9 +3,8 @@ import { NextResponse, NextRequest } from "next/server";
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const movieId = searchParams.get("movieId");
     const userId = searchParams.get("userId");
-    if (!userId || !movieId) {
+    if (!userId) {
       return NextResponse.json({
         error: "You need to be logged in to add favorite movie ",
       });

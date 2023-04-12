@@ -24,10 +24,6 @@ export default async function Page({
   );
   const userId = await getServerSession(authOptions);
 
-  // const test = await fetch("http://localhost:3000/api/movie");
-  // const result = await test.json();
-  // console.log({ result });
-
   return (
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
       <Suspense fallback={<Loader />}>
