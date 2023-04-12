@@ -45,22 +45,18 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(cuid())
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  image          String?
-  isAdmin        Boolean   @default(false)
-  firstName      String?
-  lastName       String?
-  username       String?   @unique
-  bio            String?
-  location       String?
-  portfolio      String?
-  profileUrl     String?
-  accounts       Account[]
-  Session        Session[]
-  favoriteMovies Movie[] // Add this line for favorite movies relationship
+  id               String            @id @default(cuid())
+  name             String?
+  email            String?           @unique
+  emailVerified    DateTime?
+  image            String?
+  firstName        String?
+  lastName         String?
+  username         String?           @unique
+  accounts         Account[]
+  Session          Session[]
+  favoriteMovies   FavoriteMovie[] // Update this line for favorite movies relationship
+  watchLaterMovies WatchLaterMovie[] // Add this line for watch later movies relationship
 }
 
 model VerificationToken {
@@ -71,22 +67,42 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Movie {
-  id                    Int      @id @default(autoincrement())
-  userId                String
-  backdrop_path         String?
-  belongs_to_collection Json?
-  homepage              String?
-  movieId               Int      @unique
-  original_title        String?
-  popularity            Float?
-  poster_path           String?
-  tagline               String?
-  title                 String?
-  video                 Boolean?
-  vote_average          Float?
-  vote_count            Int?
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model FavoriteMovie {
+  id             String  @id @default(cuid())
+  userId         String
+  backdrop_path  String?
+  homepage       String?
+  movieId        Int     @unique
+  original_title String?
+  popularity     String?
+  poster_path    String?
+  tagline        String?
+  title          String?
+  vote_average   String?
+  vote_count     String?
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
+  @@index([userId])
+}
+
+model WatchLaterMovie {
+  id             String  @id @default(cuid())
+  userId         String
+  backdrop_path  String?
+  homepage       String?
+  movieId        Int     @unique
+  original_title String?
+  popularity     String?
+  poster_path    String?
+  tagline        String?
+  title          String?
+  vote_average   String?
+  vote_count     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, movieId])
   @@index([userId])
 }

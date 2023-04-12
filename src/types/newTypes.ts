@@ -210,3 +210,19 @@ export interface Poster {
   vote_count: number;
   width: number;
 }
+export interface FavoriteMovies {
+  id: string;
+  userId: string;
+  backdrop_path: string;
+  homepage: string;
+  movieId: number;
+  original_title: string;
+  popularity: string;
+  poster_path: string;
+  tagline: string;
+  title: string;
+  vote_average: string;
+  vote_count: string;
+}
+// map((movie) => movie.movieId)
+//                   .includes(id),

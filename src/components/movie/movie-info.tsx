@@ -1,4 +1,5 @@
-import { Credits, Genre, Videos } from "@/types/newTypes";
+"use client";
+import { Credits, FavoriteMovies, Genre, Videos } from "@/types/newTypes";
 import Text from "../ui/typography";
 import ClientCircle from "../circle";
 import Button from "../ui/button";
@@ -6,6 +7,7 @@ import {
   IconBadge4k,
   IconClock,
   IconHeart,
+  IconHeartFilled,
   IconLink,
 } from "@tabler/icons-react";
 import Link from "next/link";
@@ -13,6 +15,11 @@ import Image from "next/image";
 import GoBack from "../back-button";
 import ModalComponentClient from "../modal/modal-component-client";
 import { Languages } from "@/types/types";
+import axios from "axios";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import clsx from "clsx";
+import { match, P } from "ts-pattern";
+import { toast } from "react-toastify";
 
 type Props = {
   tagline: string;
@@ -31,6 +38,7 @@ type Props = {
   id: number;
   videos: Videos;
   credits: Credits;
+  userId: string;
 };
 
 const MovieInfo = ({
@@ -39,6 +47,7 @@ const MovieInfo = ({
   runtime,
   release_date,
   spoken_languages,
+  backdrop_path,
   overview,
   homepage,
   videos,
@@ -47,7 +56,81 @@ const MovieInfo = ({
   imdb_id,
   credits,
   genres,
+  userId,
 }: Props) => {
+  const queryClient = useQueryClient();
+  const toggleFav = async () => {
+    const movieProps = {
+      backdrop_path,
+      homepage,
+      title,
+      movieId: id,
+      original_title: title,
+      popularity: String(vote_average),
+      poster_path: backdrop_path,
+      tagline,
+      vote_average: String(vote_average),
+      vote_count: String(vote_average),
+      userId: userId,
+    };
+
+    try {
+      const response = await axios.post("http://localhost:3000/api/favorite", {
+        movieProps,
+      });
+      return response;
+    } catch (error) {
+      console.log({ error }, "error with posting movie");
+    }
+  };
+
+  const getFavoriteMovies = async () => {
+    const res = await axios.get<FavoriteMovies[]>(
+      "http://localhost:3000/api/favorite",
+      {
+        params: {
+          movieId: id,
+          userId: userId,
+        },
+      }
+    );
+    console.log({ res });
+    return res.data;
+  };
+  const { data } = useQuery({
+    queryKey: ["add-to-favorite", id],
+    queryFn: getFavoriteMovies,
+    enabled: !!userId,
+  });
+  const isMovieFavorited =
+    data?.some((movie: FavoriteMovies) => movie.movieId === id) ?? false;
+
+  const { mutate } = useMutation({
+    mutationKey: ["add-to-favorite", id],
+    mutationFn: toggleFav,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["add-to-favorite", id],
+      });
+
+      isMovieFavorited
+        ? toast.success("Movie removed from favorites", {
+            hideProgressBar: true,
+            pauseOnFocusLoss: false,
+            theme: "colored",
+            autoClose: 2000,
+          })
+        : toast.success("Movie added to favorites", {
+            hideProgressBar: true,
+            pauseOnFocusLoss: false,
+            theme: "colored",
+            autoClose: 2000,
+          });
+    },
+  });
+
+  console.log({ isMovieFavorited });
+
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
       <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
@@ -92,10 +175,24 @@ const MovieInfo = ({
           <ClientCircle average={vote_average} />
         </div>
         <div className="flex flex-col justify-end space-y-8">
-          <Button variant="primary">
-            <Text>Unfavorite</Text>
-            <IconHeart />
-          </Button>
+          <button
+            onClick={() => {
+              if (!userId) {
+                toast.error("Please login to add to favorite");
+              }
+              mutate();
+            }}
+            className={clsx("border w-fit  border-black/10 rounded-md", {
+              "bg-red-400": isMovieFavorited,
+              "bg-white": !isMovieFavorited,
+            })}
+          >
+            {isMovieFavorited ? (
+              <IconHeartFilled className="text-red-200" />
+            ) : (
+              <IconHeart className="text-blue-500" />
+            )}
+          </button>
           <Button variant="primary">
             <Text>Remove WatchList</Text>
             <IconClock />

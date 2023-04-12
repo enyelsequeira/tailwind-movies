@@ -18,6 +18,9 @@ import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   children: ReactNode;
@@ -25,7 +28,6 @@ type Props = {
 };
 
 const Layout = ({ children, session }: Props) => {
-  console.log({ cool: session });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -217,6 +219,7 @@ const Layout = ({ children, session }: Props) => {
               </div>
             </div>
           </div>
+          <ToastContainer />
 
           <main>
             {children}
