@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   IconBrandFacebook,
@@ -11,6 +11,8 @@ import {
 import Text from "../ui/typography";
 import Button from "../ui/button";
 import { signIn } from "next-auth/react";
+import { z } from "zod";
+import { toast } from "react-toastify";
 
 type Props = {
   open: boolean;
@@ -19,6 +21,31 @@ type Props = {
 const ButtonIcons =
   "inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-gray-500 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0";
 export default function SignInModal({ open, setOpen }: Props) {
+  const [input, setInput] = useState("");
+
+  const schema = z.object({
+    email: z.string().email({
+      message: "Please enter a valid email address",
+    }),
+  });
+  // now using the schema lets write a function that will validate the input and send the input
+  // to the server
+  const validateInput = async () => {
+    try {
+      const data = schema.parse({ email: input });
+      await signIn("email", {
+        email: data.email,
+      });
+    } catch (error: any) {
+      toast.error(error.issues[0].message || error.message, {
+        theme: "colored",
+        position: "top-center",
+        autoClose: 3000,
+        pauseOnFocusLoss: false,
+      });
+    }
+  };
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50 " onClose={setOpen}>
@@ -93,7 +120,14 @@ export default function SignInModal({ open, setOpen }: Props) {
                   </div>
 
                   <div className="mt-6">
-                    <form action="#" method="POST" className="space-y-6">
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        validateInput();
+                      }}
+                      id="form"
+                      className="space-y-6"
+                    >
                       <div>
                         <label
                           htmlFor="email"
@@ -105,16 +139,18 @@ export default function SignInModal({ open, setOpen }: Props) {
                           <input
                             id="email"
                             name="email"
-                            type="email"
-                            autoComplete="email"
+                            // type="email"
+                            // autoComplete="email"
                             required
-                            className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            className="block w-full rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2"
+                            onChange={(e) => setInput(e.target.value)}
                           />
                         </div>
                       </div>
 
                       <div>
                         <button
+                          form="form"
                           type="submit"
                           className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                         >
