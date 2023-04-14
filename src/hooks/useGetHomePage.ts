@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { APIKEY, getMovieAPI } from "@/services/API";
 import { EndPoints } from "@/services/API";
 import useCategoriesStore from "@/store/useCategoriesStore";
-import { Movie } from "@/types/types";
+import { Movie } from "@/types/newTypes";
 
 export type Categories = "upcoming" | "popular" | "top_rated";
 export interface Root {

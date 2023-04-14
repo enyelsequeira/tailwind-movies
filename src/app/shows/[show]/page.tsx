@@ -11,7 +11,13 @@ import {
 import { IconMoodSadFilled } from "@tabler/icons-react";
 import { Suspense } from "react";
 
-const ShowInfoPage = async ({ params }) => {
+type Params = {
+  params: {
+    show: string;
+  };
+};
+
+const ShowInfoPage = async ({ params }: Params) => {
   const showInfo = await getShowInfo(Number(params.show));
   const res = await getExternalids(Number(params.show));
   const imdb_id = res.imdb_id;
@@ -42,7 +48,7 @@ const ShowInfoPage = async ({ params }) => {
     <div className="border min-h-screen grid lg:grid-cols-2 ">
       <Suspense fallback={<Loader />}>
         <Carrousel images={images} />
-        <MovieInfo {...showProps} />
+        <MovieInfo isShow={params.show} {...showProps} />
       </Suspense>
       <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
         <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">

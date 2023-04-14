@@ -28,8 +28,7 @@ export default function SignInModal({ open, setOpen }: Props) {
       message: "Please enter a valid email address",
     }),
   });
-  // now using the schema lets write a function that will validate the input and send the input
-  // to the server
+
   const validateInput = async () => {
     try {
       const data = schema.parse({ email: input });

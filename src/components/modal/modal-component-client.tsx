@@ -7,8 +7,6 @@ import { useRef, useState } from "react";
 import Modal from ".";
 
 type Props = {
-  // we just need to send an object with movie title, movie video
-  // and movie id
   movie: {
     title: string;
     video: string;

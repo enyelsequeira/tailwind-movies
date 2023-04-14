@@ -1,4 +1,5 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { Res } from "../favorite/route";
 
 export async function GET(req: Request) {
   try {
@@ -6,11 +7,11 @@ export async function GET(req: Request) {
     const userId = searchParams.get("userId");
     if (!userId) {
       return NextResponse.json({
-        error: "You need to be logged in to add favorite movie ",
+        error: "You need to be logged in to get watchlater movies ",
       });
     }
     // lets get all favorite movies for this user
-    const favoriteMovies = await prisma?.favoriteMovie.findMany({
+    const favoriteMovies = await prisma?.watchLaterMovie.findMany({
       where: {
         userId: userId,
       },
@@ -18,26 +19,10 @@ export async function GET(req: Request) {
     return NextResponse.json(favoriteMovies);
   } catch (error) {
     return NextResponse.json({
-      error: "Sorry Favorite Movies could not be fetched",
+      error: "Sorry watchLater Movies could not be fetched",
     });
   }
 }
-
-export type Res = {
-  movieProps: {
-    backdrop_path: string;
-    homepage: string;
-    title: string;
-    movieId: number;
-    original_title: string;
-    popularity: string;
-    poster_path: string;
-    tagline: string;
-    vote_average: string;
-    vote_count: string;
-    userId: string;
-  };
-};
 
 export async function POST(req: Request) {
   try {
@@ -45,17 +30,17 @@ export async function POST(req: Request) {
     const { movieProps } = res;
     if (!movieProps.userId || !movieProps.movieId) {
       return NextResponse.json({
-        error: "You need to be logged in to add favorite movie ",
+        error: "You need to be logged in to add watch later movie ",
       });
     }
     // lets check if movie already exists in our database
-    const movieIsFavorited = await prisma?.favoriteMovie.findUnique({
+    const movieToWatchLater = await prisma?.watchLaterMovie.findUnique({
       where: {
         movieId: movieProps.movieId,
       },
     });
-    if (movieIsFavorited) {
-      const res = await prisma?.favoriteMovie.delete({
+    if (movieToWatchLater) {
+      const res = await prisma?.watchLaterMovie.delete({
         where: {
           userId_movieId: {
             movieId: movieProps.movieId,
@@ -63,11 +48,11 @@ export async function POST(req: Request) {
           },
         },
       });
-      const message = "Movie Removed from favorites";
+      const message = "Movie Removed from watch later list";
 
       return NextResponse.json(message);
     } else {
-      const res = await prisma?.favoriteMovie.create({
+      const res = await prisma?.watchLaterMovie.create({
         data: {
           movieId: movieProps.movieId,
           userId: movieProps.userId,
@@ -88,7 +73,7 @@ export async function POST(req: Request) {
   } catch (error) {
     return NextResponse.json({
       error:
-        "Sorry something went wrong with toggling favorite movie, please try again later :(",
+        "Sorry something went wrong with toggling watch later, please try again later :(",
     });
   }
 }

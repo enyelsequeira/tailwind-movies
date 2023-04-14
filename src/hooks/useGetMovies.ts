@@ -1,5 +1,5 @@
-import { Movie } from "@/types/types";
 import { APIKEY, EndPoints, getMovieAPI } from "@/services/API";
+import { Movie } from "@/types/newTypes";
 import { useQuery } from "@tanstack/react-query";
 
 type Data = {

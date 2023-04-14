@@ -13,7 +13,6 @@ import Navigation from "../navigation/navigation";
 import DarkModeBtn from "../dark-mode-btn";
 import Button from "../ui/button";
 import SignInModal from "../signin-modal";
-import { match, P } from "ts-pattern";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";

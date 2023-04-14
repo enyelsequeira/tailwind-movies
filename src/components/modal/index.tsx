@@ -16,12 +16,7 @@ type Props = {
     id: number;
   };
 };
-export default function Modal({
-  cancelButtonRef,
-  open,
-  setOpen,
-  movie,
-}: Props) {
+export default function Modal({ open, setOpen, movie }: Props) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50 " onClose={setOpen}>

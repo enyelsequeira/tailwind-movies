@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Movie } from "@/types/types";
 import Text from "../ui/typography";
+import { Movie } from "@/types/newTypes";
 
 interface Props {
   data?: Movie;
@@ -15,7 +15,6 @@ const Hero = ({ data }: Props) => {
           <Link href={`/movies/${data.id}`} passHref>
             <Image
               fill
-           
               className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer object-cover object-center "
               src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
               alt={data?.title}

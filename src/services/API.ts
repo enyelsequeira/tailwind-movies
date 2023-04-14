@@ -21,9 +21,6 @@ type EndPointKeys = keyof EndPointType;
 //  create a union from the object values
 export type EndPointValues = EndPointType[EndPointKeys];
 
-//
-// const aTest: EndPointValues = EndPoints.staffLogin;
-
 const MoviesAPI: AxiosInstance = axios.create({
   baseURL: MOVIEAPI,
   headers: {
@@ -33,8 +30,7 @@ const MoviesAPI: AxiosInstance = axios.create({
 
 export const getMovieAPI = (): AxiosInstance => {
   if (!MoviesAPI) {
-    throw new Error("No ICS API found");
+    throw new Error("No Movies API found");
   }
   return MoviesAPI;
 };
-// https://api.themoviedb.org/3/tv/top_rated?api_key=4e0d07555e20e0345f6bd12869b2604e&language=en-US&page=1

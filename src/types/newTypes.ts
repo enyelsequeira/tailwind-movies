@@ -224,5 +224,47 @@ export interface FavoriteMovies {
   vote_average: string;
   vote_count: string;
 }
-// map((movie) => movie.movieId)
-//                   .includes(id),
+
+export type MovieInfoProps = {
+  tagline: string;
+  runtime: number;
+  genres?: Genre[];
+  homepage: string;
+  imdb_id: string;
+  vote_average: number;
+  vote_count: number;
+  release_date: string;
+  overview: string;
+  backdrop_path: string;
+  poster_path: string;
+  title: string;
+  spoken_languages: Languages[];
+  id: number;
+  videos: Videos;
+  credits: Credits;
+
+  isShow?: string;
+  userId?: string;
+};
+
+export interface Languages {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+export interface Movie {
+  adult: boolean;
+  backdrop_path: string;
+  genres_ids?: number[];
+  id: number;
+  original_language: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}

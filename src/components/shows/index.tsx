@@ -15,11 +15,11 @@ const Shows = () => {
       </Text>
       <div className="h-full">
         <div className="grid grid-cols-3 gap-4">
-          {error && (
+          {error ? (
             <Text size="h2" className="col-span-3">
               Error could not load tv shows
             </Text>
-          )}
+          ) : null}
           {shows &&
             shows?.results.slice(0, 6).map((d) => {
               return (

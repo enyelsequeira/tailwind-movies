@@ -1,47 +1,29 @@
 "use client";
-import { Credits, FavoriteMovies, Genre, Videos } from "@/types/newTypes";
+import { FavoriteMovies, MovieInfoProps } from "@/types/newTypes";
 import Text from "../ui/typography";
 import ClientCircle from "../circle";
 import Button from "../ui/button";
 import {
   IconBadge4k,
-  IconClock,
+  IconClockHour12,
+  IconClockRecord,
   IconHeart,
   IconHeartFilled,
   IconLink,
 } from "@tabler/icons-react";
 import GoBack from "../back-button";
 import ModalComponentClient from "../modal/modal-component-client";
-import { Languages } from "@/types/types";
 import { useQueryClient } from "@tanstack/react-query";
 import clsx from "clsx";
 import { toast } from "react-toastify";
 import {
   useGetFavoriteMovies,
+  useGetWatchLater,
   useToggleFavorite,
+  useToggleWatchLater,
 } from "@/hooks/useFavoriteList";
 import Genres from "./genres";
 import Cast from "./cast";
-
-type Props = {
-  tagline: string;
-  runtime: number;
-  genres?: Genre[];
-  homepage: string;
-  imdb_id: string;
-  vote_average: number;
-  vote_count: number;
-  release_date: string;
-  overview: string;
-  backdrop_path: string;
-  poster_path: string;
-  title: string;
-  spoken_languages: Languages[];
-  id: number;
-  videos: Videos;
-  credits: Credits;
-  userId: string;
-};
 
 const MovieInfo = ({
   title,
@@ -59,14 +41,69 @@ const MovieInfo = ({
   credits,
   genres,
   userId,
-}: Props) => {
+  isShow,
+}: MovieInfoProps) => {
   const queryClient = useQueryClient();
-  const { data } = useGetFavoriteMovies({ userId });
+  const { data } = useGetFavoriteMovies({ userId: userId as string });
+  const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
   const isMovieFavorited =
     data?.some((movie: FavoriteMovies) => movie.movieId === id) ?? false;
 
+  const isMovieWatchLater =
+    watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id) ??
+    false;
+
   const { mutate } = useToggleFavorite();
+  const watchLater = useToggleWatchLater();
+  const movieProps = {
+    backdrop_path,
+    homepage,
+    title,
+    movieId: id,
+    original_title: title,
+    popularity: String(vote_average),
+    poster_path: backdrop_path,
+    tagline,
+    vote_average: String(vote_average),
+    vote_count: String(vote_average),
+    userId: userId as string,
+  };
+
+  const watchLaterFn = () => {
+    if (!userId) {
+      toast.error("Please login to add to watch later list", {
+        hideProgressBar: true,
+        pauseOnFocusLoss: false,
+        theme: "colored",
+        autoClose: 2000,
+      });
+      return;
+    }
+    watchLater.mutate(
+      { movieProps },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["watchLaterMovies"],
+          });
+          isMovieWatchLater
+            ? toast.success("Movie removed from watch later", {
+                hideProgressBar: true,
+                pauseOnFocusLoss: false,
+                theme: "colored",
+                autoClose: 2000,
+              })
+            : toast.success("Movie added to watch later", {
+                hideProgressBar: true,
+                pauseOnFocusLoss: false,
+                theme: "colored",
+                autoClose: 2000,
+              });
+        },
+      }
+    );
+  };
 
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
@@ -112,70 +149,69 @@ const MovieInfo = ({
           <ClientCircle average={vote_average} />
         </div>
         <div className="flex flex-col justify-end space-y-8">
-          <button
-            onClick={() => {
-              if (!userId) {
-                toast.error("Please login to add to favorite", {
-                  hideProgressBar: true,
-                  pauseOnFocusLoss: false,
-                  theme: "colored",
-                  autoClose: 2000,
-                });
-                return;
-              }
-              mutate(
-                {
-                  movieProps: {
-                    backdrop_path,
-                    homepage,
-                    title,
-                    movieId: id,
-                    original_title: title,
-                    popularity: String(vote_average),
-                    poster_path: backdrop_path,
-                    tagline,
-                    vote_average: String(vote_average),
-                    vote_count: String(vote_average),
-                    userId: userId,
-                  },
-                },
-                {
-                  onSuccess: () => {
-                    queryClient.invalidateQueries({
-                      queryKey: ["favoriteMovies"],
-                    });
-                    isMovieFavorited
-                      ? toast.success("Movie removed from favorites", {
-                          hideProgressBar: true,
-                          pauseOnFocusLoss: false,
-                          theme: "colored",
-                          autoClose: 2000,
-                        })
-                      : toast.success("Movie added to favorites", {
-                          hideProgressBar: true,
-                          pauseOnFocusLoss: false,
-                          theme: "colored",
-                          autoClose: 2000,
-                        });
-                  },
+          {isShow ? null : (
+            <button
+              onClick={() => {
+                if (!userId) {
+                  toast.error("Please login to add to favorite", {
+                    hideProgressBar: true,
+                    pauseOnFocusLoss: false,
+                    theme: "colored",
+                    autoClose: 2000,
+                  });
+                  return;
                 }
-              );
-            }}
-            className={clsx("border w-fit  border-black/10 rounded-md", {
-              "bg-red-400": isMovieFavorited,
-              "bg-white": !isMovieFavorited,
-            })}
-          >
-            {isMovieFavorited ? (
-              <IconHeartFilled className="text-red-200" />
-            ) : (
-              <IconHeart className="text-blue-500" />
-            )}
-          </button>
-          <Button variant="primary">
-            <Text>Remove WatchList</Text>
-            <IconClock />
-          </Button>
+                mutate(
+                  { movieProps },
+                  {
+                    onSuccess: () => {
+                      queryClient.invalidateQueries({
+                        queryKey: ["favoriteMovies"],
+                      });
+                      isMovieFavorited
+                        ? toast.success("Movie removed from favorites", {
+                            hideProgressBar: true,
+                            pauseOnFocusLoss: false,
+                            theme: "colored",
+                            autoClose: 2000,
+                          })
+                        : toast.success("Movie added to favorites", {
+                            hideProgressBar: true,
+                            pauseOnFocusLoss: false,
+                            theme: "colored",
+                            autoClose: 2000,
+                          });
+                    },
+                  }
+                );
+              }}
+              className={clsx("border w-fit  border-black/10 rounded-md", {
+                "bg-red-400": isMovieFavorited,
+                "bg-white": !isMovieFavorited,
+              })}
+            >
+              {isMovieFavorited ? (
+                <IconHeartFilled className="text-red-200" />
+              ) : (
+                <IconHeart className="text-blue-500" />
+              )}
+            </button>
+          )}
+          {isShow ? null : (
+            <button
+              onClick={watchLaterFn}
+              className={clsx("border w-fit  border-black/10 rounded-md", {
+                "bg-red-400": isMovieWatchLater,
+                "bg-white": !isMovieWatchLater,
+              })}
+            >
+              {isMovieWatchLater ? (
+                <IconClockRecord className="text-red-200" />
+              ) : (
+                <IconClockHour12 className="text-blue-500" />
+              )}
+            </button>
+          )}
         </div>
       </div>
       <Genres genres={genres} />

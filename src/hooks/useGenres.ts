@@ -1,7 +1,9 @@
-import { GenresData } from "@/types/types";
 import { EndPoints, getMovieAPI } from "@/services/API";
 import { useQuery } from "@tanstack/react-query";
-
+export interface GenresData {
+  id: number;
+  name: string;
+}
 type Data = {
   genres: GenresData[];
 };
