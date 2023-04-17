@@ -5,6 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import {
   IconBrandFacebook,
   IconBrandGithub,
+  IconBrandGoogle,
   IconBrandTwitter,
   IconX,
 } from "@tabler/icons-react";
@@ -89,8 +90,11 @@ export default function SignInModal({ open, setOpen }: Props) {
                 <div className="px-4">
                   <div>
                     <div className="mt-4 grid grid-cols-3 gap-3">
-                      <Button className={ButtonIcons}>
-                        <IconBrandFacebook />
+                      <Button
+                        className={ButtonIcons}
+                        onClick={() => signIn("google")}
+                      >
+                        <IconBrandGoogle />
                       </Button>
                       <Button className={ButtonIcons}>
                         <IconBrandTwitter />

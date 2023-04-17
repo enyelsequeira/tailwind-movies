@@ -23,3 +23,12 @@ const ProfilePage = async ({ params: { profile } }: Props) => {
 };
 
 export default ProfilePage;
+// async session({ session, user, token, ...props }) {
+//       console.log({ TESTIONG: session.user });
+//       if (session.user) {
+//         // console.log({ TESTINGTHISNOW: session.user, HELLOWNOW: user });
+//         (session.user.id = token.sub as string),
+//           (session.user.email = token.email as string);
+//       }
+//       return session;
+//     },

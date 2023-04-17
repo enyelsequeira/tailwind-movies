@@ -11,11 +11,13 @@ import Layout from "@/components/layout-client";
 const alegreya = Alegreya({
   variable: "--title",
   weight: ["400", "700", "900"],
+  subsets: ["latin-ext"],
 });
 
 const sourceSans = Source_Sans_Pro({
   variable: "--body",
   weight: ["200", "400", "600", "700", "300", "900"],
+  subsets: ["latin-ext"],
 });
 
 export default async function RootLayout({
