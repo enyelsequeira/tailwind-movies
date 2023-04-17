@@ -10,6 +10,7 @@ export const EndPoints = {
   getMovieInfo: "movie",
   generalMovie: "movie",
   shows: `tv/top_rated?api_key=${APIKEY}&language=en-US`,
+  search: `/search/multi?api_key=${APIKEY}`,
 } as const;
 
 // create a types out of the object
