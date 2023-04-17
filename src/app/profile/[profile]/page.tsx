@@ -1,4 +1,8 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import FavoriteMovies from "@/components/profile/favorites";
+import WatchllaterMovies from "@/components/profile/watch-later";
+import Text from "@/components/ui/typography";
+import { getFavoriteMovies } from "@/hooks/useFavoriteList";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -13,22 +17,24 @@ const ProfilePage = async ({ params: { profile } }: Props) => {
   if (!session) {
     redirect("/");
   }
-  const res = await axios.get("http://localhost:3000/api/movie", {
-    params: {
-      profile,
-    },
-  });
-  console.log({ FRONTEND: res.data });
-  return <div>HELLO WORLD</div>;
+
+  // console.log({ FRONTEND: res.data });
+  return (
+    <div className="border-2 border-red-500 min-h-screen flex flex-col gap-y-3  p-3">
+      <section>
+        <Text size={"h1"} className="col-span-4  my-2">
+          Favorite Movies
+        </Text>
+        <FavoriteMovies profile={profile} />
+      </section>
+      <section>
+        <Text size={"h1"} className="col-span-4 my-2">
+          Watch Later Movies{" "}
+        </Text>
+        <WatchllaterMovies profile={profile} />
+      </section>
+    </div>
+  );
 };
 
 export default ProfilePage;
-// async session({ session, user, token, ...props }) {
-//       console.log({ TESTIONG: session.user });
-//       if (session.user) {
-//         // console.log({ TESTINGTHISNOW: session.user, HELLOWNOW: user });
-//         (session.user.id = token.sub as string),
-//           (session.user.email = token.email as string);
-//       }
-//       return session;
-//     },

@@ -107,7 +107,7 @@ const MovieInfo = ({
 
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
-      <div className="mt-5  border-red-900  flex flex-col items-center md:items-center">
+      <div className="mt-5 flex flex-col items-center md:items-center">
         <Text size="h3" className="md:tracking-wider text-center">
           {title}
         </Text>
