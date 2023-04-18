@@ -54,6 +54,7 @@ export async function POST(req: Request) {
         movieId: movieProps.movieId,
       },
     });
+    console.log({ movieIsFavorited });
     if (movieIsFavorited) {
       const res = await prisma?.favoriteMovie.delete({
         where: {
@@ -63,6 +64,7 @@ export async function POST(req: Request) {
           },
         },
       });
+      console.log({ res });
       const message = "Movie Removed from favorites";
 
       return NextResponse.json(message);
