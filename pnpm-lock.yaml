@@ -12,7 +12,7 @@ dependencies:
     version: 2.0.17(react@18.2.0)
   '@next-auth/prisma-adapter':
     specifier: ^1.0.5
-    version: 1.0.5(@prisma/client@4.12.0)(next-auth@4.22.0)
+    version: 1.0.5(@prisma/client@4.12.0)(next-auth@4.22.1)
   '@next/codemod':
     specifier: 13.2.4
     version: 13.2.4(@babel/preset-env@7.21.4)
@@ -39,7 +39,7 @@ dependencies:
     version: 1.2.1
   cva:
     specifier: npm:class-variance-authority@^0.5.1
-    version: /class-variance-authority@0.5.1(typescript@5.0.3)
+    version: /class-variance-authority@0.5.2(typescript@5.0.3)
   framer-motion:
     specifier: ^10.10.0
     version: 10.10.0(react-dom@18.2.0)(react@18.2.0)
@@ -47,8 +47,8 @@ dependencies:
     specifier: 13.3.0
     version: 13.3.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
   next-auth:
-    specifier: ^4.22.0
-    version: 4.22.0(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^4.22.1
+    version: 4.22.1(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0)
   next-seo:
     specifier: ^6.0.0
     version: 6.0.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
@@ -1496,14 +1496,14 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@next-auth/prisma-adapter@1.0.5(@prisma/client@4.12.0)(next-auth@4.22.0):
+  /@next-auth/prisma-adapter@1.0.5(@prisma/client@4.12.0)(next-auth@4.22.1):
     resolution: {integrity: sha512-VqMS11IxPXrPGXw6Oul6jcyS/n8GLOWzRMrPr3EMdtD6eOalM6zz05j08PcNiis8QzkfuYnCv49OvufTuaEwYQ==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3'
       next-auth: ^4
     dependencies:
       '@prisma/client': 4.12.0(prisma@4.12.0)
-      next-auth: 4.22.0(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0)
+      next-auth: 4.22.1(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@next/codemod@13.2.4(@babel/preset-env@7.21.4):
@@ -2334,8 +2334,8 @@ packages:
       static-extend: 0.1.2
     dev: false
 
-  /class-variance-authority@0.5.1(typescript@5.0.3):
-    resolution: {integrity: sha512-J3tAiPbmBhPffsZ6Le3cR4o5hN78XBTst5NwCJJF7hAkZYIDuHQKV03Tb89zMDAxIONmM+DFRooMUCK5nTWpvQ==}
+  /class-variance-authority@0.5.2(typescript@5.0.3):
+    resolution: {integrity: sha512-j7Qqw3NPbs4IpO80gvdACWmVvHiLLo5MECacUBLnJG17CrLpWaQ7/4OaWX6P0IO1j2nvZ7AuSfBS/ImtEUZJGA==}
     peerDependencies:
       typescript: '>= 4.5.5 < 6'
     peerDependenciesMeta:
@@ -4371,8 +4371,8 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
-  /next-auth@4.22.0(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-08+kjnDoE7aQ52O996x6cwA3ffc2CbHIkrCgLYhbE+aDIJBKI0oA9UbIEIe19/+ODYJgpAHHOtJx4izmsgaVag==}
+  /next-auth@4.22.1(next@13.3.0)(nodemailer@6.9.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-NTR3f6W7/AWXKw8GSsgSyQcDW6jkslZLH8AiZa5PQ09w1kR8uHtR9rez/E9gAq/o17+p0JYHE8QjF3RoniiObA==}
     peerDependencies:
       next: ^12.2.5 || ^13
       nodemailer: ^6.6.5
