@@ -1,6 +1,7 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: "jit",
-  purge: [
+  content: [
+    "./src/app/**/*.{js,ts,jsx,tsx}",
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/layout/**/*.{js,ts,jsx,tsx}",
@@ -9,10 +10,17 @@ module.exports = {
   darkMode: "class", // or 'media' or 'class'
   theme: {
     fontFamily: {
-      title: ["Alegreya", "serif"],
-      body: ["Source Sans Pro", "serif"],
+      title: "var(--title)",
+      body: "var(--body)",
     },
     extend: {
+      keyframes: {
+        shimmer: {
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
+      },
       animation: {
         bounce200: "bounce 1s infinite 200ms",
         bounce400: "bounce 1s infinite 400ms",
@@ -53,5 +61,5 @@ module.exports = {
       lineClamp: ["hover"],
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [],
 };

@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, forwardRef } from "react";
-import cn from "classnames"
+import { VariantProps, cva } from "cva";
+import { mergeClasses } from "../helpers";
 enum Component {
   p,
   h1,
@@ -8,40 +9,49 @@ enum Component {
   h4,
   h5,
   h6,
-  span
-}
-export interface ITypography extends ComponentPropsWithoutRef<'p'>, ComponentPropsWithoutRef<"h1"> {
-  as?: keyof typeof Component,
-  component?: keyof typeof Component,
-  resetStyles?: boolean,
-
+  span,
 }
 
+export const textStyles = cva("", {
+  variants: {
+    size: {
+      h1: "text-4xl font-bold font-title",
+      h2: "text-3xl font-bold font-title",
+      h3: "text-2xl font-bold font-title",
+      h4: "text-xl font-medium font-title",
+      h5: "text-lg font-medium font-title",
+      base: "text-base font-body",
+    },
+  },
+  defaultVariants: {
+    size: "base",
+  },
+});
+export interface TextProps extends VariantProps<typeof textStyles> {}
 
-const Typography = forwardRef<HTMLDivElement, ITypography>(
+export interface TypographyProps
+  extends TextProps,
+    ComponentPropsWithoutRef<"p">,
+    ComponentPropsWithoutRef<"h1"> {
+  as?: keyof typeof Component;
+  component?: keyof typeof Component;
+}
+
+const Text = forwardRef<HTMLDivElement, TypographyProps>(
   (props, ref): JSX.Element => {
-    const { as, component = "p", className, children, resetStyles, ...rest } = props;
+    const { as, component = "p", className, children, size, ...rest } = props;
     const Element = as || component;
 
-    const rootClass = cn({
-      'text-4xl font-bold font-title': Element === 'h1' && !resetStyles,
-      'text-3xl font-bold font-title': Element === 'h2' && !resetStyles,
-      'text-2xl font-bold font-title': Element === 'h3' && !resetStyles,
-      'text-xl font-medium font-title': Element === 'h4' && !resetStyles,
-      'text-lg font-medium font-title': Element === 'h5' && !resetStyles,
-      'text-lg font-base font-title dark:text-white text-black': Element === 'h6' && !resetStyles,
-      'text-base font-body': Element === 'p' && !resetStyles,
-    },
-      className
-    );
-
     return (
-      <Element ref={ref} className={rootClass} {...rest}>
+      <Element
+        ref={ref}
+        className={mergeClasses(textStyles({ size }), className)}
+        {...rest}
+      >
         {children}
-
       </Element>
-    )
+    );
   }
-)
+);
 
-export default Typography
+export default Text;

@@ -1,44 +1,104 @@
-import { searchMovie } from "@/features/currentGenreOrCategory/CurrentGenreOrCategory";
-import { KeyboardEvent } from "react";
-import { useState, useEffect } from "react";
-import { RootState } from "@/app/rootReducer";
+"use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from 'next/router';
+import useDebounce from "@/hooks/useDebouncedState";
+import useSearch from "@/hooks/useSeach";
+import { useRef, useState } from "react";
+import { match } from "ts-pattern";
+import { XMarkIcon } from "@heroicons/react/20/solid";
+import Link from "next/link";
+import { useOnClickOutside } from "@/hooks/ useOnClickOutside";
 
-const Search = () => {
-  const [query, setQuery] = useState("")
-  const { searchQuery } = useSelector((state: RootState) => state.currentGenreOrCategory);
-  const location = useRouter()
+const SearchInput = () => {
+  const [value, setValue] = useState<string>();
 
-  const dispatch = useDispatch();
+  const debouncedValue = useDebounce(value, 500);
+  const { searchedMovies } = useSearch(debouncedValue as string);
+  const ref = useRef(null);
 
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      dispatch(searchMovie(query));
-    }
+  const handleSelectItem = () => {
+    setValue("");
   };
-  // const onClickIcon = ()
-  // console.log(searchQuery);
 
-  useEffect(() => {
-    // console.log(query)
-    setQuery(searchQuery)
-  }, [searchQuery])
+  const handleClickOutside = () => {
+    setValue("");
+  };
 
+  useOnClickOutside(ref, handleClickOutside);
 
   return (
-    <div className="flex  border-dark-background-secondary dark:border-light-background-primary rounded-md w-full md:w-2/4 mt-14 md:mt-0">
-      <input type="text" className="px-4 py-2 w-full  rounded-md" placeholder={location.pathname !== "/" ? "Can't search " : "Search Movie"} onKeyDown={handleKeyDown} disabled={location.pathname !== "/"} value={query} onChange={(e) => setQuery(e.target.value)} />
-      {/* <button className="flex items-center justify-center px-4 border-l" onClick={(e) => handleKeyDown(e)}>
-        <svg className="w-6 h-6 text-gray-600" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24">
-          <path
-            d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z" />
-        </svg>
-      </button> */}
+    <div className="relative flex flex-1 max-w-full  mt-2">
+      <div className="relative mt-1 w-full">
+        <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none  sm:text-sm">
+          <input
+            className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 outline-none dark:bg-dark-background-primary dark:text-white"
+            onChange={(event) => setValue(event.target.value)}
+            value={value}
+            placeholder="Search..."
+          />
+          {value && value?.length > 0 && (
+            <button
+              className="absolute inset-y-0 right-0 flex items-center pr-2"
+              onClick={() => setValue("")}
+            >
+              <XMarkIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            </button>
+          )}
+        </div>
+        <>
+          {value && value?.length > 0 && (
+            <ul
+              ref={ref}
+              className="absolute mt-2  max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm space-y-2 flex flex-col"
+            >
+              {searchedMovies?.results ? (
+                <>
+                  {searchedMovies?.results?.map((movie, i) => {
+                    return (
+                      <li
+                        key={i}
+                        value={i}
+                        className={"px-2 text-base  text-black font-body py-1"}
+                        onClick={handleSelectItem}
+                      >
+                        {match(movie)
+                          .with({ media_type: "tv" }, () => (
+                            <Link href={`/shows/${movie.id}`}>
+                              {movie.name}
+                            </Link>
+                          ))
+                          .with({ media_type: "movie" }, () => (
+                            <Link href={`/movies/${movie.id}`}>
+                              {movie.original_title}
+                            </Link>
+                          ))
+                          .with({ media_type: "person" }, () => (
+                            <Link
+                              href={{
+                                pathname: "/cast",
+                                query: { id: movie.id },
+                              }}
+                            >
+                              {movie.name}
+                            </Link>
+                          ))
+                          .otherwise(() => (
+                            <p>Nothing was found </p>
+                          ))}
+                      </li>
+                    );
+                  })}
+                </>
+              ) : (
+                <div className="text-center py-2 font-bold font-title">
+                  NO MOVIES TRY AGAIN
+                </div>
+              )}
+            </ul>
+          )}
+        </>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default SearchInput;
