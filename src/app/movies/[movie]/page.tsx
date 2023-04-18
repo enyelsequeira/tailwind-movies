@@ -30,6 +30,9 @@ export default async function Page({
         <Carrousel images={images} />
         {/* <MovieInfo userId={userId?.user?.id as string} {...movieInfo} /> */}
       </Suspense>
+      <Suspense fallback={<Loader />}>
+        <MovieInfo userId={userId?.user?.id as string} {...movieInfo} />
+      </Suspense>
       <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
         <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">
           Recommendations
