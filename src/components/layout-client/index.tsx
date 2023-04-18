@@ -119,13 +119,12 @@ const Layout = ({ children, session }: Props) => {
 
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 <DarkModeBtn />
-
                 {/* Separator */}
                 <div
                   className="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
                   aria-hidden="true"
                 />
-                {session?.user?.id && session.user.email ? (
+                {/* {session?.user?.id && session.user.email ? (
                   <Menu as="div" className="relative">
                     <Menu.Button className="-m-1.5 flex items-center p-1.5">
                       <span className="sr-only">Open user menu</span>
@@ -188,8 +187,8 @@ const Layout = ({ children, session }: Props) => {
                   <Button variant={"primary"} onClick={() => setOpen(!open)}>
                     Sign in
                   </Button>
-                )}
-
+                )} */}{" "}
+                <Button variant={"primary"}>Coming Soon</Button>
                 <SignInModal open={open} setOpen={setOpen} />
               </div>
             </div>
