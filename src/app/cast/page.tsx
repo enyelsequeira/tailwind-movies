@@ -11,6 +11,8 @@ import Text from "@/components/ui/typography";
 import Movie from "@/components/movie";
 import { IconMoodSadFilled } from "@tabler/icons-react";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
+import Loader from "@/components/loader";
 
 const CastPage = async ({ searchParams }: { searchParams: { id: string } }) => {
   const queryClient = getQueryClient();
@@ -31,7 +33,9 @@ const CastPage = async ({ searchParams }: { searchParams: { id: string } }) => {
   return (
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
       <Hydrate state={dehydratedState}>
-        <ClientCast />
+        <Suspense fallback={<Loader />}>
+          <ClientCast />
+        </Suspense>
       </Hydrate>
       <section className="lg:col-span-2 text-white mt-3 px-4 py-2">
         <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">
