@@ -12,8 +12,6 @@ export const authOptions: NextAuthOptions = {
 
   // Configure one or more authentication providers
   pages: {
-    // if theres an error just send them back to the home page
-    error: "/", // Error code passed in query string as ?error=
     signIn: "/",
   },
   adapter: PrismaAdapter(prisma),
