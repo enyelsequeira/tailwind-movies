@@ -66,7 +66,7 @@ const Navigation = () => {
                 ))}
               </ul>
             </li>
-            <li className="mt-auto">
+            {/* <li className="mt-auto">
               <a
                 href="#"
                 className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:text-white text-black"
@@ -77,7 +77,7 @@ const Navigation = () => {
                 />
                 Settings
               </a>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

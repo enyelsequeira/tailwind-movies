@@ -6,26 +6,20 @@ type Params = {
   userId: string;
 };
 export const getFavoriteMovies = async ({ userId }: Params) => {
-  const res = await axios.get<FavoriteMovies[]>(
-    "http://localhost:3000/api/favorite",
-    {
-      params: {
-        userId: userId,
-      },
-    }
-  );
+  const res = await axios.get<FavoriteMovies[]>("/api/favorite", {
+    params: {
+      userId: userId,
+    },
+  });
   return res.data;
 };
 
 export const getWatchLaterMovies = async ({ userId }: Params) => {
-  const res = await axios.get<FavoriteMovies[]>(
-    "http://localhost:3000/api/watchlater",
-    {
-      params: {
-        userId: userId,
-      },
-    }
-  );
+  const res = await axios.get<FavoriteMovies[]>("/api/watchlater", {
+    params: {
+      userId: userId,
+    },
+  });
   return res.data;
 };
 
@@ -73,7 +67,7 @@ type param = {
 };
 const toggleFav = async (param: param) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/favorite", {
+    const response = await axios.post("/api/favorite", {
       movieProps: param.movieProps,
     });
     return response;
@@ -95,7 +89,7 @@ export const useToggleFavorite = () => {
 
 const toggleWatchlater = async (param: param) => {
   try {
-    const response = await axios.post("http://localhost:3000/api/watchlater", {
+    const response = await axios.post("/api/watchlater", {
       movieProps: param.movieProps,
     });
     return response;
