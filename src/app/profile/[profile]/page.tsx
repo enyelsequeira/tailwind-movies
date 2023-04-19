@@ -18,9 +18,8 @@ const ProfilePage = async ({ params: { profile } }: Props) => {
     redirect("/");
   }
 
-  // console.log({ FRONTEND: res.data });
   return (
-    <div className="border-2 border-red-500 min-h-screen flex flex-col gap-y-3  p-3">
+    <div className=" min-h-screen flex flex-col gap-y-3  p-3">
       <section>
         <Text size={"h1"} className="col-span-4  my-2">
           Favorite Movies

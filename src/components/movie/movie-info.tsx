@@ -24,7 +24,6 @@ import {
 } from "@/hooks/useFavoriteList";
 import Genres from "./genres";
 import Cast from "./cast";
-import Loader from "../loader";
 
 const MovieInfo = ({
   title,
