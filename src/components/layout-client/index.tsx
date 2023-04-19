@@ -1,10 +1,7 @@
 "use client";
 
 import { Fragment, ReactNode, useState } from "react";
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { IconCalendar, IconMenu, IconX } from "@tabler/icons-react";
 import { Dialog, Menu, Transition } from "@headlessui/react";

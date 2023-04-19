@@ -15,6 +15,7 @@ export async function GET(req: Request) {
         userId: userId,
       },
     });
+
     return NextResponse.json(favoriteMovies);
   } catch (error) {
     return NextResponse.json({

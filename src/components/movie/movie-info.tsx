@@ -52,6 +52,8 @@ const MovieInfo = ({
   const isMovieFavorited =
     data?.some((movie: FavoriteMovies) => movie.movieId === id) ?? false;
 
+  console.log({ MOVIESFAVOIRED: data, isMovieFavorited });
+
   const isMovieWatchLater =
     watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id) ??
     false;
@@ -150,7 +152,7 @@ const MovieInfo = ({
           </Text>
           <ClientCircle average={vote_average} />
         </div>
-        {/* <div className="flex flex-col justify-end space-y-8">
+        <div className="flex flex-col justify-end space-y-8">
           {isShow ? null : (
             <button
               onClick={() => {
@@ -214,7 +216,7 @@ const MovieInfo = ({
               )}
             </button>
           )}
-        </div> */}
+        </div>
       </div>
       <Genres genres={genres} />
       <Cast credits={credits} />
