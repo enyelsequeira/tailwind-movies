@@ -218,8 +218,8 @@ const MovieInfo = ({
           )}
         </div>
       </div> */}
-      <Genres genres={genres} />
-      <Cast credits={credits} />
+      {/* <Genres genres={genres} />
+      <Cast credits={credits} /> */}
 
       <div className="flex flex-row gap-1 flex-wrap lg:flex-row justify-between items-baseline  my-2">
         <div

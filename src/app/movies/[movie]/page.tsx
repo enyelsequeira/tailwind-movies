@@ -44,9 +44,6 @@ export default async function Page({
     <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
       <Suspense fallback={<Loader />}>
         <Carrousel images={images} />
-        {/* <MovieInfo userId={userId?.user?.id as string} {...movieInfo} /> */}
-      </Suspense>
-      <Suspense fallback={<Loader />}>
         <MovieInfo userId={userId?.user?.id as string} {...movieInfo} />
       </Suspense>
       <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
