@@ -50,12 +50,13 @@ const MovieInfo = ({
   });
   const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
-  const isMovieFavorited =
-    data?.some((movie: FavoriteMovies) => movie.movieId === id) ?? false;
+  const isMovieFavorited = data
+    ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
+    : false;
 
-  const isMovieWatchLater =
-    watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id) ??
-    false;
+  const isMovieWatchLater = data
+    ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
+    : false;
 
   const { mutate } = useToggleFavorite();
   const watchLater = useToggleWatchLater();
@@ -144,7 +145,7 @@ const MovieInfo = ({
         </Text>
       </div>
       {/* rating and buttons */}
-      <div className="flex flex-between space-x-16  md:space-x-48 ">
+      {/* <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
           <Text size="h3" className="my-2">
             Rating
@@ -216,7 +217,7 @@ const MovieInfo = ({
             </button>
           )}
         </div>
-      </div>
+      </div> */}
       <Genres genres={genres} />
       <Cast credits={credits} />
 
