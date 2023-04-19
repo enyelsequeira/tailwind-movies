@@ -2,8 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import FavoriteMovies from "@/components/profile/favorites";
 import WatchllaterMovies from "@/components/profile/watch-later";
 import Text from "@/components/ui/typography";
-import { getFavoriteMovies } from "@/hooks/useFavoriteList";
-import axios from "axios";
+import { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
@@ -37,3 +36,12 @@ const ProfilePage = async ({ params: { profile } }: Props) => {
 };
 
 export default ProfilePage;
+
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const session = await getServerSession(authOptions);
+
+  return {
+    title: `Profile Page of ${session?.user?.name || session?.user?.id}`,
+    description: `Profile page where you will find favorite movies and watch later movis as well as editing your profile`,
+  };
+}

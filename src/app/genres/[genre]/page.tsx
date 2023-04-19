@@ -4,6 +4,7 @@ import Loader from "@/components/loader";
 import Movie from "@/components/movie";
 import Pagination from "@/components/pagination";
 import { useGetMovies } from "@/hooks/useGetMovies";
+import Head from "next/head";
 import { useState } from "react";
 
 export default function Page({ params }) {
@@ -15,6 +16,16 @@ export default function Page({ params }) {
   });
   return (
     <>
+      <Head>
+        <title>Movies with the Genre `${params.genre}`</title>
+        <meta
+          name="description"
+          content="Movies with the Genre `${params.genre}`"
+        >
+          Movies with the Genre `${params.genre}` will be displayed here
+        </meta>
+      </Head>
+
       <div className="px-4 sm:px-6 lg:px-8 border min-h-screen grid lg:grid-cols-2 xl:grid-cols-4 lg:gap-x-3 lg:gap-y-6 py-2 grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 ">
         {isLoading ? (
           <div className="w-full col-span-full flex items-center ">

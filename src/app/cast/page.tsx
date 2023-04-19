@@ -13,6 +13,7 @@ import { IconMoodSadFilled } from "@tabler/icons-react";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import Loader from "@/components/loader";
+import { Metadata } from "next";
 
 const CastPage = async ({ searchParams }: { searchParams: { id: string } }) => {
   const queryClient = getQueryClient();
@@ -64,3 +65,12 @@ const CastPage = async ({ searchParams }: { searchParams: { id: string } }) => {
 };
 
 export default CastPage;
+
+export async function generateMetadata({ searchParams }): Promise<Metadata> {
+  const data = await getPersonInfo(Number(searchParams.id));
+
+  return {
+    title: `Cast  ${data?.name}`,
+    description: `Cast page where you will find information about ${data?.name} such as movies they have been in and more`,
+  };
+}

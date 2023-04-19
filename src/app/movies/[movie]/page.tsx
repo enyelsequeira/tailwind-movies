@@ -13,6 +13,7 @@ import getQueryClient from "@/app/getQueryClient";
 import { getFavoriteMovies } from "@/hooks/useFavoriteList";
 import { getWatchLaterMovies } from "@/hooks/useFavoriteList";
 import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { Metadata } from "next";
 
 export default async function Page({
   params,
@@ -71,4 +72,13 @@ export default async function Page({
       </div>
     </Hydrate>
   );
+}
+
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const data = await fetchMovieInfo(Number(params.movie));
+
+  return {
+    title: `Movie  ${data?.title}`,
+    description: `${data?.overview}`,
+  };
 }

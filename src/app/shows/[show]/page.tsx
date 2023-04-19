@@ -9,6 +9,7 @@ import {
   getTvRecommendations,
 } from "@/hooks/useGetShows";
 import { IconMoodSadFilled } from "@tabler/icons-react";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
 type Params = {
@@ -84,3 +85,12 @@ const ShowInfoPage = async ({ params }: Params) => {
 };
 
 export default ShowInfoPage;
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const showInfo = await getShowInfo(Number(params.show));
+
+  return {
+    title: `Page of  ${showInfo?.name}`,
+    description: `${showInfo?.overview}`,
+  };
+}
