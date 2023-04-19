@@ -48,21 +48,19 @@ const MovieInfo = ({
   const { data, isLoading } = useGetFavoriteMovies({
     userId: userId as string,
   });
-  // const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
+  const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
-  console.log({ returned: data });
-  const isMovieFavorited = false;
-  //   !isLoading && data
-  //     ? Boolean(data.find((movie: FavoriteMovies) => movie?.movieId === id))
-  //     : false;
-  // // const isMovieFavorited = false
+  const isMovieFavorited =
+    data && data
+      ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
+      : false;
 
-  // const isMovieWatchLater = watchLaterMovies
-  //   ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
-  //   : false;
+  const isMovieWatchLater = watchLaterMovies
+    ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
+    : false;
 
   const { mutate } = useToggleFavorite();
-  // const watchLater = useToggleWatchLater();
+  const watchLater = useToggleWatchLater();
   const movieProps = {
     backdrop_path,
     homepage,
@@ -77,40 +75,40 @@ const MovieInfo = ({
     userId: userId as string,
   };
 
-  // const watchLaterFn = () => {
-  //   if (!userId) {
-  //     toast.error("Please login to add to watch later list", {
-  //       hideProgressBar: true,
-  //       pauseOnFocusLoss: false,
-  //       theme: "colored",
-  //       autoClose: 2000,
-  //     });
-  //     return;
-  //   }
-  //   watchLater.mutate(
-  //     { movieProps },
-  //     {
-  //       onSuccess: () => {
-  //         queryClient.invalidateQueries({
-  //           queryKey: ["watchLaterMovies"],
-  //         });
-  //         isMovieWatchLater
-  //           ? toast.success("Movie removed from watch later", {
-  //               hideProgressBar: true,
-  //               pauseOnFocusLoss: false,
-  //               theme: "colored",
-  //               autoClose: 2000,
-  //             })
-  //           : toast.success("Movie added to watch later", {
-  //               hideProgressBar: true,
-  //               pauseOnFocusLoss: false,
-  //               theme: "colored",
-  //               autoClose: 2000,
-  //             });
-  //       },
-  //     }
-  //   );
-  // };
+  const watchLaterFn = () => {
+    if (!userId) {
+      toast.error("Please login to add to watch later list", {
+        hideProgressBar: true,
+        pauseOnFocusLoss: false,
+        theme: "colored",
+        autoClose: 2000,
+      });
+      return;
+    }
+    watchLater.mutate(
+      { movieProps },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["watchLaterMovies"],
+          });
+          isMovieWatchLater
+            ? toast.success("Movie removed from watch later", {
+                hideProgressBar: true,
+                pauseOnFocusLoss: false,
+                theme: "colored",
+                autoClose: 2000,
+              })
+            : toast.success("Movie added to watch later", {
+                hideProgressBar: true,
+                pauseOnFocusLoss: false,
+                theme: "colored",
+                autoClose: 2000,
+              });
+        },
+      }
+    );
+  };
 
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
@@ -203,7 +201,7 @@ const MovieInfo = ({
               )}
             </button>
           )}
-          {/* {isShow ? null : (
+          {isShow ? null : (
             <button
               onClick={watchLaterFn}
               className={clsx("border w-fit  border-black/10 rounded-md", {
@@ -217,7 +215,7 @@ const MovieInfo = ({
                 <IconClockHour12 className="text-blue-500" />
               )}
             </button>
-          )} */}
+          )}
         </div>
       </div>
       <Genres genres={genres} />

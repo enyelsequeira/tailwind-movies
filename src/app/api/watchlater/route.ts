@@ -19,7 +19,7 @@ export async function GET(req: Request) {
     return NextResponse.json(favoriteMovies);
   } catch (error) {
     return NextResponse.json({
-      error: "Sorry watchLater Movies could not be fetched",
+      error: `Sorry something went wrong with getting favorite movies, please try again later :( ${error}`,
     });
   }
 }
@@ -72,8 +72,7 @@ export async function POST(req: Request) {
     }
   } catch (error) {
     return NextResponse.json({
-      error:
-        "Sorry something went wrong with toggling watch later, please try again later :(",
+      error: `Sorry something went wrong with getting favorite movies, please try again later :( ${error}`,
     });
   }
 }

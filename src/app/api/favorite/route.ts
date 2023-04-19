@@ -57,7 +57,6 @@ export async function POST(req: Request) {
         movieId: movieProps.movieId,
       },
     });
-    console.log({ movieIsFavorited });
     if (movieIsFavorited) {
       const res = await prisma?.favoriteMovie.delete({
         where: {
@@ -67,7 +66,6 @@ export async function POST(req: Request) {
           },
         },
       });
-      console.log({ res });
       const message = "Movie Removed from favorites";
 
       return NextResponse.json(message);
@@ -92,8 +90,7 @@ export async function POST(req: Request) {
     }
   } catch (error) {
     return NextResponse.json({
-      error:
-        "Sorry something went wrong with toggling favorite movie, please try again later :(",
+      error: `Sorry something went wrong with getting favorite movies, please try again later :( ${error}`,
     });
   }
 }
