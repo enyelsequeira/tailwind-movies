@@ -6,7 +6,7 @@ import {
   MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import clsx from "clsx";
-import { IconCalendar, IconX } from "@tabler/icons-react";
+import { IconCalendar, IconMenu, IconX } from "@tabler/icons-react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import MobileNavigation from "../navigation/mobile";
 import Navigation from "../navigation/navigation";
@@ -105,7 +105,7 @@ const Layout = ({ children, session }: Props) => {
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
-              <IconCalendar className="h-6 w-6" aria-hidden="true" />
+              <IconMenu className="h-6 w-6" aria-hidden="true" />
             </button>
 
             {/* Separator */}
