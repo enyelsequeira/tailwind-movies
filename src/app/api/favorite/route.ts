@@ -19,9 +19,7 @@ export async function GET(req: Request) {
 
     return NextResponse.json(favoriteMovies);
   } catch (error) {
-    return NextResponse.json({
-      error,
-    });
+    return NextResponse.json(error);
   }
 }
 
