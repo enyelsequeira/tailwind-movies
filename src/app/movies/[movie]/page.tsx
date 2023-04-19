@@ -28,47 +28,47 @@ export default async function Page({
   );
   const userId = await getServerSession(authOptions);
 
-  // const queryClient = getQueryClient();
-  // await queryClient.prefetchQuery({
-  //   queryKey: ["favoriteMovies"],
-  //   queryFn: () => getFavoriteMovies({ userId: userId?.user?.id as string }),
-  // });
-  // await queryClient.prefetchQuery({
-  //   queryKey: ["watchLaterMovies"],
-  //   queryFn: () => getWatchLaterMovies({ userId: userId?.user?.id as string }),
-  // });
-  // const dehydratedState = dehydrate(queryClient);
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["favoriteMovies"],
+    queryFn: () => getFavoriteMovies({ userId: userId?.user?.id as string }),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["watchLaterMovies"],
+    queryFn: () => getWatchLaterMovies({ userId: userId?.user?.id as string }),
+  });
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    // <Hydrate state={dehydratedState}>
-    <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
-      <Suspense fallback={<Loader />}>
-        <Carrousel images={images} />
-        <MovieInfo userId={userId?.user?.id as string} {...movieInfo} />
-      </Suspense>
-      <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
-        <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">
-          Recommendations
-        </Text>
-        <div className="grid lg:grid-cols-4 gap-3">
-          {movieRecommendations.length ? (
-            <>
-              {movieRecommendations.map((movie) => (
-                <Movie key={movie.id} tvShows={false} {...movie} />
-              ))}
-            </>
-          ) : (
-            <Text
-              size="h1"
-              className="py-4 text-center col-span-full flex flex-col items-center justify-center text-black dark:text-white"
-            >
-              NO MOVIES FOUND
-              <IconMoodSadFilled className="dark:text-red-50 text-black" />
-            </Text>
-          )}
+    <Hydrate state={dehydratedState}>
+      <div className="border min-h-screen grid lg:grid-cols-2  lg:gap-x-2">
+        <Suspense fallback={<Loader />}>
+          <Carrousel images={images} />
+          <MovieInfo userId={userId?.user?.id as string} {...movieInfo} />
+        </Suspense>
+        <div className="lg:col-span-2 text-white mt-3 px-4 py-2">
+          <Text size="h2" className="my-4 text-4xl  text-black dark:text-white">
+            Recommendations
+          </Text>
+          <div className="grid lg:grid-cols-4 gap-3">
+            {movieRecommendations.length ? (
+              <>
+                {movieRecommendations.map((movie) => (
+                  <Movie key={movie.id} tvShows={false} {...movie} />
+                ))}
+              </>
+            ) : (
+              <Text
+                size="h1"
+                className="py-4 text-center col-span-full flex flex-col items-center justify-center text-black dark:text-white"
+              >
+                NO MOVIES FOUND
+                <IconMoodSadFilled className="dark:text-red-50 text-black" />
+              </Text>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-    // </Hydrate>
+    </Hydrate>
   );
 }

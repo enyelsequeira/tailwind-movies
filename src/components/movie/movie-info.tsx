@@ -52,8 +52,9 @@ const MovieInfo = ({
 
   const isMovieFavorited =
     !isLoading && data
-      ? data?.some((movie: FavoriteMovies) => movie?.movieId === id)
+      ? Boolean(data?.find((movie: FavoriteMovies) => movie?.movieId === id))
       : false;
+  // const isMovieFavorited = false
 
   // const isMovieWatchLater = watchLaterMovies
   //   ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
