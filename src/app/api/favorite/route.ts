@@ -19,7 +19,9 @@ export async function GET(req: Request) {
 
     return NextResponse.json(favoriteMovies);
   } catch (error) {
-    return NextResponse.json(error);
+    return NextResponse.json({
+      error: `Sorry something went wrong with getting favorite movies, please try again later :( ${error}`,
+    });
   }
 }
 
