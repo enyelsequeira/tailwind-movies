@@ -118,7 +118,7 @@ const MovieInfo = ({
         <Text size="h4" className="tracking-wide my-5">
           {tagline !== "" ? tagline : "No Tagline"}
         </Text>
-        {/* <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
+        <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
           <div className="relative px-2">
             <Text className="relative">{runtime} Mins</Text>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
@@ -132,9 +132,9 @@ const MovieInfo = ({
               {spoken_languages[0]?.english_name}
             </Text>
           </div>
-        </div> */}
+        </div>
       </div>
-      {/* <div>
+      <div>
         <Text size="h3">Overview </Text>
         <Text
           as="p"
@@ -142,7 +142,7 @@ const MovieInfo = ({
         >
           {overview}
         </Text>
-      </div> */}
+      </div>
       {/* rating and buttons */}
       {/* <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
