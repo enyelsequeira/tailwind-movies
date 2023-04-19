@@ -15,10 +15,11 @@ const Hero = ({ data }: Props) => {
           <Link href={`/movies/${data.id}`} passHref>
             <Image
               fill
-              className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer object-cover object-center "
+              className="rounded-2xl rounded-t-xl rounded-l-xl cursor-pointer object-cover object-center  transition-opacity duration-500 ease-in-out opacity-0"
               src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
               alt={data?.title}
               blurDataURL={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+              onLoadingComplete={(image) => image.classList.remove("opacity-0")}
             />
           </Link>
           <div className="absolute bg-black/40 text-white space-y-1 w-[300px] md:w-auto  rounded-b-2xl bottom-0 p-2 ">

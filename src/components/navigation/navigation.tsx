@@ -20,7 +20,11 @@ const Navigation = () => {
     <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-64 lg:flex-col ">
       {/* Sidebar component, swap this element with another sidebar if you like */}
       <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-light-background-primary dark:bg-dark-background-secondary px-6 pb-4 no-scrollbar">
-        <Link href="/" className="flex h-16 shrink-0 items-center mt-2">
+        <Link
+          href="/"
+          aria-label="go home"
+          className="flex h-16 shrink-0 items-center mt-2"
+        >
           <IconMovie className="w-14 h-14 flex mx-auto py-1" />
         </Link>
         <nav className="flex flex-1 flex-col">
