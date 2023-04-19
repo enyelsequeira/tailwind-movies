@@ -5,8 +5,20 @@ import { IconCalendar, IconChevronRight, IconMovie } from "@tabler/icons-react";
 import Link from "next/link";
 import { sidebarMenu } from "@/constants";
 import { useGenres } from "@/hooks/useGenres";
-export const MobileNavigation = () => {
+import useCategoriesStore, {
+  usePaginationStore,
+} from "@/store/useCategoriesStore";
+import { useRouter } from "next/navigation";
+import { Categories } from "@/hooks/useGetHomePage";
+import { Dispatch, SetStateAction } from "react";
+type Props = {
+  closeDrawer: Dispatch<SetStateAction<boolean>>;
+};
+export const MobileNavigation = ({ closeDrawer }: Props) => {
   const { genres } = useGenres();
+  const setCategory = useCategoriesStore((state) => state.setCategory);
+  const setPage = usePaginationStore((state) => state.setPage);
+  const router = useRouter();
 
   return (
     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-light-background-primary dark:bg-dark-background-secondary px-6 pb-4 ">
@@ -19,6 +31,12 @@ export const MobileNavigation = () => {
             <ul role="list" className="space-y-1">
               {sidebarMenu.map((item) => (
                 <li
+                  onClick={async () => {
+                    router.push("/");
+                    setCategory(item.value as Categories);
+                    setPage(() => 1);
+                    closeDrawer(false);
+                  }}
                   key={item.label}
                   className={clsx(
                     "text-sm font-base font-title dark:text-white text-black transition duration-500 ease-in-out cursor-pointer   text-light-2 py-2 hover:font-semibold hover:text-dark-2 dark:hover:text-light-3"
@@ -41,6 +59,9 @@ export const MobileNavigation = () => {
                   href={`/genres/${genre.id}`}
                   key={genre.name}
                   className={"group flex gap-x-3 p-2 "}
+                  onClick={() => {
+                    closeDrawer(false);
+                  }}
                 >
                   <IconChevronRight className="p-1 text-light bg-light-accent rounded-xl group-hover:text-dark group-hover:bg-orange" />
                   <span className=" font-title dark:text-white text-black  transition duration-500 ease-in-out  text-sm text-light-2 cursor-pointer group-hover:text-dark-2 group-hover:font-semibold dark:hover:text-light-3">

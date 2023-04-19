@@ -87,7 +87,7 @@ const Layout = ({ children, session }: Props) => {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like  mobile*/}
-                  <MobileNavigation />
+                  <MobileNavigation closeDrawer={setSidebarOpen} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>
