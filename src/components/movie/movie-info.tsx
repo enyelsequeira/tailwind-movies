@@ -50,11 +50,12 @@ const MovieInfo = ({
   });
   // const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
-  const isMovieFavorited =
-    !isLoading && data
-      ? Boolean(data?.find((movie: FavoriteMovies) => movie?.movieId === id))
-      : false;
-  // const isMovieFavorited = false
+  console.log({ returned: data });
+  // const isMovieFavorited =
+  //   !isLoading && data
+  //     ? Boolean(data.find((movie: FavoriteMovies) => movie?.movieId === id))
+  //     : false;
+  // // const isMovieFavorited = false
 
   // const isMovieWatchLater = watchLaterMovies
   //   ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
