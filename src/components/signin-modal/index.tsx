@@ -87,7 +87,7 @@ export default function SignInModal({ open, setOpen }: Props) {
                     </span>
                   </Button>
                 </div>
-                <div className="px-4">
+                <div className="px-4 pb-3">
                   <div>
                     <div className="mt-4 grid grid-cols-2 gap-3">
                       <Button
@@ -105,7 +105,7 @@ export default function SignInModal({ open, setOpen }: Props) {
                       </Button>
                     </div>
 
-                    <div className="relative mt-6">
+                    {/* <div className="relative mt-6">
                       <div
                         className="absolute inset-0 flex items-center"
                         aria-hidden="true"
@@ -117,10 +117,10 @@ export default function SignInModal({ open, setOpen }: Props) {
                           Or continue with
                         </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
 
-                  <div className="mt-6">
+                  {/* <div className="mt-6">
                     <form
                       onSubmit={(e) => {
                         e.preventDefault();
@@ -140,7 +140,7 @@ export default function SignInModal({ open, setOpen }: Props) {
                           <input
                             id="email"
                             name="email"
-                            disabled
+                            // disabled
                             placeholder="WORK IN PROGRESS"
                             // type="email"
                             // autoComplete="email"
@@ -153,7 +153,7 @@ export default function SignInModal({ open, setOpen }: Props) {
 
                       <div>
                         <button
-                          disabled
+                          // disabled
                           form="form"
                           type="submit"
                           className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-indigo-600/30"
@@ -162,7 +162,7 @@ export default function SignInModal({ open, setOpen }: Props) {
                         </button>
                       </div>
                     </form>
-                  </div>
+                  </div> */}
                 </div>
                 {/* MORE CONTENT COPULD GO HERE */}
               </Dialog.Panel>
