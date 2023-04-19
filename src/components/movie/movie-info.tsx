@@ -219,7 +219,7 @@ const MovieInfo = ({
       </div> */}
       <Genres genres={genres} />
       <Cast credits={credits} />
-      {/* 
+
       <div className="flex flex-row gap-1 flex-wrap lg:flex-row justify-between items-baseline  my-2">
         <div
           className="flex rounded-lg flex-row justify-between text-lg gap-1"
@@ -254,7 +254,7 @@ const MovieInfo = ({
         </div>
 
         <GoBack />
-      </div> */}
+      </div>
     </section>
   );
 };
