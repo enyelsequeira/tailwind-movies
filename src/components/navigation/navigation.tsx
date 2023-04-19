@@ -54,9 +54,10 @@ const Navigation = () => {
                   Genres
                 </p>
               </div>
-              <ul role="list" className="-mx-2 mt-2 space-y-1">
+              <ul role="link" className="-mx-2 mt-2 space-y-1">
                 {genres?.map((genre) => (
                   <Link
+                    role="link"
                     scroll={true}
                     href={`/genres/${genre.id} `}
                     key={genre.name}
