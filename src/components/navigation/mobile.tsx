@@ -38,7 +38,7 @@ export const MobileNavigation = () => {
             <ul role="list" className="-mx-2 mt-2 space-y-1">
               {genres?.map((genre) => (
                 <Link
-                  href={`/genre/${genre.id}`}
+                  href={`/genres/${genre.id}`}
                   key={genre.name}
                   className={"group flex gap-x-3 p-2 "}
                 >
