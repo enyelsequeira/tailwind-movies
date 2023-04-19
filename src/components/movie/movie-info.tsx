@@ -44,70 +44,70 @@ const MovieInfo = ({
   userId,
   isShow,
 }: MovieInfoProps) => {
-  const queryClient = useQueryClient();
-  const { data, isLoading } = useGetFavoriteMovies({
-    userId: userId as string,
-  });
-  const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
+  // const queryClient = useQueryClient();
+  // const { data, isLoading } = useGetFavoriteMovies({
+  //   userId: userId as string,
+  // });
+  // const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
-  const isMovieFavorited = data
-    ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
-    : false;
+  // const isMovieFavorited = data
+  //   ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
+  //   : false;
 
-  const isMovieWatchLater = watchLaterMovies
-    ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
-    : false;
+  // const isMovieWatchLater = watchLaterMovies
+  //   ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
+  //   : false;
 
-  const { mutate } = useToggleFavorite();
-  const watchLater = useToggleWatchLater();
-  const movieProps = {
-    backdrop_path,
-    homepage,
-    title,
-    movieId: id,
-    original_title: title,
-    popularity: String(vote_average),
-    poster_path: backdrop_path,
-    tagline,
-    vote_average: String(vote_average),
-    vote_count: String(vote_average),
-    userId: userId as string,
-  };
+  // const { mutate } = useToggleFavorite();
+  // const watchLater = useToggleWatchLater();
+  // const movieProps = {
+  //   backdrop_path,
+  //   homepage,
+  //   title,
+  //   movieId: id,
+  //   original_title: title,
+  //   popularity: String(vote_average),
+  //   poster_path: backdrop_path,
+  //   tagline,
+  //   vote_average: String(vote_average),
+  //   vote_count: String(vote_average),
+  //   userId: userId as string,
+  // };
 
-  const watchLaterFn = () => {
-    if (!userId) {
-      toast.error("Please login to add to watch later list", {
-        hideProgressBar: true,
-        pauseOnFocusLoss: false,
-        theme: "colored",
-        autoClose: 2000,
-      });
-      return;
-    }
-    watchLater.mutate(
-      { movieProps },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({
-            queryKey: ["watchLaterMovies"],
-          });
-          isMovieWatchLater
-            ? toast.success("Movie removed from watch later", {
-                hideProgressBar: true,
-                pauseOnFocusLoss: false,
-                theme: "colored",
-                autoClose: 2000,
-              })
-            : toast.success("Movie added to watch later", {
-                hideProgressBar: true,
-                pauseOnFocusLoss: false,
-                theme: "colored",
-                autoClose: 2000,
-              });
-        },
-      }
-    );
-  };
+  // const watchLaterFn = () => {
+  //   if (!userId) {
+  //     toast.error("Please login to add to watch later list", {
+  //       hideProgressBar: true,
+  //       pauseOnFocusLoss: false,
+  //       theme: "colored",
+  //       autoClose: 2000,
+  //     });
+  //     return;
+  //   }
+  //   watchLater.mutate(
+  //     { movieProps },
+  //     {
+  //       onSuccess: () => {
+  //         queryClient.invalidateQueries({
+  //           queryKey: ["watchLaterMovies"],
+  //         });
+  //         isMovieWatchLater
+  //           ? toast.success("Movie removed from watch later", {
+  //               hideProgressBar: true,
+  //               pauseOnFocusLoss: false,
+  //               theme: "colored",
+  //               autoClose: 2000,
+  //             })
+  //           : toast.success("Movie added to watch later", {
+  //               hideProgressBar: true,
+  //               pauseOnFocusLoss: false,
+  //               theme: "colored",
+  //               autoClose: 2000,
+  //             });
+  //       },
+  //     }
+  //   );
+  // };
 
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
@@ -116,10 +116,9 @@ const MovieInfo = ({
           {title}
         </Text>
         <Text size="h4" className="tracking-wide my-5">
-          {" "}
           {tagline !== "" ? tagline : "No Tagline"}
         </Text>
-        <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
+        {/* <div className="flex md:space-x-2 my-2 border-2 border-black dark:border-red-200/25">
           <div className="relative px-2">
             <Text className="relative">{runtime} Mins</Text>
             <span className="divide-x-2 border-[1px] h-4 my-auto rotate-12 border-red-700 absolute top-1 -right-1" />
@@ -133,9 +132,9 @@ const MovieInfo = ({
               {spoken_languages[0]?.english_name}
             </Text>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div>
+      {/* <div>
         <Text size="h3">Overview </Text>
         <Text
           as="p"
@@ -143,7 +142,7 @@ const MovieInfo = ({
         >
           {overview}
         </Text>
-      </div>
+      </div> */}
       {/* rating and buttons */}
       {/* <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
