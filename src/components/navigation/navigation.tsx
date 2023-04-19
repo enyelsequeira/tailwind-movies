@@ -30,7 +30,7 @@ const Navigation = () => {
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
             <li>
-              <ul role="list" className="space-y-1">
+              <ul role="link" className="space-y-1">
                 {sidebarMenu.map((item) => (
                   <li
                     onClick={async () => {
