@@ -24,6 +24,7 @@ import {
 } from "@/hooks/useFavoriteList";
 import Genres from "./genres";
 import Cast from "./cast";
+import Loader from "../loader";
 
 const MovieInfo = ({
   title,
@@ -44,15 +45,13 @@ const MovieInfo = ({
   isShow,
 }: MovieInfoProps) => {
   const queryClient = useQueryClient();
-  const { data } = useGetFavoriteMovies({ userId: userId as string });
+  const { data, isLoading } = useGetFavoriteMovies({
+    userId: userId as string,
+  });
   const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
-
-  console.log({ data, watchLaterMovies });
 
   const isMovieFavorited =
     data?.some((movie: FavoriteMovies) => movie.movieId === id) ?? false;
-
-  console.log({ MOVIESFAVOIRED: data, isMovieFavorited });
 
   const isMovieWatchLater =
     watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id) ??
@@ -108,6 +107,10 @@ const MovieInfo = ({
       }
     );
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
