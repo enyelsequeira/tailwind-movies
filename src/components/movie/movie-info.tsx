@@ -108,10 +108,6 @@ const MovieInfo = ({
     );
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
       <div className="mt-5 flex flex-col items-center md:items-center">
