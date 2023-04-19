@@ -11,6 +11,7 @@ export const getFavoriteMovies = async ({ userId }: Params) => {
       userId: userId,
     },
   });
+  console.log({ RESPONSE: res });
   return res.data;
 };
 
