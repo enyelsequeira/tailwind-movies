@@ -15,11 +15,12 @@ export async function GET(req: Request) {
         userId: userId,
       },
     });
+    console.log({ favoriteMovies });
 
     return NextResponse.json(favoriteMovies);
   } catch (error) {
     return NextResponse.json({
-      error: "Sorry Favorite Movies could not be fetched",
+      error,
     });
   }
 }
