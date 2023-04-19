@@ -144,7 +144,7 @@ const MovieInfo = ({
         </Text>
       </div>
       {/* rating and buttons */}
-      {/* <div className="flex flex-between space-x-16  md:space-x-48 ">
+      <div className="flex flex-between space-x-16  md:space-x-48 ">
         <div>
           <Text size="h3" className="my-2">
             Rating
@@ -154,53 +154,53 @@ const MovieInfo = ({
         <div className="flex flex-col justify-end space-y-8">
           {isShow ? null : (
             <button
-              onClick={() => {
-                if (!userId) {
-                  toast.error("Please login to add to favorite", {
-                    hideProgressBar: true,
-                    pauseOnFocusLoss: false,
-                    theme: "colored",
-                    autoClose: 2000,
-                  });
-                  return;
-                }
-                mutate(
-                  { movieProps },
-                  {
-                    onSuccess: () => {
-                      queryClient.invalidateQueries({
-                        queryKey: ["favoriteMovies"],
-                      });
-                      isMovieFavorited
-                        ? toast.success("Movie removed from favorites", {
-                            hideProgressBar: true,
-                            pauseOnFocusLoss: false,
-                            theme: "colored",
-                            autoClose: 2000,
-                          })
-                        : toast.success("Movie added to favorites", {
-                            hideProgressBar: true,
-                            pauseOnFocusLoss: false,
-                            theme: "colored",
-                            autoClose: 2000,
-                          });
-                    },
-                  }
-                );
-              }}
+              // onClick={() => {
+              //   if (!userId) {
+              //     toast.error("Please login to add to favorite", {
+              //       hideProgressBar: true,
+              //       pauseOnFocusLoss: false,
+              //       theme: "colored",
+              //       autoClose: 2000,
+              //     });
+              //     return;
+              //   }
+              //   mutate(
+              //     { movieProps },
+              //     {
+              //       onSuccess: () => {
+              //         queryClient.invalidateQueries({
+              //           queryKey: ["favoriteMovies"],
+              //         });
+              //         isMovieFavorited
+              //           ? toast.success("Movie removed from favorites", {
+              //               hideProgressBar: true,
+              //               pauseOnFocusLoss: false,
+              //               theme: "colored",
+              //               autoClose: 2000,
+              //             })
+              //           : toast.success("Movie added to favorites", {
+              //               hideProgressBar: true,
+              //               pauseOnFocusLoss: false,
+              //               theme: "colored",
+              //               autoClose: 2000,
+              //             });
+              //       },
+              //     }
+              //   );
+              // }}
               className={clsx("border w-fit  border-black/10 rounded-md", {
-                "bg-red-400": isMovieFavorited,
-                "bg-white": !isMovieFavorited,
+                // "bg-red-400": isMovieFavorited,
+                // "bg-white": !isMovieFavorited,
               })}
             >
-              {isMovieFavorited ? (
+              {/* {isMovieFavorited ? (
                 <IconHeartFilled className="text-red-200" />
-              ) : (
-                <IconHeart className="text-blue-500" />
-              )}
+              ) : ( */}
+              <IconHeart className="text-blue-500" />
+              {/* )} */}
             </button>
           )}
-          {isShow ? null : (
+          {/* {isShow ? null : (
             <button
               onClick={watchLaterFn}
               className={clsx("border w-fit  border-black/10 rounded-md", {
@@ -214,9 +214,9 @@ const MovieInfo = ({
                 <IconClockHour12 className="text-blue-500" />
               )}
             </button>
-          )}
+          )} */}
         </div>
-      </div> */}
+      </div>
       <Genres genres={genres} />
       <Cast credits={credits} />
 
