@@ -44,35 +44,36 @@ const MovieInfo = ({
   userId,
   isShow,
 }: MovieInfoProps) => {
-  // const queryClient = useQueryClient();
-  // const { data, isLoading } = useGetFavoriteMovies({
-  //   userId: userId as string,
-  // });
+  const queryClient = useQueryClient();
+  const { data, isLoading } = useGetFavoriteMovies({
+    userId: userId as string,
+  });
   // const { watchLaterMovies } = useGetWatchLater({ userId: userId as string });
 
-  // const isMovieFavorited = data
-  //   ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
-  //   : false;
+  const isMovieFavorited =
+    !isLoading && data
+      ? data?.some((movie: FavoriteMovies) => movie.movieId === id)
+      : false;
 
   // const isMovieWatchLater = watchLaterMovies
   //   ? watchLaterMovies?.some((movie: FavoriteMovies) => movie.movieId === id)
   //   : false;
 
-  // const { mutate } = useToggleFavorite();
+  const { mutate } = useToggleFavorite();
   // const watchLater = useToggleWatchLater();
-  // const movieProps = {
-  //   backdrop_path,
-  //   homepage,
-  //   title,
-  //   movieId: id,
-  //   original_title: title,
-  //   popularity: String(vote_average),
-  //   poster_path: backdrop_path,
-  //   tagline,
-  //   vote_average: String(vote_average),
-  //   vote_count: String(vote_average),
-  //   userId: userId as string,
-  // };
+  const movieProps = {
+    backdrop_path,
+    homepage,
+    title,
+    movieId: id,
+    original_title: title,
+    popularity: String(vote_average),
+    poster_path: backdrop_path,
+    tagline,
+    vote_average: String(vote_average),
+    vote_count: String(vote_average),
+    userId: userId as string,
+  };
 
   // const watchLaterFn = () => {
   //   if (!userId) {
@@ -154,50 +155,50 @@ const MovieInfo = ({
         <div className="flex flex-col justify-end space-y-8">
           {isShow ? null : (
             <button
-              // onClick={() => {
-              //   if (!userId) {
-              //     toast.error("Please login to add to favorite", {
-              //       hideProgressBar: true,
-              //       pauseOnFocusLoss: false,
-              //       theme: "colored",
-              //       autoClose: 2000,
-              //     });
-              //     return;
-              //   }
-              //   mutate(
-              //     { movieProps },
-              //     {
-              //       onSuccess: () => {
-              //         queryClient.invalidateQueries({
-              //           queryKey: ["favoriteMovies"],
-              //         });
-              //         isMovieFavorited
-              //           ? toast.success("Movie removed from favorites", {
-              //               hideProgressBar: true,
-              //               pauseOnFocusLoss: false,
-              //               theme: "colored",
-              //               autoClose: 2000,
-              //             })
-              //           : toast.success("Movie added to favorites", {
-              //               hideProgressBar: true,
-              //               pauseOnFocusLoss: false,
-              //               theme: "colored",
-              //               autoClose: 2000,
-              //             });
-              //       },
-              //     }
-              //   );
-              // }}
+              onClick={() => {
+                if (!userId) {
+                  toast.error("Please login to add to favorite", {
+                    hideProgressBar: true,
+                    pauseOnFocusLoss: false,
+                    theme: "colored",
+                    autoClose: 2000,
+                  });
+                  return;
+                }
+                mutate(
+                  { movieProps },
+                  {
+                    onSuccess: () => {
+                      queryClient.invalidateQueries({
+                        queryKey: ["favoriteMovies"],
+                      });
+                      isMovieFavorited
+                        ? toast.success("Movie removed from favorites", {
+                            hideProgressBar: true,
+                            pauseOnFocusLoss: false,
+                            theme: "colored",
+                            autoClose: 2000,
+                          })
+                        : toast.success("Movie added to favorites", {
+                            hideProgressBar: true,
+                            pauseOnFocusLoss: false,
+                            theme: "colored",
+                            autoClose: 2000,
+                          });
+                    },
+                  }
+                );
+              }}
               className={clsx("border w-fit  border-black/10 rounded-md", {
-                // "bg-red-400": isMovieFavorited,
-                // "bg-white": !isMovieFavorited,
+                "bg-red-400": isMovieFavorited,
+                "bg-white": !isMovieFavorited,
               })}
             >
-              {/* {isMovieFavorited ? (
+              {isMovieFavorited ? (
                 <IconHeartFilled className="text-red-200" />
-              ) : ( */}
-              <IconHeart className="text-blue-500" />
-              {/* )} */}
+              ) : (
+                <IconHeart className="text-blue-500" />
+              )}
             </button>
           )}
           {/* {isShow ? null : (
