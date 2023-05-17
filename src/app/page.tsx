@@ -5,7 +5,9 @@ import { fetchInitialdata } from "@/hooks/useGetHomePage";
 import InitialPage from "./inital";
 import { fetchInitialShow } from "@/hooks/useGetShows";
 
-const IndexPage = async () => {
+
+const IndexPage = async ({ searchParams }) => {
+  console.log({ searchParams });
   const queryClient = getQueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["initial-page"],
