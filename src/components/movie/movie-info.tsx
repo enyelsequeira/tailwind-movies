@@ -109,6 +109,11 @@ const MovieInfo = ({
     );
   };
 
+  const TrailerOrTease = videos.results.find((v) => {
+    if (v.type === "Trailer") return v;
+    return v.type === "Teaser";
+  });
+
   return (
     <section className="px-1 md:px-[10px] h-full md:max-h-full">
       <div className="mt-5 flex flex-col items-center md:items-center">
@@ -248,7 +253,7 @@ const MovieInfo = ({
             movie={{
               id,
               title: title,
-              video: videos?.results[0]?.key,
+              video: TrailerOrTease?.key as string,
             }}
           />
         </div>
